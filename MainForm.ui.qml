@@ -9,10 +9,11 @@ Rectangle {
     property alias text1: text1
 
     Column {
+        id: testGetImageItem
+        opacity: 0
+        enabled: false
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-
-
 
         Rectangle {
             id: rectangle2
@@ -31,7 +32,5 @@ Rectangle {
             font.pointSize: 16
         }
     }
-
-
 
 }
