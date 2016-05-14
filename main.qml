@@ -16,12 +16,17 @@ Window {
 
     }
 
+    WindowHeader{
+        anchors.top: parent.top
+//        text: textFont.name
+    }
 
     Connections{
         target: mainWorker
         onSetMessage: form.text1.text = message
     }
 
-    FontLoader{ source: "qrc:/fonts/myriad-set-pro_ultralight.ttf" }
+    FontLoader{ source: "qrc:/fonts/myriad-set-pro_ultralight.ttf"; }
+    FontLoader{ source: "qrc:/fonts/myriad-set-pro_thin.ttf"; }
 
 }

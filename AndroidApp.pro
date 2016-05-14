@@ -1,4 +1,4 @@
-QT += quick androidextras
+QT += quick androidextras svg
 
 SOURCES += main.cpp \
     mainworker.cpp \

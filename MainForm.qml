@@ -10,8 +10,8 @@ Rectangle {
 
     Column {
         id: testGetImageItem
-        opacity: 0
-        enabled: false
+//        opacity: 1
+//        enabled: false
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
 

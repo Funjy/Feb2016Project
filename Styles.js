@@ -1,4 +1,4 @@
 
-function func() {
-
+var DefaultStyle = {
+    headerFont: "Myriad Set Pro",
 }
