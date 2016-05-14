@@ -1,7 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Window 2.2
 
-import "Styles.js" as ScriptStyles
+import "../myScripts/Styles.js" as ScriptStyles
 
 Item {
     id: root
@@ -11,20 +11,19 @@ Item {
 
     height: Screen.height * 0.12
 
-    property int shadowHeight: 60
+    property double shadowHeight: 60
     property alias text: textItem.text
 
-    signal bakcClicked()
+    signal backClicked()
 
     BorderImage {
         id: bImage
-        height: root.height + root.shadowHeight
         source: "qrc:/images/window-header-w-shadow.png"
         border.left: 5; border.top: 5
         border.right: 5; border.bottom: 5
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors.fill: parent
+        anchors.bottomMargin: -dif
+        property double dif: (60/152)*root.height
     }
 
     Item{
@@ -33,10 +32,15 @@ Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         width: height
+        MouseArea{
+            anchors.fill: parent
+            onClicked: root.backClicked()
+        }
+
         Image{
             fillMode: Image.Pad
             anchors.fill: parent
-            source: "qrc:/images/close.png"
+            source: "qrc:/images/close-128.png"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -48,7 +52,9 @@ Item {
         font.pixelSize: Screen.height * 0.06
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        text: "Header " + font.pixelSize
+        text: "Header "// + root.height + " : " + bImage.dif.toFixed(1)
         font.family: ScriptStyles.DefaultStyle.headerFont
+        font.weight: Font.Bold
     }
+
 }
