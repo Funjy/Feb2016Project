@@ -3,7 +3,6 @@
         <file>main.qml</file>
         <file>MainForm.qml</file>
         <file>RegistrationForm.qml</file>
-        <file>WindowHeader.qml</file>
         <file>images/window-header.png</file>
         <file>images/close.svg</file>
         <file>fonts/myriad-set-pro_ultralight.ttf</file>
@@ -12,5 +11,6 @@
         <file>images/window-header-w-shadow.png</file>
         <file>fonts/myriad-set-pro_thin.ttf</file>
         <file>images/close-128.png</file>
+        <file>controls/WindowHeader.qml</file>
     </qresource>
 </RCC>
