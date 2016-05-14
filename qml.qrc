@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>MainForm.qml</file>
         <file>RegistrationForm.qml</file>
+        <file>WindowHeader.qml</file>
     </qresource>
 </RCC>
