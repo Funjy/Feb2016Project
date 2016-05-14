@@ -5,19 +5,16 @@ import "Styles.js" as ScriptStyles
 
 Item {
     id: root
+    anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: parent.right
 
-//    height: 152
-    height: Screen.height * 0.1
-
-
-//    property int fullHeight: 212
-//    property int noShadowHeight: 152
+    height: Screen.height * 0.12
 
     property int shadowHeight: 60
-
     property alias text: textItem.text
+
+    signal bakcClicked()
 
     BorderImage {
         id: bImage
@@ -39,7 +36,7 @@ Item {
         Image{
             fillMode: Image.Pad
             anchors.fill: parent
-            source: "qrc:/images/cross-128.png"
+            source: "qrc:/images/close.png"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
@@ -47,15 +44,11 @@ Item {
 
     Text{
         id: textItem
-//        anchors.left: closeItem.right
-//        anchors.right: parent.right
-//        anchors.top: parent.top
-//        anchors.bottom: parent.bottom
         anchors.fill: parent
-        font.pointSize: 14
+        font.pixelSize: Screen.height * 0.06
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        text: "Header"
+        text: "Header " + font.pixelSize
         font.family: ScriptStyles.DefaultStyle.headerFont
     }
 }

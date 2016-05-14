@@ -11,6 +11,6 @@
         <file>images/close.png</file>
         <file>images/window-header-w-shadow.png</file>
         <file>fonts/myriad-set-pro_thin.ttf</file>
-        <file>images/cross-128.png</file>
+        <file>images/close-128.png</file>
     </qresource>
 </RCC>
