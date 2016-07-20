@@ -18,7 +18,7 @@ Item {
             text: "Registration"
             property int i: 0
             onBackClicked: {
-                text = ++i
+                stack.pop()
             }
         }
 
