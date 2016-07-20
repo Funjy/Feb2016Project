@@ -5,11 +5,12 @@ import "../myScripts/Styles.js" as ScriptStyles
 
 Item {
     id: root
-    anchors.top: parent.top
-    anchors.left: parent.left
-    anchors.right: parent.right
+//    anchors.top: parent.top
+//    anchors.left: parent.left
+//    anchors.right: parent.right
 
-    height: Screen.height * 0.12
+//    height: Screen.height * 0.12
+    implicitHeight: Screen.height * 0.12 + shadowHeight
 
     property double shadowHeight: 60
     property alias text: textItem.text
@@ -20,9 +21,9 @@ Item {
         id: bImage
         source: "qrc:/images/window-header-w-shadow.png"
         border.left: 5; border.top: 5
-        border.right: 5; border.bottom: 5
+        border.right: 5; border.bottom: root.shadowHeight
         anchors.fill: parent
-        anchors.bottomMargin: -dif
+        anchors.bottomMargin: -root.shadowHeight
         property double dif: (60/152)*root.height
     }
 
@@ -39,10 +40,13 @@ Item {
 
         Image{
             fillMode: Image.Pad
-            anchors.fill: parent
-            source: "qrc:/images/close-128.png"
+            anchors.centerIn: parent
+            mipmap: true
+            height: Screen.height * 0.06
+            width: height
+            source: "qrc:/images/close.svg"
             horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
+            verticalAlignment: Text.AlignVCenter            
         }
     }
 

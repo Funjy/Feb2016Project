@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <registrationformdata.h>
 
 
 //#include <QtGui>
@@ -11,6 +12,8 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+    qmlRegisterType<RegistrationFormData>("com.riftekit.RegistrationFormData", 1, 0, "RegistrationFormData");
 
     MainWorker mainWorker;
 

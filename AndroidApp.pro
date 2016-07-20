@@ -2,14 +2,16 @@ QT += quick androidextras svg
 
 SOURCES += main.cpp \
     mainworker.cpp \
-    imagepickerandroid.cpp
+    imagepickerandroid.cpp \
+    registrationformdata.cpp
 
 RESOURCES += qml.qrc
 include(deployment.pri)
 
 HEADERS += \
     mainworker.h \
-    imagepickerandroid.h
+    imagepickerandroid.h \
+    registrationformdata.h
 
 OTHER_FILES += \
     android/AndroidManifest.xml \

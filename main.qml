@@ -1,10 +1,19 @@
 import QtQuick 2.5
 import QtQuick.Window 2.2
+import QtQuick.Controls 2.0
+
+import "myScripts/Styles.js" as ScriptStyles
 
 Window {
     visible: true
     width: 800
     height: 600
+
+    property int global_scale_factor: 1
+
+    Component.onCompleted: {
+        global_scale_factor = Screen.pixelDensity/ScriptStyles.default_pix_density
+    }
 
 //    property var font1: msp_th
 
@@ -18,9 +27,20 @@ Window {
 
 //    }
 
-    RegistrationForm{
-
+    StackView{
+        id: stack
+        anchors.fill: parent
+        initialItem: RegistrationForm{}
+        focus: true
+        Keys.onReleased: if (event.key === Qt.Key_Back && stack.depth > 1) {
+                             stack.pop();
+                             event.accepted = true;
+                         }
     }
+
+//    RegistrationForm{
+
+//    }
 
 //    Text{
 //        anchors.centerIn: parent

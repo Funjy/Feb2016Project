@@ -10,6 +10,7 @@
 #endif
 
 #include <imagepickerandroid.h>
+#include <registrationformdata.h>
 
 class MainWorker : public QObject
 {
@@ -18,6 +19,8 @@ public:
     MainWorker(QObject *parent = 0);
 
     Q_INVOKABLE void buttonClicked();
+
+    Q_INVOKABLE void testFunc(RegistrationFormData* data);
 
 signals:
     void setMessage(QString message);

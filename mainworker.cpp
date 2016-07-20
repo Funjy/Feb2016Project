@@ -13,6 +13,10 @@ void MainWorker::buttonClicked()
 
 }
 
+void MainWorker::testFunc(RegistrationFormData* data)
+{
+}
+
 void MainWorker::onImageSelected(QString imagePath)
 {
     emit setMessage(imagePath);
