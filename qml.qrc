@@ -14,5 +14,6 @@
         <file>myScripts/Styles.js</file>
         <file>fonts/myriad-set-pro_text.ttf</file>
         <file>myControls/TextBoxPF.qml</file>
+        <file>myControls/LabelPF.qml</file>
     </qresource>
 </RCC>
