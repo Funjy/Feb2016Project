@@ -17,6 +17,8 @@ Item {
 
     signal backClicked()
 
+    onBackClicked: stack.pop()
+
     BorderImage {
         id: bImage
         source: "qrc:/images/window-header-w-shadow.png"

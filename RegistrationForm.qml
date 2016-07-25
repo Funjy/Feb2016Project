@@ -17,9 +17,6 @@ Item {
             id: panelHeader
             text: "Registration"
             property int i: 0
-            onBackClicked: {
-                stack.pop()
-            }
         }
 
         Item {

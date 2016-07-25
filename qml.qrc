@@ -13,5 +13,6 @@
         <file>myControls/WindowHeader.qml</file>
         <file>myScripts/Styles.js</file>
         <file>fonts/myriad-set-pro_text.ttf</file>
+        <file>myControls/TextBoxFF.qml</file>
     </qresource>
 </RCC>
