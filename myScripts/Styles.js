@@ -1,8 +1,11 @@
 
 var default_pix_density = 22
 
-var DefaultStyle = {
-    headerFont: "Myriad Set Pro",
+var myriad_set_pro = "Myriad Set Pro"
+
+var DefaultStyle = {    
+    headerFont: myriad_set_pro,
 //    headerFont: "myriadSetPro_thin",
 //    headerFont: "myriadSetPro_ultralight",
+    textInputFont: myriad_set_pro
 }

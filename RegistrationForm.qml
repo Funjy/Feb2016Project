@@ -26,6 +26,20 @@ Item {
 //                anchors.fill: parent
 //                color: "magenta"
 //            }
+
+            Column{
+                anchors.fill: parent
+
+                TextBoxPF{
+                    text: "1"
+                }
+
+                TextBoxPF{
+                    text: "2"
+                }
+
+            }
+
         }
     }
 
