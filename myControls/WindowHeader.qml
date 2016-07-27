@@ -10,7 +10,7 @@ Item {
 //    anchors.right: parent.right
 
 //    height: Screen.height * 0.12
-    implicitHeight: Screen.height * 0.12 + shadowHeight
+    implicitHeight: Screen.height * 0.1 + shadowHeight
 
     property double shadowHeight: 60
     property alias text: textItem.text

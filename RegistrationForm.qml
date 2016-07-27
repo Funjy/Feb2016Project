@@ -13,6 +13,8 @@ Item {
         columns: 1
         flow: GridLayout.TopToBottom
 
+        rowSpacing: 100 * global_scale_factor
+
         WindowHeader{
             Layout.fillWidth: true
             id: panelHeader
@@ -30,44 +32,25 @@ Item {
 
             Column{
                 anchors.fill: parent
-                spacing: 10 * global_scale_factor
+                spacing: 100 * global_scale_factor
                 property int marginValue: parent.width * 0.1
                 anchors.leftMargin: marginValue
                 anchors.rightMargin: marginValue
 
-                LabelPF{
-                    text: "Name"
+                TextBoxPF{
+                    placeHolderText: qsTr("Name")                    
                 }
 
                 TextBoxPF{
-                }
-
-                LabelPF{
-                    text: "Surname"
+                    placeHolderText: qsTr("Surname")
                 }
 
                 TextBoxPF{
-                }
-
-                LabelPF{
-                    text: "Email Address"
+                    placeHolderText: qsTr("Email")
                 }
 
                 TextBoxPF{
-                }
-
-                LabelPF{
-                    text: "Credit card"
-                }
-
-                TextBoxPF{
-                }
-
-                LabelPF{
-                    text: "Home address"
-                }
-
-                TextBoxPF{
+                    placeHolderText: qsTr("Phone number")
                 }
 
             }
