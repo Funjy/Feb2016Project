@@ -10,9 +10,12 @@ Window {
     height: 600
 
     property int global_scale_factor: 1
+    property int global_scale_font_factor: 1
 
     Component.onCompleted: {
-        global_scale_factor = Screen.pixelDensity/ScriptStyles.default_pix_density
+//        global_scale_factor = Screen.pixelDensity/ScriptStyles.default_pix_density
+        global_scale_factor = mainWorker.ratio()
+        global_scale_font_factor = mainWorker.ratioFont()
     }
 
 //    property var font1: msp_th

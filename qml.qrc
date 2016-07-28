@@ -15,5 +15,7 @@
         <file>fonts/myriad-set-pro_text.ttf</file>
         <file>myControls/TextBoxPF.qml</file>
         <file>myControls/LabelPF.qml</file>
+        <file>SuccessRegistration.qml</file>
+        <file>myControls/MessageDialog.qml</file>
     </qresource>
 </RCC>

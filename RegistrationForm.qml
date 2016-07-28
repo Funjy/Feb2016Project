@@ -3,42 +3,53 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
 import "myControls"
 import com.riftekit.RegistrationFormData 1.0
+import QtQuick.Window 2.2
 
 Item {
     id: root
     anchors.fill: parent
 
+    MessageDialog{
+        id: sucRes
+        z: 1
+        messageComponent:
+            Component{
+            SuccessRegistration{
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+    }
+
     GridLayout{
         anchors.fill: parent
         columns: 1
-        flow: GridLayout.TopToBottom
+        flow: GridLayout.TopToBottom        
 
-        rowSpacing: 100 * global_scale_factor
+        rowSpacing: 16 * global_scale_factor
 
         WindowHeader{
             Layout.fillWidth: true
             id: panelHeader
             text: "Registration"
-            property int i: 0
+            onBackClicked: {
+                sucRes.show()
+            }
         }
 
         Item {
             Layout.fillHeight: true
             Layout.fillWidth: true
-//            Rectangle{
-//                anchors.fill: parent
-//                color: "magenta"
-//            }
 
             Column{
                 anchors.fill: parent
-                spacing: 100 * global_scale_factor
+                spacing: 16 * global_scale_factor
                 property int marginValue: parent.width * 0.1
                 anchors.leftMargin: marginValue
                 anchors.rightMargin: marginValue
 
                 TextBoxPF{
-                    placeHolderText: qsTr("Name")                    
+                    placeHolderText: qsTr("Name")
+                    text: global_scale_factor
                 }
 
                 TextBoxPF{

@@ -17,11 +17,17 @@ class MainWorker : public QObject
     Q_OBJECT
 public:
     MainWorker(QObject *parent = 0);
+    MainWorker(qreal ratio, qreal ratioFont, QObject *parent = 0);
 
     Q_INVOKABLE void buttonClicked();
 
     Q_INVOKABLE void testFunc(RegistrationFormData* data);
 
+    Q_INVOKABLE qreal ratio() const;
+    Q_INVOKABLE qreal ratioFont() const;
+
+    static qreal Ratio;
+    static qreal RatioFont;
 signals:
     void setMessage(QString message);
 
@@ -32,6 +38,7 @@ private slots:
 
 private:
     ImagePickerAndroid m_imPicker;
+
 
 
 };

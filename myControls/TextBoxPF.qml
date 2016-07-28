@@ -2,7 +2,7 @@ import QtQuick 2.4
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
-import QtGraphicalEffects 1.0
+//import QtGraphicalEffects 1.0
 
 import "../myScripts/Styles.js" as ScriptStyles
 
@@ -14,7 +14,8 @@ Item {
 
     anchors.left: parent.left
     anchors.right: parent.right
-    implicitHeight: Math.max(global_scale_factor * 140, textBox.implicitHeight)
+//    implicitHeight: Math.max(global_scale_factor * 140, textBox.implicitHeight)
+    implicitHeight: Math.max(global_scale_factor * 150, textBox.implicitHeight)
     activeFocusOnTab: true
 
 //    Rectangle{
@@ -39,10 +40,9 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
-        anchors.margins: 20 * global_scale_factor
+        anchors.margins: 4 * global_scale_factor
         font.family: ScriptStyles.DefaultStyle.textInputFont
-        font.pixelSize: 160 * global_scale_factor
-
+        font.pixelSize: 34 * global_scale_factor
         style: TextFieldStyle{
             background: null
         }
