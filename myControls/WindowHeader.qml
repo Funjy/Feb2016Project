@@ -11,6 +11,9 @@ Item {
 
 //    height: Screen.height * 0.12
 //    implicitHeight: Screen.height * 0.1 + shadowHeight
+
+    property bool showNextButton: false
+
     property int height_no_shadow: 150*global_scale_factor
     implicitHeight: height_no_shadow + shadowHeight
 
@@ -67,5 +70,17 @@ Item {
         font.family: ScriptStyles.DefaultStyle.headerFont
         font.weight: Font.Bold
     }
+
+    ClickableImage{
+        visible: root.showNextButton
+        enabled: visible
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        width: height
+        iconSource: "qrc:/images/close.svg"
+//        text:
+    }
+
 
 }

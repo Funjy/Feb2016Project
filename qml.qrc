@@ -17,5 +17,7 @@
         <file>myControls/LabelPF.qml</file>
         <file>SuccessRegistration.qml</file>
         <file>myControls/MessageDialog.qml</file>
+        <file>myControls/ClickableImage.qml</file>
+        <file>fonts/MaterialIcons-Regular.ttf</file>
     </qresource>
 </RCC>
