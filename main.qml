@@ -3,8 +3,10 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 2.0
 
 import "myScripts/Styles.js" as ScriptStyles
+import "myControls"
 
 Window {
+    id: root
     visible: true
     width: 800
     height: 600
@@ -60,8 +62,9 @@ Window {
         onSetMessage: form.text1.text = message
     }
 
-    FontLoader{ id: msp_ul; source: "qrc:/fonts/myriad-set-pro_ultralight.ttf"; }   // Light
-    FontLoader{ id: msp_th; source: "qrc:/fonts/myriad-set-pro_thin.ttf"; }         // Bold
+    FontLoader{ id: msp_ul;     source: "qrc:/fonts/myriad-set-pro_ultralight.ttf"; }   // Light
+    FontLoader{ id: msp_th;     source: "qrc:/fonts/myriad-set-pro_thin.ttf"; }         // Bold
 //    FontLoader{ source: "qrc:/fonts/myriad-set-pro_text.ttf"; }
+    FontLoader{ id: materialFont;   source: "qrc:/fonts/MaterialIcons-Regular.ttf"; }
 
 }

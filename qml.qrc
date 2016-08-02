@@ -19,5 +19,8 @@
         <file>myControls/MessageDialog.qml</file>
         <file>myControls/ClickableImage.qml</file>
         <file>fonts/MaterialIcons-Regular.ttf</file>
+        <file>myControls/DefaultPanelPF.qml</file>
+        <file>myScripts/MaterialIconsFont.js</file>
+        <file>images/ic_chevron_right_48px.svg</file>
     </qresource>
 </RCC>

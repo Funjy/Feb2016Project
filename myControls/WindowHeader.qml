@@ -2,6 +2,7 @@ import QtQuick 2.4
 import QtQuick.Window 2.2
 
 import "../myScripts/Styles.js" as ScriptStyles
+import "../myScripts/MaterialIconsFont.js" as MaterialIcons
 
 Item {
     id: root
@@ -22,6 +23,7 @@ Item {
     property alias text: textItem.text
 
     signal backClicked()
+    signal nextClicked()
 
     onBackClicked: stack.pop()
 
@@ -66,21 +68,32 @@ Item {
         font.pixelSize: 40 * global_scale_factor
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        text: "Header "// + root.height + " : " + bImage.dif.toFixed(1)
+        text: "Header "
         font.family: ScriptStyles.DefaultStyle.headerFont
         font.weight: Font.Bold
     }
 
-    ClickableImage{
+    Item{
         visible: root.showNextButton
         enabled: visible
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
+        anchors.bottomMargin: root.shadowHeight
         width: height
-        iconSource: "qrc:/images/close.svg"
-//        text:
+        ClickableImage{
+            anchors.fill: parent
+            iconSource: "qrc:/images/ic_chevron_right_48px.svg"
+            onClicked: root.nextClicked()
+        }
+//        Text {
+//            text: MaterialIcons.Icon.ChevronRight
+//            font.family: MaterialIcons.FontFamilyName
+//            font.pixelSize: parent.height - 20
+//            anchors.centerIn: parent
+//        }
     }
+
 
 
 }
