@@ -35,6 +35,9 @@ private:
     QHash<uint, QString>    m_ccnList;
     QString                 m_address;
 };
-Q_DECLARE_METATYPE(RegistrationFormData)
+
+Q_DECLARE_OPAQUE_POINTER(RegistrationFormData*)
+Q_DECLARE_METATYPE      (RegistrationFormData*)
+Q_DECLARE_METATYPE      (RegistrationFormData)
 
 #endif // REGISTRATIONFORMDATA_H

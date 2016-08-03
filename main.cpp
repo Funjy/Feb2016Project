@@ -26,7 +26,8 @@ int main(int argc, char *argv[])
     qreal m_ratio = qMin(height/refHeight, width/refWidth);
     qreal m_ratioFont = qMin(height*refDpi/(dpi*refHeight), width*refDpi/(dpi*refWidth));
 
-    qmlRegisterType<RegistrationFormData>("com.riftekit.RegistrationFormData", 1, 0, "RegistrationFormData");
+    qmlRegisterType<RegistrationFormData>   ("com.riftekit.Containers", 1, 0, "RegistrationFormData");
+    qmlRegisterType<MainWorker>             ("com.riftekit.Workers",    1, 0, "MainWorker");
 
     MainWorker mainWorker(m_ratio, m_ratioFont);
 //    MainWorker mainWorker;
@@ -35,6 +36,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("mainWorker", &mainWorker);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
+    mainWorker.Init();
 
 //    QQuickView view;
 //    MainWorker *mainWorker = new MainWorker(&view);

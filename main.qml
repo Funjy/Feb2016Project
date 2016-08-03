@@ -4,6 +4,7 @@ import QtQuick.Controls 2.0
 
 import "myScripts/Styles.js" as ScriptStyles
 import "myControls"
+import com.riftekit.Workers 1.0
 
 Window {
     id: root
@@ -14,10 +15,11 @@ Window {
     property int global_scale_factor: 1
     property int global_scale_font_factor: 1
 
+    property MainWorker global_mainWorker: mainWorker
+
     Component.onCompleted: {
-//        global_scale_factor = Screen.pixelDensity/ScriptStyles.default_pix_density
         global_scale_factor = mainWorker.ratio()
-        global_scale_font_factor = mainWorker.ratioFont()
+        global_scale_font_factor = mainWorker.ratioFont()        
     }
 
 //    property var font1: msp_th

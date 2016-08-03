@@ -32,6 +32,11 @@ qreal MainWorker::ratio() const {return Ratio;}
 
 qreal MainWorker::ratioFont() const {return RatioFont;}
 
+void MainWorker::Init()
+{
+
+}
+
 void MainWorker::onImageSelected(QString imagePath)
 {
     emit setMessage(imagePath);

@@ -26,6 +26,8 @@ public:
     Q_INVOKABLE qreal ratio() const;
     Q_INVOKABLE qreal ratioFont() const;
 
+    void Init();
+
     static qreal Ratio;
     static qreal RatioFont;
 signals:
