@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    qreal refDpi = 326.;
+    qreal refDpi = 326.; // this comment
     qreal refHeight = 1136.;
     qreal refWidth = 640.;
     QRect rect = app.primaryScreen()->geometry();
