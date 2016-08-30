@@ -3,9 +3,8 @@
 #include <QQmlContext>
 #include <QScreen>
 
-#include <registrationformdata.h>
-
-
+#include "registrationformdata.h"
+#include "applicationsettings.h"
 //#include <QtGui>
 //#include <QtQuick>
 
@@ -14,6 +13,16 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+    app.setOrganizationName("Riftek IT");
+    app.setOrganizationDomain("riftekit.ca");
+    app.setApplicationName("PhotoFly");
+
+    qmlRegisterType<RegistrationFormData>           ("com.riftekit.Containers", 1, 0, "RegistrationFormData");
+    qmlRegisterType<MainWorker>                     ("com.riftekit.Workers",    1, 0, "MainWorker");
+    qmlRegisterSingletonType<ApplicationSettings>   ("com.riftekit.Workers",    1, 0, "ApplicationSettings", ApplicationSettings_provider);
+
+    appSettings.init();
 
     qreal refDpi = 326.; // this comment
     qreal refHeight = 1136.;
@@ -25,9 +34,6 @@ int main(int argc, char *argv[])
     qreal dpi = app.primaryScreen()->physicalDotsPerInch();
     qreal m_ratio = qMin(height/refHeight, width/refWidth);
     qreal m_ratioFont = qMin(height*refDpi/(dpi*refHeight), width*refDpi/(dpi*refWidth));
-
-    qmlRegisterType<RegistrationFormData>   ("com.riftekit.Containers", 1, 0, "RegistrationFormData");
-    qmlRegisterType<MainWorker>             ("com.riftekit.Workers",    1, 0, "MainWorker");
 
     MainWorker mainWorker(m_ratio, m_ratioFont);
 //    MainWorker mainWorker;

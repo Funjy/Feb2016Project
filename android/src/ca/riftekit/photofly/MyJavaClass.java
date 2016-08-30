@@ -1,4 +1,4 @@
-package org.riftekit.example.myandroidapp;
+package ca.riftekit.photofly;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -6,6 +6,8 @@
 
 #include <QDebug>
 
+#define NATIVE_CODE_PATH    QString("ca/riftekit/photofly/")
+
 class ImagePickerAndroid : public QObject, public QAndroidActivityResultReceiver
 {
     Q_OBJECT

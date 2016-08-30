@@ -22,5 +22,6 @@
         <file>myControls/DefaultPanelPF.qml</file>
         <file>myScripts/MaterialIconsFont.js</file>
         <file>images/ic_chevron_right_48px.svg</file>
+        <file>images/Ph_logo.png</file>
     </qresource>
 </RCC>

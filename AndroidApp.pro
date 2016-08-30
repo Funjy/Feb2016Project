@@ -1,9 +1,13 @@
 QT += quick androidextras svg
 
+TEMPLATE = app
+TARGET = PhotoFly
+
 SOURCES += main.cpp \
     mainworker.cpp \
     imagepickerandroid.cpp \
-    registrationformdata.cpp
+    registrationformdata.cpp \
+    applicationsettings.cpp
 
 RESOURCES += qml.qrc
 include(deployment.pri)
@@ -11,7 +15,8 @@ include(deployment.pri)
 HEADERS += \
     mainworker.h \
     imagepickerandroid.h \
-    registrationformdata.h
+    registrationformdata.h \
+    applicationsettings.h
 
 OTHER_FILES += \
     android/AndroidManifest.xml \
@@ -21,5 +26,5 @@ OTHER_FILES += \
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 DISTFILES += \
-    android/src/org/riftekit/example/myandroidapp/MyJavaClass.java
+    android/src/ca/riftekit/photofly/MyJavaClass.java
 

@@ -2,8 +2,10 @@ import QtQuick 2.4
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
 import "myControls"
-import com.riftekit.Containers 1.0
 import QtQuick.Window 2.2
+
+import com.riftekit.Containers 1.0
+//import com.riftekit.Workers 1.0
 
 DefaultPanelPF{
     title: "Registration"
@@ -33,7 +35,7 @@ DefaultPanelPF{
         }
     }
 
-    onBackClicked: sucRes.show()
+    onBackClicked: mainWorker.buttonClicked() //sucRes.show()
 
     RegistrationFormData{
         id: registrationData
