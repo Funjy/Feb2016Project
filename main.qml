@@ -43,10 +43,13 @@ Window {
         anchors.fill: parent
         initialItem: RegistrationForm{}
         focus: true
-        Keys.onReleased: if (event.key === Qt.Key_Back && stack.depth > 1) {
-                             stack.pop();
-                             event.accepted = true;
-                         }
+        Keys.onReleased: {
+            if (event.key === Qt.Key_Back && stack.depth > 1)
+            {
+                stack.pop();
+                event.accepted = true;
+            }
+        }
     }
 
 
