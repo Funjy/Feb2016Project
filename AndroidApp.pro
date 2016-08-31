@@ -12,6 +12,10 @@ SOURCES += main.cpp \
 RESOURCES += qml.qrc
 include(deployment.pri)
 
+DEFINES += QPM_INIT\\(E\\)=\"E.addImportPath(QStringLiteral(\\\"qrc:/\\\"));\"
+
+include(../resources/material/material.pri)
+
 HEADERS += \
     mainworker.h \
     imagepickerandroid.h \

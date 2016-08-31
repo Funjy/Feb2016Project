@@ -8,6 +8,7 @@ Item {
     property alias content: contentItem.data
     property string title:  ""
     property alias showNextButton: panelHeader.showNextButton
+    property alias showBackButton: panelHeader.showBackButton
 
     signal backClicked()
     signal nextClicked()

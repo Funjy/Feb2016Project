@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
     mainWorker->Init();
 
     QQmlApplicationEngine engine;
+    QPM_INIT(engine)
     engine.rootContext()->setContextProperty("mainWorker", mainWorker.data());
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 

@@ -13,6 +13,7 @@ Item {
 //    height: Screen.height * 0.12
 //    implicitHeight: Screen.height * 0.1 + shadowHeight
 
+    property bool showBackButton: true
     property bool showNextButton: false
 
     property int height_no_shadow: 150*global_scale_factor
@@ -39,6 +40,8 @@ Item {
 
     Item{
         id: closeItem
+        visible: showBackButton
+        enabled: visible
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
@@ -55,7 +58,8 @@ Item {
 //            height: Screen.height * 0.06
             height: 30 * global_scale_factor
             width: height
-            source: "qrc:/images/close.svg"
+//            source: "qrc:/images/close.svg"
+            source: "qrc:/icons/navigation/arrow_back.svg"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter            
         }
@@ -83,6 +87,7 @@ Item {
         width: height
         ClickableImage{
             anchors.fill: parent
+            anchors.margins: parent.height/4
             iconSource: "qrc:/images/ic_chevron_right_48px.svg"
             onClicked: root.nextClicked()
         }
