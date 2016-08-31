@@ -7,7 +7,7 @@ Item{
     enabled: opacity === 1
     visible: opacity !== 0
 
-    property var messageComponent: undefined
+    default property var messageComponent: undefined
 
     Rectangle{
         anchors.fill: parent
@@ -20,8 +20,25 @@ Item{
     }
 
     Loader{
+        id: loader
         anchors.fill: parent
         sourceComponent: root.messageComponent
+
+        Binding{
+            target: loader.item
+            property: "anchors.left"
+            value: loader.left
+        }
+        Binding{
+            target: loader.item
+            property: "anchors.right"
+            value: loader.right
+        }
+        Binding{
+            target: loader.item
+            property: "anchors.verticalCenter"
+            value: loader.verticalCenter
+        }
     }
 
     Behavior on opacity { NumberAnimation{}}

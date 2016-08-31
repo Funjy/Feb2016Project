@@ -3,8 +3,8 @@ import "qrc:/myControls"
 
 Rectangle {
     height: 315 * global_scale_factor
-    anchors.left: parent.left
-    anchors.right: parent.right
+//    anchors.left: parent.left
+//    anchors.right: parent.right
     color: "white"
 
     Item{

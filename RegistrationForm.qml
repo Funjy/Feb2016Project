@@ -5,9 +5,9 @@ import "myControls"
 import QtQuick.Window 2.2
 
 import com.riftekit.Containers 1.0
-//import com.riftekit.Workers 1.0
 
 DefaultPanelPF{
+    id: root
     title: "Registration"
     showNextButton: true
     content: Column{
@@ -22,9 +22,22 @@ DefaultPanelPF{
             text: global_scale_factor
         }
 
-        TextBoxPF{
-            placeHolderText: qsTr("Surname")
-        }
+//        WindowHeader{
+//            Layout.fillWidth: true
+//            id: panelHeader
+//            text: "Registration"
+//            Component{
+//                id: cameraFormComponent
+//                CameraForm{
+
+//                }
+//            }
+
+//            onBackClicked: {
+////                sucRes.show()
+//                stack.push(cameraFormComponent)
+//            }
+//        }
 
         TextBoxPF{
             placeHolderText: qsTr("Email")
@@ -35,7 +48,16 @@ DefaultPanelPF{
         }
     }
 
-    onBackClicked: mainWorker.buttonClicked() //sucRes.show()
+//    onBackClicked: mainWorker.buttonClicked() //sucRes.show()
+    onBackClicked: sucRes.show()
+    onNextClicked: stack.push(cameraFormComponent)
+
+    Component{
+        id: cameraFormComponent
+        CameraForm{
+
+        }
+    }
 
     RegistrationFormData{
         id: registrationData
@@ -43,10 +65,9 @@ DefaultPanelPF{
 
     MessageDialog{
         id: sucRes
-        messageComponent:
-            Component{
+        Component{
             SuccessRegistration{
-                anchors.verticalCenter: parent.verticalCenter
+//                anchors.verticalCenter: sucRes.verticalCenter
             }
         }
     }

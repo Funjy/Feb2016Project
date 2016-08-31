@@ -24,6 +24,7 @@ Item {
             Layout.fillWidth: true
             text: root.title
             onBackClicked: root.backClicked()
+            onNextClicked: root.nextClicked()
 
         }
 
