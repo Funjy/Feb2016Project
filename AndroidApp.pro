@@ -26,5 +26,8 @@ OTHER_FILES += \
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 DISTFILES += \
-    android/src/ca/riftekit/photofly/MyJavaClass.java
+    android/src/ca/riftekit/photofly/MyJavaClass.java \
+    android/res/drawable-hdpi/icon.png \
+    android/res/drawable-ldpi/icon.png \
+    android/res/drawable-mdpi/icon.png
 
