@@ -8,15 +8,23 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <QApplication>
+#include <QScreen>
 
 #define appSettings ApplicationSettings::instance()
 #define appSettingsCore appSettings.settings()
+
+#define GROUP_GENERAL           "general"
 
 #define OPTION_IS_REGISTERED    "isRegistered"
 
 class ApplicationSettings : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString keyIsRegistered READ keyIsRegistered CONSTANT)
+
+    Q_PROPERTY(qreal ratio READ ratio CONSTANT)
+    Q_PROPERTY(qreal fontRatio READ fontRatio CONSTANT)
+
 public:
 
     static ApplicationSettings& instance(){
@@ -25,10 +33,14 @@ public:
     }
 
     void init();
-    QSettings&  settings();
+    QSettings&  settings();    
 
     Q_INVOKABLE void        setValue(const QString& key, const QVariant &value);
     Q_INVOKABLE QVariant    getValue(const QString& key);
+
+    QString keyIsRegistered() const;
+    qreal ratio() const;
+    qreal fontRatio() const;
 
 signals:
 
@@ -41,7 +53,11 @@ protected:
     ApplicationSettings& operator=(const ApplicationSettings&);      // Prevent assignment
 
 private:
-    QSettings   *m_settings;
+    void calcRatio();
+
+    QSettings   *m_settings;        
+    qreal       m_ratio;
+    qreal       m_fontRatio;
 };
 
 static QObject *ApplicationSettings_provider(QQmlEngine *engine, QJSEngine *scriptEngine)

@@ -7,7 +7,7 @@ Button {
         background: Item {}
 
         label: Item {
-            anchors.fill: control
+//            anchors.fill: control
             Image {
                 id:                     imageItem
                 source:                 control.iconSource
