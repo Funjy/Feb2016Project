@@ -10,7 +10,10 @@ Window {
     id: root
     visible: true
     width: 800
-    height: 600
+    height: 600    
+    visibility: global_requestedFullScreen ? Window.FullScreen : Window.AutomaticVisibility
+
+    property bool global_requestedFullScreen: false
 
     property int global_scale_factor: 1
     property int global_scale_font_factor: 1
