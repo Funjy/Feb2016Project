@@ -42,6 +42,7 @@ void ImagePickerAndroid::openCamera()
 
 void ImagePickerAndroid::handleActivityResult(int receiverRequestCode, int resultCode, const QAndroidJniObject &data)
 {
+    qDebug() << "req code: " << receiverRequestCode;
     Q_UNUSED(receiverRequestCode)
     jint RESULT_OK = QAndroidJniObject::getStaticField<jint>("android/app/Activity", "RESULT_OK");
     if(resultCode != RESULT_OK)
@@ -65,9 +66,19 @@ void ImagePickerAndroid::handleActivityResult(int receiverRequestCode, int resul
     }
     QAndroidJniEnvironment jniEnv;
     int splitArrayLength = jniEnv->GetArrayLength(res.object<jarray>());
-    QAndroidJniObject arrayElement = jniEnv->GetObjectArrayElement(res.object<jobjectArray>(), splitArrayLength - 1 );
 
-    QString retStr = arrayElement.toString();
-    emit imageSelected("Count: " + QString::number(splitArrayLength)+ ".\nLast: " + retStr);
+    QStringList ret;
+    for(int i = 0; i < splitArrayLength; i++){
+        QAndroidJniObject arrayElement = jniEnv->GetObjectArrayElement(res.object<jobjectArray>(), i );
+//        QString retStr = arrayElement.toString();
+        if(arrayElement.isValid())
+            ret << arrayElement.toString();
+
+    }
+
+    emit imagesSelected(ret);
+
+
+//    emit imageSelected("Count: " + QString::number(splitArrayLength)+ ".\nLast: " + retStr);
 }
 

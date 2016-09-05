@@ -33,7 +33,8 @@ signals:
 public slots:
 
 private slots:
-    void onImageSelected(QString imagePath);
+//    void onImageSelected(QString imagePath);
+    void onImagesSelected(QStringList imagePaths);
 
 private:
     ImagePickerAndroid m_imPicker;

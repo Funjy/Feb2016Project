@@ -1,7 +1,8 @@
 #include "mainworker.h"
 
 MainWorker::MainWorker(QObject *parent) : QObject(parent){
-    connect(&m_imPicker, &ImagePickerAndroid::imageSelected, this, &MainWorker::onImageSelected);
+//    connect(&m_imPicker, &ImagePickerAndroid::imageSelected, this, &MainWorker::onImageSelected);
+    connect(&m_imPicker, &ImagePickerAndroid::imagesSelected, this, &MainWorker::onImagesSelected);
     emit setMessage("Ready");
 }
 
@@ -27,7 +28,15 @@ void MainWorker::Init()
 
 }
 
-void MainWorker::onImageSelected(QString imagePath)
+void MainWorker::onImagesSelected(QStringList imagePaths)
 {
-    emit setMessage(imagePath);
+    qDebug() << "images: ";
+    foreach(QString path, imagePaths){
+        qDebug() << "path: " << path;
+    }
 }
+
+//void MainWorker::onImageSelected(QString imagePath)
+//{
+//    emit setMessage(imagePath);
+//}

@@ -24,10 +24,6 @@ ApplicationWindow {
 
     property MainWorker global_mainWorker: mainWorker
 
-//    property var menuList: [
-//        qsTr("Payment"), qsTr("History"), qsTr("Settings")
-//    ]
-
     property list<Action> menuList: [
         Action{
             name: qsTr("Payment")
@@ -40,21 +36,19 @@ ApplicationWindow {
         Action{
             name: qsTr("Settings")
         }
-
     ]
 
-//    property string selectedComponent: menuList[0]
 
-    function openItem(openItem, props)
-    {
-        stack.push(openItem, {destroyOnPop: true, properties: props})
-    }
-    function closeItem()
-    {
-        console.log("depth: " + stack.depth)
-        if ( stack.depth > 1 )
-            stack.pop();
-    }
+//    function openItem(openItem, props)
+//    {
+//        stack.push(openItem, {destroyOnPop: true, properties: props})
+//    }
+//    function closeItem()
+//    {
+//        console.log("depth: " + stack.depth)
+//        if ( stack.depth > 1 )
+//            stack.pop();
+//    }
 
     Component.onCompleted: {
         global_scale_factor = ApplicationSettings.ratio
@@ -64,13 +58,7 @@ ApplicationWindow {
 
         if(isFirstLaunch){
             root.pageStack.push(regFormComponent)
-//            initPage.push(regFormComponent)
         }
-
-
-//        if(isFirstLaunch){
-//            openItem(regFormComponent)
-//        }
     }
 
     Component{
@@ -84,22 +72,6 @@ ApplicationWindow {
         id: mainFormComponent
         MainForm{}
     }
-
-//    property var font1: msp_th
-
-//    MainForm {
-//        id: form
-//        anchors.fill: parent
-
-//        mouseArea1.onClicked: {
-//            mainWorker.buttonClicked()
-//        }
-
-//    }
-//    Connections{
-//        target: mainWorker
-//        onSetMessage: form.text1.text = message
-//    }
 
     initialPage: initPage
 
@@ -118,11 +90,43 @@ ApplicationWindow {
                 Column {
                     id: content
                     anchors.fill: parent
+                    spacing: 20 * global_scale_factor
+
+                    Item{
+                        height: 1
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                    }
+
+                    Rectangle{
+                        color: Theme.tabHighlightColor
+                        height: 160 * global_scale_factor
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        Row{
+                            anchors.fill: parent
+                            spacing: 16 * global_scale_factor
+                            Icon{
+                                name: "navigation/more_vert"
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                            Label{
+                                text: "Anton Kustou"
+                                anchors.verticalCenter: parent.verticalCenter
+                                font.pixelSize: 32 * global_scale_factor
+                            }
+                        }
+                    }
+
+                    ThinDivider { }
+
+//                    ListItem.Divider{ }
 
                     Repeater {
                         model: menuList.length
                         Button{
                             id: menuButton
+                            implicitHeight: 60 * global_scale_factor
 
                             text: action.name
                             enabled: action.enabled

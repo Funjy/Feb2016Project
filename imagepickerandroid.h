@@ -25,6 +25,7 @@ signals:
 
     void imageSelected(QString imagePath);
     void error(QString error);
+    void imagesSelected(QStringList imagePaths);
 
 public slots:
 };

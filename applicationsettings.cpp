@@ -5,6 +5,8 @@ void ApplicationSettings::init()
 {
     calcRatio();
     QQmlEngine::setObjectOwnership(&appSettings, QQmlEngine::CppOwnership);
+
+    // Init settings file
     if(!m_settings){
         QString path = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
         if(!QDir(path).exists()){
@@ -13,10 +15,13 @@ void ApplicationSettings::init()
         QString fullName = QString("%1/%2.conf").arg(path).arg(qApp->applicationName());
         m_settings = new QSettings(fullName, QSettings::NativeFormat, this);
     }
+
+    // Registration data
     m_isFirstLaunch = appSettingsCore.value(OPTION_IS_FIRST_LAUNCH, true).toBool();
     setValue(OPTION_IS_FIRST_LAUNCH, false);
     // note: debug
     m_isFirstLaunch = true;
+
 
 }
 

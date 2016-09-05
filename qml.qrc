@@ -25,4 +25,5 @@
         <file>images/Ph_logo.png</file>
         <file>CameraForm.qml</file>
     </qresource>
+    <qresource prefix="/icons"/>
 </RCC>
