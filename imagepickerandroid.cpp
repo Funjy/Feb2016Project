@@ -1,6 +1,7 @@
 #include "imagepickerandroid.h"
 
 static const int ACTIVITY_REQUEST_CODE = 1;
+static const int ACTIVITY_REQUEST_CODE_OPEN_CAMERA = 2;
 
 ImagePickerAndroid::ImagePickerAndroid(QObject *parent) : QObject(parent)
 {
@@ -9,7 +10,7 @@ ImagePickerAndroid::ImagePickerAndroid(QObject *parent) : QObject(parent)
 
 void ImagePickerAndroid::openGallery()
 {
-    QString className = NATIVE_CODE_PATH + "MyJavaClass";
+    QString className = NATIVE_CODE_PATH + NATIVE_CODE_CLASSNAME;
     QAndroidJniObject res = QAndroidJniObject::callStaticObjectMethod(
                 className.toStdString().c_str(),
                 "getIntent",
@@ -23,6 +24,22 @@ void ImagePickerAndroid::openGallery()
     QtAndroid::startActivity(res.object<jobject>(), ACTIVITY_REQUEST_CODE, this);
 }
 
+void ImagePickerAndroid::openCamera()
+{
+    QString className = NATIVE_CODE_PATH + NATIVE_CODE_CLASSNAME;
+    QAndroidJniObject res = QAndroidJniObject::callStaticObjectMethod(
+                className.toStdString().c_str(),
+                "getOpenCameraIntent",
+                "()Landroid/content/Intent;");
+
+    if(!res.isValid()){
+        qDebug() << "Wrong intent";
+        return;
+    }
+
+    QtAndroid::startActivity(res.object<jobject>(), ACTIVITY_REQUEST_CODE_OPEN_CAMERA);
+}
+
 void ImagePickerAndroid::handleActivityResult(int receiverRequestCode, int resultCode, const QAndroidJniObject &data)
 {
     Q_UNUSED(receiverRequestCode)
@@ -32,7 +49,7 @@ void ImagePickerAndroid::handleActivityResult(int receiverRequestCode, int resul
         emit imageSelected("Canceled");
         return;
     }
-    QString className = NATIVE_CODE_PATH + "MyJavaClass";
+    QString className = NATIVE_CODE_PATH + NATIVE_CODE_CLASSNAME;
     QAndroidJniObject res = QAndroidJniObject::callStaticObjectMethod(
                 className.toStdString().c_str(),
                 "handleResult",

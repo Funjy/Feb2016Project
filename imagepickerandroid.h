@@ -6,7 +6,8 @@
 
 #include <QDebug>
 
-#define NATIVE_CODE_PATH    QString("ca/riftekit/photofly/")
+#define NATIVE_CODE_PATH            QString("ca/riftekit/photofly/")
+#define NATIVE_CODE_CLASSNAME       QString("MyJavaClass")
 
 class ImagePickerAndroid : public QObject, public QAndroidActivityResultReceiver
 {
@@ -16,6 +17,7 @@ public:
 
 
     void openGallery();
+    void openCamera();
 
     virtual void handleActivityResult(int receiverRequestCode, int resultCode, const QAndroidJniObject & data);
 

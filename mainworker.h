@@ -21,6 +21,8 @@ public:
 
     Q_INVOKABLE void selectImageFromGallery();
 
+    Q_INVOKABLE void openCamera();
+
     Q_INVOKABLE void testFunc(RegistrationFormData* data);
 
     void Init();

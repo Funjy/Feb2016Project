@@ -13,6 +13,11 @@ void MainWorker::selectImageFromGallery()
 
 }
 
+void MainWorker::openCamera()
+{
+    m_imPicker.openCamera();
+}
+
 void MainWorker::testFunc(RegistrationFormData* data)
 {
 }

@@ -24,10 +24,26 @@ ApplicationWindow {
 
     property MainWorker global_mainWorker: mainWorker
 
-    property var menuList: [
-        qsTr("Payment"), qsTr("History"), qsTr("Settings")
+//    property var menuList: [
+//        qsTr("Payment"), qsTr("History"), qsTr("Settings")
+//    ]
+
+    property list<Action> menuList: [
+        Action{
+            name: qsTr("Payment")
+            onTriggered: console.log("pay")
+        },
+        Action{
+            name: qsTr("History")
+            onTriggered: console.log("hist")
+        },
+        Action{
+            name: qsTr("Settings")
+        }
+
     ]
-    property string selectedComponent: menuList[0]
+
+//    property string selectedComponent: menuList[0]
 
     function openItem(openItem, props)
     {
@@ -104,12 +120,17 @@ ApplicationWindow {
                     anchors.fill: parent
 
                     Repeater {
-                        model: menuList
-                        delegate: ListItem.Standard {
-                            text: modelData
-//                            selected: modelData == root.selectedComponent
+                        model: menuList.length
+                        Button{
+                            id: menuButton
+
+                            text: action.name
+                            enabled: action.enabled
+
+                            property Action action: menuList[index]
+
                             onClicked: {
-//                                root.selectedComponent = modelData
+                                action.trigger(menuButton)
                                 navDrawer.close()
                             }
                         }
@@ -150,7 +171,7 @@ ApplicationWindow {
                         Ink {
                             anchors.fill: parent
 
-        //                    onClicked: overlayView.open(image)
+                            onClicked: mainWorker.openCamera()
                         }
                     }
                 }

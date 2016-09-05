@@ -18,6 +18,11 @@ public class MyJavaClass
     public MyJavaClass(){
     }
 
+    public static Intent getOpenCameraIntent(){
+	Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+	return intent;
+    }
+
     public static Intent getIntent(){
 	Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 	pickIntent.setType("image/*");
