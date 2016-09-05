@@ -120,8 +120,6 @@ ApplicationWindow {
 
                     ThinDivider { }
 
-//                    ListItem.Divider{ }
-
                     Repeater {
                         model: menuList.length
                         Button{
