@@ -20,9 +20,31 @@ Window {
 
     property MainWorker global_mainWorker: mainWorker
 
+    function openItem(openItem, props)
+    {
+        stack.push(openItem, {destroyOnPop: true, properties: props})
+    }
+
     Component.onCompleted: {
-        global_scale_factor = mainWorker.ratio()
-        global_scale_font_factor = mainWorker.ratioFont()        
+        global_scale_factor = ApplicationSettings.ratio
+        global_scale_font_factor = ApplicationSettings.fontRatio
+
+        var isReg = ApplicationSettings.getValue(ApplicationSettings.keyIsRegistered)
+        if(isReg === undefined || !isReg){
+            openItem("qrc:/RegistrationForm.qml")
+        } else {
+            openItem(mainFormComponent)
+        }
+    }
+
+    Component{
+        id: regFormComponent
+        RegistrationForm{}
+    }
+
+    Component{
+        id: mainFormComponent
+        MainForm{}
     }
 
 //    property var font1: msp_th
@@ -44,7 +66,7 @@ Window {
     StackView{
         id: stack
         anchors.fill: parent
-        initialItem: RegistrationForm{}
+//        initialItem: RegistrationForm{}
         focus: true
         Keys.onReleased: {
             if (event.key === Qt.Key_Back && stack.depth > 1)

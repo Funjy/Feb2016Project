@@ -23,13 +23,8 @@ public:
 
     Q_INVOKABLE void testFunc(RegistrationFormData* data);
 
-    Q_INVOKABLE qreal ratio() const;
-    Q_INVOKABLE qreal ratioFont() const;
-
     void Init();
 
-    static qreal Ratio;
-    static qreal RatioFont;
 signals:
     void setMessage(QString message);
 

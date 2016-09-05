@@ -21,7 +21,9 @@ Item{
 
     Loader{
         id: loader
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
         sourceComponent: root.messageComponent
 
         Binding{
@@ -34,11 +36,11 @@ Item{
             property: "anchors.right"
             value: loader.right
         }
-        Binding{
-            target: loader.item
-            property: "anchors.verticalCenter"
-            value: loader.verticalCenter
-        }
+//        Binding{
+//            target: loader.item
+//            property: "anchors.verticalCenter"
+//            value: loader.verticalCenter
+//        }
     }
 
     Behavior on opacity { NumberAnimation{}}

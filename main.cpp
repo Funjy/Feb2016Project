@@ -1,7 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QScreen>
 
 #include "registrationformdata.h"
 #include "applicationsettings.h"
@@ -24,25 +23,26 @@ int main(int argc, char *argv[])
 
     appSettings.init();
 
-    qreal refDpi = 326.; // this comment
-    qreal refHeight = 1136.;
-    qreal refWidth = 640.;
-    QRect rect = app.primaryScreen()->geometry();
-    qreal height = qMax(rect.width(), rect.height());
-    qreal width = qMin(rect.width(), rect.height());
-//    qreal dpi = app.primaryScreen()->logicalDotsPerInch();
-    qreal dpi = app.primaryScreen()->physicalDotsPerInch();
-    qreal m_ratio = qMin(height/refHeight, width/refWidth);
-    qreal m_ratioFont = qMin(height*refDpi/(dpi*refHeight), width*refDpi/(dpi*refWidth));
+//    // It's about iphone 5
+//    qreal refDpi = 326.;
+//    qreal refHeight = 1136.;
+//    qreal refWidth = 640.;
+//    QRect rect = app.primaryScreen()->geometry();
+//    qreal height = qMax(rect.width(), rect.height());
+//    qreal width = qMin(rect.width(), rect.height());
+////    qreal dpi = app.primaryScreen()->logicalDotsPerInch();
+//    qreal dpi = app.primaryScreen()->physicalDotsPerInch();
+//    qreal m_ratio = qMin(height/refHeight, width/refWidth);
+//    qreal m_ratioFont = qMin(height*refDpi/(dpi*refHeight), width*refDpi/(dpi*refWidth));
 
-    MainWorker mainWorker(m_ratio, m_ratioFont);
-//    MainWorker mainWorker;
+    QScopedPointer<MainWorker> mainWorker(new MainWorker());// *mainWorker(m_ratio, m_ratioFont);
+    mainWorker->Init();
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("mainWorker", &mainWorker);
+    QPM_INIT(engine)
+    engine.rootContext()->setContextProperty("mainWorker", mainWorker.data());
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-    mainWorker.Init();
 
 //    QQuickView view;
 //    MainWorker *mainWorker = new MainWorker(&view);
