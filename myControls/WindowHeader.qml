@@ -22,6 +22,7 @@ Item {
 //    property double shadowHeight: 60
     property double shadowHeight: 24*global_scale_factor
     property alias text: textItem.text
+    property alias backButtonImageSource: backButton.iconSource
 
     signal backClicked()
     signal nextClicked()
@@ -38,6 +39,33 @@ Item {
 //        property double dif: (60/152)*root.height
     }
 
+//    Item{
+//        id: closeItem
+//        visible: showBackButton
+//        enabled: visible
+//        anchors.left: parent.left
+//        anchors.top: parent.top
+//        anchors.bottom: parent.bottom
+//        width: height
+//        MouseArea{
+//            anchors.fill: parent
+//            onClicked: root.backClicked()
+//        }
+
+//        Image{
+//            id: backButton
+//            fillMode: Image.PreserveAspectFit
+//            anchors.centerIn: parent
+//            mipmap: true
+////            height: Screen.height * 0.06
+//            height: 40 * global_scale_factor
+//            width: height
+////            source: "qrc:/images/close.svg"
+//            source: "qrc:/icons/navigation/arrow_back.svg"
+//            horizontalAlignment: Text.AlignHCenter
+//            verticalAlignment: Text.AlignVCenter
+//        }
+//    }
     Item{
         id: closeItem
         visible: showBackButton
@@ -45,24 +73,21 @@ Item {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
+        anchors.bottomMargin: root.shadowHeight
         width: height
-        MouseArea{
+        ClickableImage{
+            id: backButton
             anchors.fill: parent
+            anchors.margins: parent.height/4
+            iconSource: "qrc:/icons/navigation/arrow_back.svg"
             onClicked: root.backClicked()
         }
-
-        Image{
-            fillMode: Image.PreserveAspectFit
-            anchors.centerIn: parent
-            mipmap: true
-//            height: Screen.height * 0.06
-            height: 30 * global_scale_factor
-            width: height
-//            source: "qrc:/images/close.svg"
-            source: "qrc:/icons/navigation/arrow_back.svg"
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter            
-        }
+//        Text {
+//            text: MaterialIcons.Icon.ChevronRight
+//            font.family: MaterialIcons.FontFamilyName
+//            font.pixelSize: parent.height - 20
+//            anchors.centerIn: parent
+//        }
     }
 
     Text{

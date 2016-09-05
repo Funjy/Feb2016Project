@@ -5,7 +5,7 @@ MainWorker::MainWorker(QObject *parent) : QObject(parent){
     emit setMessage("Ready");
 }
 
-void MainWorker::buttonClicked()
+void MainWorker::selectImageFromGallery()
 {
     emit setMessage("Open clicked");
 

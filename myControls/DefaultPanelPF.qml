@@ -3,12 +3,14 @@ import QtQuick.Layouts 1.3
 
 Item {
     id: root
-    anchors.fill: if(parent) parent
+//    anchors.fill: if(parent) parent
 
     property alias content: contentItem.data
     property string title:  ""
     property alias showNextButton: panelHeader.showNextButton
     property alias showBackButton: panelHeader.showBackButton
+//    property WindowHeader header: panelHeader
+    property alias backButtonImageSource: panelHeader.backButtonImageSource
 
     signal backClicked()
     signal nextClicked()

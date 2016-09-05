@@ -16,6 +16,7 @@
 #define GROUP_GENERAL           "general"
 
 #define OPTION_IS_REGISTERED    "isRegistered"
+#define OPTION_IS_FIRST_LAUNCH  "isFirstLaunch"
 
 class ApplicationSettings : public QObject
 {
@@ -37,6 +38,7 @@ public:
 
     Q_INVOKABLE void        setValue(const QString& key, const QVariant &value);
     Q_INVOKABLE QVariant    getValue(const QString& key);
+    Q_INVOKABLE bool        isFirstLaunch() const;
 
     QString keyIsRegistered() const;
     qreal ratio() const;
@@ -58,6 +60,7 @@ private:
     QSettings   *m_settings;        
     qreal       m_ratio;
     qreal       m_fontRatio;
+    bool        m_isFirstLaunch;
 };
 
 static QObject *ApplicationSettings_provider(QQmlEngine *engine, QJSEngine *scriptEngine)

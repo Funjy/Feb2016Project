@@ -13,7 +13,10 @@ void ApplicationSettings::init()
         QString fullName = QString("%1/%2.conf").arg(path).arg(qApp->applicationName());
         m_settings = new QSettings(fullName, QSettings::NativeFormat, this);
     }
-//    setValue(OPTION_IS_REGISTERED, false);
+    m_isFirstLaunch = appSettingsCore.value(OPTION_IS_FIRST_LAUNCH, true).toBool();
+    setValue(OPTION_IS_FIRST_LAUNCH, false);
+    // note: debug
+    m_isFirstLaunch = true;
 
 }
 
@@ -31,6 +34,11 @@ void ApplicationSettings::setValue(const QString& key, const QVariant& value)
 QVariant ApplicationSettings::getValue(const QString &key)
 {
     return m_settings->value(key);
+}
+
+bool ApplicationSettings::isFirstLaunch() const
+{
+    return m_isFirstLaunch;
 }
 
 QString ApplicationSettings::keyIsRegistered() const

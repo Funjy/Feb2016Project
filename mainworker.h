@@ -19,7 +19,7 @@ public:
     MainWorker(QObject *parent = 0);
     MainWorker(qreal ratio, qreal ratioFont, QObject *parent = 0);
 
-    Q_INVOKABLE void buttonClicked();
+    Q_INVOKABLE void selectImageFromGallery();
 
     Q_INVOKABLE void testFunc(RegistrationFormData* data);
 

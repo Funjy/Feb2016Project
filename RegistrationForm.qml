@@ -6,14 +6,16 @@ import QtQuick.Window 2.2
 import Material 0.3
 
 import "myControls"
+import "qrc:/Material"
 import com.riftekit.Containers 1.0
 
-DefaultPanelPF{
+Page{
     id: root
     title: "Registration"
-//    showBackButton: false
-    showNextButton: true
-    content: GridLayout{
+
+    property bool firstLaunch: false
+
+    GridLayout{
         anchors.fill: parent
         columns: 1
         columnSpacing: 16 * global_scale_factor
@@ -40,28 +42,20 @@ DefaultPanelPF{
 
         GridLayout{
             Button{
+                visible: root.firstLaunch
                 text: "Skip"
                 Layout.fillWidth: true
+                onClicked: root.pop()
             }
             Button{
                 text: "Accept"
                 Layout.fillWidth: true
+                onClicked: sucRes.show()
             }
         }
 
 
     }
-
-//    onBackClicked: mainWorker.buttonClicked() //sucRes.show()
-//    onBackClicked: sucRes.show()
-//    onNextClicked: stack.push(cameraFormComponent)
-
-//    Component{
-//        id: cameraFormComponent
-//        CameraForm{
-
-//        }
-//    }
 
     RegistrationFormData{
         id: registrationData
