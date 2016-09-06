@@ -3,6 +3,8 @@ QT += quick androidextras svg
 TEMPLATE = app
 TARGET = PhotoFly
 
+CONFIG += c++11
+
 RESOURCES += qml.qrc
 include(deployment.pri)
 
@@ -38,5 +40,10 @@ DISTFILES += \
     android/src/ca/riftekit/photofly/MyJavaClass.java \
     android/res/drawable-hdpi/icon.png \
     android/res/drawable-ldpi/icon.png \
-    android/res/drawable-mdpi/icon.png
+    android/res/drawable-mdpi/icon.png \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradlew \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew.bat
 
