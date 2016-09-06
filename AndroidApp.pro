@@ -3,12 +3,6 @@ QT += quick androidextras svg
 TEMPLATE = app
 TARGET = PhotoFly
 
-SOURCES += main.cpp \
-    mainworker.cpp \
-    imagepickerandroid.cpp \
-    registrationformdata.cpp \
-    applicationsettings.cpp
-
 RESOURCES += qml.qrc
 include(deployment.pri)
 
@@ -19,8 +13,19 @@ include(../resources/material/material.pri)
 HEADERS += \
     mainworker.h \
     imagepickerandroid.h \
-    registrationformdata.h \
-    applicationsettings.h
+    models/registrationformdata.h \
+    applicationsettings.h \
+    models/photocontainer.h \
+    behaviours/iserializable.h \
+    containers/iserializationinfo.h
+
+SOURCES += main.cpp \
+    mainworker.cpp \
+    imagepickerandroid.cpp \
+    models/registrationformdata.cpp \
+    applicationsettings.cpp \
+    models/photocontainer.cpp \
+    containers/iserializationinfo.cpp
 
 OTHER_FILES += \
     android/AndroidManifest.xml \

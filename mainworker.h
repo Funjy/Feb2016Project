@@ -10,7 +10,7 @@
 #endif
 
 #include <imagepickerandroid.h>
-#include <registrationformdata.h>
+#include <models/registrationformdata.h>
 
 class MainWorker : public QObject
 {

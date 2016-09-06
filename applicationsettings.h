@@ -10,7 +10,7 @@
 #include <QApplication>
 #include <QScreen>
 
-#include "registrationformdata.h"
+#include "models/registrationformdata.h"
 
 #define appSettings ApplicationSettings::instance()
 #define appSettingsCore appSettings.settings()

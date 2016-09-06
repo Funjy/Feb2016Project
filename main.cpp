@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#include "registrationformdata.h"
+#include "models/registrationformdata.h"
 #include "applicationsettings.h"
 //#include <QtGui>
 //#include <QtQuick>
