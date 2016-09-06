@@ -17,7 +17,7 @@ HEADERS += \
     applicationsettings.h \
     models/photocontainer.h \
     behaviours/iserializable.h \
-    containers/iserializationinfo.h
+    containers/serializationinfo.h
 
 SOURCES += main.cpp \
     mainworker.cpp \
@@ -25,7 +25,7 @@ SOURCES += main.cpp \
     models/registrationformdata.cpp \
     applicationsettings.cpp \
     models/photocontainer.cpp \
-    containers/iserializationinfo.cpp
+    containers/serializationinfo.cpp
 
 OTHER_FILES += \
     android/AndroidManifest.xml \

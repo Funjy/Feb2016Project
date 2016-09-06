@@ -1,13 +1,14 @@
 #ifndef ISERIALIZABLE_H
 #define ISERIALIZABLE_H
 
-#include "../containers/iserializationinfo.h"
+#include "../containers/serializationinfo.h"
 
 namespace PhotoFlyBehaviours {
 
 class ISerializable
 {
-    void getObjectInfo();
+public:
+    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) = 0;
 };
 
 }
