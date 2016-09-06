@@ -3,6 +3,8 @@
 
 #include <QObject>
 
+namespace PhotoFlyContainers {
+
 class ISerializationInfo : public QObject
 {
     Q_OBJECT
@@ -13,5 +15,7 @@ signals:
 
 public slots:
 };
+
+}
 
 #endif // ISERIALIZATIONINFO_H
