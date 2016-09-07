@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QtAndroidExtras>
-
 #include <QDebug>
 
 #define NATIVE_CODE_PATH            QString("ca/riftekit/photofly/")

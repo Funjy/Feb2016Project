@@ -9,15 +9,16 @@
 #include <QtAndroid>
 #endif
 
-#include <imagepickerandroid.h>
-#include <models/registrationformdata.h>
+#include "imagepickerandroid.h"
+#include "models/registrationformdata.h"
+#include "paymentandroid.h"
 
 class MainWorker : public QObject
 {
     Q_OBJECT
 public:
     MainWorker(QObject *parent = 0);
-    MainWorker(qreal ratio, qreal ratioFont, QObject *parent = 0);
+//    MainWorker(qreal ratio, qreal ratioFont, QObject *parent = 0);
 
     Q_INVOKABLE void selectImageFromGallery();
 

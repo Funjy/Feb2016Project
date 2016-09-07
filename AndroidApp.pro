@@ -19,7 +19,8 @@ HEADERS += \
     applicationsettings.h \
     models/photocontainer.h \
     behaviours/iserializable.h \
-    containers/serializationinfo.h
+    containers/serializationinfo.h \
+    paymentandroid.h
 
 SOURCES += main.cpp \
     mainworker.cpp \
@@ -27,7 +28,8 @@ SOURCES += main.cpp \
     models/registrationformdata.cpp \
     applicationsettings.cpp \
     models/photocontainer.cpp \
-    containers/serializationinfo.cpp
+    containers/serializationinfo.cpp \
+    paymentandroid.cpp
 
 OTHER_FILES += \
     android/AndroidManifest.xml \
@@ -45,5 +47,6 @@ DISTFILES += \
     android/gradlew \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat
+    android/gradlew.bat \
+    android/src/ca/riftekit/photofly/MyPayment.java
 

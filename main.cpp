@@ -7,7 +7,18 @@
 //#include <QtGui>
 //#include <QtQuick>
 
-#include <mainworker.h>
+#include "mainworker.h"
+#include "paymentandroid.h"
+
+//JNIEXPORT
+//jint
+//JNI_OnLoad(JavaVM* vm, void*) {
+//    Q_UNUSED(vm);
+
+//    PaymentAndroid::instance();
+
+//    return JNI_VERSION_1_6;
+//}
 
 int main(int argc, char *argv[])
 {
@@ -22,6 +33,10 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType<ApplicationSettings>   ("com.riftekit.Workers",    1, 0, "ApplicationSettings", ApplicationSettings_provider);
 
     appSettings.init();
+
+    PaymentAndroid pay;
+    pay.init();
+    pay.callPaymentRequest();
 
 //    // It's about iphone 5
 //    qreal refDpi = 326.;
@@ -52,6 +67,7 @@ int main(int argc, char *argv[])
 //    view.setResizeMode(QQuickView::SizeRootObjectToView);
 //    view.setSource(QUrl(QStringLiteral("qrc:/main.qml")));
 //    view.show();
+
 
     return app.exec();
 }
