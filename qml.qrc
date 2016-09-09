@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>MainForm.qml</file>
+        <file>MainForm_mypf.qml</file>
         <file>RegistrationForm.qml</file>
         <file>images/window-header.png</file>
         <file>images/close.svg</file>
@@ -24,6 +24,6 @@
         <file>images/ic_chevron_right_48px.svg</file>
         <file>images/Ph_logo.png</file>
         <file>CameraForm.qml</file>
+        <file>MainForm.qml</file>
     </qresource>
-    <qresource prefix="/icons"/>
 </RCC>

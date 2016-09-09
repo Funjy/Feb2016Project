@@ -8,17 +8,6 @@
 //#include <QtQuick>
 
 #include "mainworker.h"
-#include "paymentandroid.h"
-
-//JNIEXPORT
-//jint
-//JNI_OnLoad(JavaVM* vm, void*) {
-//    Q_UNUSED(vm);
-
-//    PaymentAndroid::instance();
-
-//    return JNI_VERSION_1_6;
-//}
 
 int main(int argc, char *argv[])
 {
@@ -32,30 +21,16 @@ int main(int argc, char *argv[])
     qmlRegisterType<MainWorker>                     ("com.riftekit.Workers",    1, 0, "MainWorker");
     qmlRegisterSingletonType<ApplicationSettings>   ("com.riftekit.Workers",    1, 0, "ApplicationSettings", ApplicationSettings_provider);
 
-    appSettings.init();
-
-    PaymentAndroid pay;
-    pay.init();
-    pay.callPaymentRequest();
-
-//    // It's about iphone 5
-//    qreal refDpi = 326.;
-//    qreal refHeight = 1136.;
-//    qreal refWidth = 640.;
-//    QRect rect = app.primaryScreen()->geometry();
-//    qreal height = qMax(rect.width(), rect.height());
-//    qreal width = qMin(rect.width(), rect.height());
-////    qreal dpi = app.primaryScreen()->logicalDotsPerInch();
-//    qreal dpi = app.primaryScreen()->physicalDotsPerInch();
-//    qreal m_ratio = qMin(height/refHeight, width/refWidth);
-//    qreal m_ratioFont = qMin(height*refDpi/(dpi*refHeight), width*refDpi/(dpi*refWidth));
-
-    QScopedPointer<MainWorker> mainWorker(new MainWorker());// *mainWorker(m_ratio, m_ratioFont);
-    mainWorker->Init();
-
     QQmlApplicationEngine engine;
     QPM_INIT(engine)
-    engine.rootContext()->setContextProperty("mainWorker", mainWorker.data());
+
+    appSettings.init();
+
+    auto mainWorker = new MainWorker(&engine);
+//    QScopedPointer<MainWorker> mainWorker(new MainWorker());
+    mainWorker->Init();
+
+    engine.rootContext()->setContextProperty("mainWorker", mainWorker);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
 

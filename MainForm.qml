@@ -1,43 +1,79 @@
-import QtQuick 2.4
+import QtQuick 2.5
 import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.0 as Controls
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Window 2.2
+
+import "qrc:/Material"
 import Material 0.3
 
-import "myControls"
-import "qrc:/Material"
-import com.riftekit.Containers 1.0
-import com.riftekit.Workers 1.0
-
-DefaultPanelPF {
+Page {
     id: root
-    title: "PHOTOFLY"
-    backButtonImageSource: "qrc:/icons/navigation/menu.svg"
+    title: "PhotoFly"
 
-    onBackClicked: nav.toggle()
+    backAction: navDrawer.action
+    property list<Action> menuList
 
-    NavigationDrawer{
-        z: 1
-        id: nav
+    NavigationDrawer {
+        id: navDrawer
         Flickable {
             anchors.fill: parent
 
             contentHeight: Math.max(content.implicitHeight, height)
+
             Column {
                 id: content
                 anchors.fill: parent
+                spacing: 20 * global_scale_factor
 
-                TextField {
-                    placeholderText: "Search..."
-                    anchors.horizontalCenter: parent.horizontalCenter
+                Item{
+                    height: 1
+                    anchors.left: parent.left
+                    anchors.right: parent.right
                 }
 
+                Rectangle{
+                    color: Theme.tabHighlightColor
+                    height: 160 * global_scale_factor
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    Row{
+                        anchors.fill: parent
+                        spacing: 16 * global_scale_factor
+                        Icon{
+                            name: "navigation/more_vert"
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                        Label{
+                            text: "Anton Kustou"
+                            anchors.verticalCenter: parent.verticalCenter
+                            font.pixelSize: 32 * global_scale_factor
+                        }
+                    }
+                }
+
+                ThinDivider { }
+
+                Repeater {
+                    model: root.menuList.length
+                    Button{
+                        id: menuButton
+                        implicitHeight: 60 * global_scale_factor
+
+                        text: action.name
+                        enabled: action.enabled
+
+                        property Action action: root.menuList[index]
+
+                        onClicked: {
+                            action.trigger(menuButton)
+                            navDrawer.close()
+                        }
+                    }
+                }
             }
         }
+
     }
 
-    content: GridLayout{
+    GridLayout{
         columns: 1
         anchors.fill: parent
         Item {
@@ -67,36 +103,9 @@ DefaultPanelPF {
                 size: parent.height / 2
                 Ink {
                     anchors.fill: parent
-
-//                    onClicked: overlayView.open(image)
+                    onClicked: mainWorker.openCamera()
                 }
             }
         }
     }
-
-//    Column {
-//        id: testGetImageItem
-////        opacity: 1
-////        enabled: false
-//        anchors.horizontalCenter: parent.horizontalCenter
-//        anchors.verticalCenter: parent.verticalCenter
-
-//        Rectangle {
-//            id: rectangle2
-//            width: 300
-//            height: 300
-//            color: mouseArea1.pressed ? "orange" : "cyan"
-
-//            MouseArea {
-//                id: mouseArea1
-//                anchors.fill: parent
-//            }
-//        }
-//        Text {
-//            id: text1
-//            text: qsTr("Text")
-//            font.pointSize: 16
-//        }
-//    }
-
 }

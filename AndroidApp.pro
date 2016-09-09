@@ -40,6 +40,7 @@ ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 DISTFILES += \
     android/src/ca/riftekit/photofly/MyJavaClass.java \
+#    android/src/ca/riftekit/photofly/MyPayment.java \
     android/res/drawable-hdpi/icon.png \
     android/res/drawable-ldpi/icon.png \
     android/res/drawable-mdpi/icon.png \
@@ -48,5 +49,6 @@ DISTFILES += \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew.bat \
-    android/src/ca/riftekit/photofly/MyPayment.java
+    android/ma_file.txt \
+    saved_for_later_use/MyPayment.java
 
