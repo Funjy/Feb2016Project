@@ -3,11 +3,11 @@
 #include <QQmlContext>
 
 #include "models/registrationformdata.h"
-#include "applicationsettings.h"
+#include "core/applicationsettings.h"
 //#include <QtGui>
 //#include <QtQuick>
 
-#include "mainworker.h"
+#include "core/mainworker.h"
 
 int main(int argc, char *argv[])
 {
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     mainWorker->Init();
 
     engine.rootContext()->setContextProperty("mainWorker", mainWorker);
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
 
 //    QQuickView view;

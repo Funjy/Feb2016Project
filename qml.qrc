@@ -1,8 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>MainForm_mypf.qml</file>
-        <file>RegistrationForm.qml</file>
         <file>images/window-header.png</file>
         <file>images/close.svg</file>
         <file>fonts/myriad-set-pro_ultralight.ttf</file>
@@ -10,20 +7,23 @@
         <file>images/window-header-w-shadow.png</file>
         <file>fonts/myriad-set-pro_thin.ttf</file>
         <file>images/close-128.png</file>
-        <file>myControls/WindowHeader.qml</file>
-        <file>myScripts/Styles.js</file>
         <file>fonts/myriad-set-pro_text.ttf</file>
-        <file>myControls/TextBoxPF.qml</file>
-        <file>myControls/LabelPF.qml</file>
-        <file>SuccessRegistration.qml</file>
-        <file>myControls/MessageDialog.qml</file>
-        <file>myControls/ClickableImage.qml</file>
         <file>fonts/MaterialIcons-Regular.ttf</file>
-        <file>myControls/DefaultPanelPF.qml</file>
-        <file>myScripts/MaterialIconsFont.js</file>
         <file>images/ic_chevron_right_48px.svg</file>
         <file>images/Ph_logo.png</file>
-        <file>CameraForm.qml</file>
-        <file>MainForm.qml</file>
+        <file>qml/myControls/ClickableImage.qml</file>
+        <file>qml/myControls/DefaultPanelPF.qml</file>
+        <file>qml/myControls/LabelPF.qml</file>
+        <file>qml/myControls/MessageDialog.qml</file>
+        <file>qml/myControls/TextBoxPF.qml</file>
+        <file>qml/myControls/WindowHeader.qml</file>
+        <file>qml/myScripts/MaterialIconsFont.js</file>
+        <file>qml/myScripts/Styles.js</file>
+        <file>qml/CameraForm.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/MainForm.qml</file>
+        <file>qml/MainForm_mypf.qml</file>
+        <file>qml/RegistrationForm.qml</file>
+        <file>qml/SuccessRegistration.qml</file>
     </qresource>
 </RCC>

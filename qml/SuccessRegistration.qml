@@ -1,5 +1,5 @@
 import QtQuick 2.4
-import "qrc:/myControls"
+import "myControls"
 
 Rectangle {
     height: 315 * global_scale_factor

@@ -12,6 +12,12 @@ DEFINES += QPM_INIT\\(E\\)=\"E.addImportPath(QStringLiteral(\\\"qrc:/\\\"));\"
 
 include(../resources/material/material.pri)
 
+DEP_INCLUDES = \
+    src
+
+DEPENDPATH +=	$${DEP_INCLUDES}
+INCLUDEPATH +=	$${DEP_INCLUDES}
+
 HEADERS += \
     src/core/applicationsettings.h \
     src/core/imagepickerandroid.h \
@@ -25,7 +31,7 @@ HEADERS += \
 SOURCES += \
     src/core/applicationsettings.cpp \
     src/core/imagepickerandroid.cpp \
-    src/core/main.cpp \
+    src/main.cpp \
     src/core/mainworker.cpp \
     src/core/paymentandroid.cpp \
     src/models/photocontainer.cpp \
