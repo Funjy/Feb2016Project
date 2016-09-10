@@ -13,23 +13,24 @@ DEFINES += QPM_INIT\\(E\\)=\"E.addImportPath(QStringLiteral(\\\"qrc:/\\\"));\"
 include(../resources/material/material.pri)
 
 HEADERS += \
-    mainworker.h \
-    imagepickerandroid.h \
-    models/registrationformdata.h \
-    applicationsettings.h \
-    models/photocontainer.h \
-    behaviours/iserializable.h \
-    containers/serializationinfo.h \
-    paymentandroid.h
+    src/core/applicationsettings.h \
+    src/core/imagepickerandroid.h \
+    src/core/mainworker.h \
+    src/core/paymentandroid.h \
+    src/models/photocontainer.h \
+    src/models/registrationformdata.h \
+    src/containers/serializationinfo.h \
+    src/behaviours/iserializable.h
 
-SOURCES += main.cpp \
-    mainworker.cpp \
-    imagepickerandroid.cpp \
-    models/registrationformdata.cpp \
-    applicationsettings.cpp \
-    models/photocontainer.cpp \
-    containers/serializationinfo.cpp \
-    paymentandroid.cpp
+SOURCES += \
+    src/core/applicationsettings.cpp \
+    src/core/imagepickerandroid.cpp \
+    src/core/main.cpp \
+    src/core/mainworker.cpp \
+    src/core/paymentandroid.cpp \
+    src/models/photocontainer.cpp \
+    src/models/registrationformdata.cpp \
+    src/containers/serializationinfo.cpp
 
 OTHER_FILES += \
     android/AndroidManifest.xml \
