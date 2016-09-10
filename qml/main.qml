@@ -84,14 +84,20 @@ ApplicationWindow {
         id: overlay
         width: root.width
         height: root.height
-        Text {
-            anchors.centerIn: parent
-            text: qsTr("tap to close")
+
+        RegistrationFormContent{
+            firstLaunch: true
+            onSkipClicked: overlay.close()
         }
-        MouseArea{
-            anchors.fill: parent
-            onClicked: overlay.close()
-        }
+
+//        Text {
+//            anchors.centerIn: parent
+//            text: qsTr("tap to close")
+//        }
+//        MouseArea{
+//            anchors.fill: parent
+//            onClicked: overlay.close()
+//        }
     }
 
 //    StackView{

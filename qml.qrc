@@ -25,5 +25,6 @@
         <file>qml/MainForm_mypf.qml</file>
         <file>qml/RegistrationForm.qml</file>
         <file>qml/SuccessRegistration.qml</file>
+        <file>qml/RegistrationFormContent.qml</file>
     </qresource>
 </RCC>
