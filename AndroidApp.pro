@@ -28,8 +28,8 @@ HEADERS += \
     src/containers/serializationinfo.h \
     src/behaviours/iserializable.h \
     src/behaviours/iserviceprovider.h \
-    src/behaviours/iservicerequest.h \
-    src/photo_service/requestfactory.h
+    src/photo_service/requestfactory.h \
+    src/behaviours/servicerequest.h
 
 SOURCES += \
     src/core/applicationsettings.cpp \
