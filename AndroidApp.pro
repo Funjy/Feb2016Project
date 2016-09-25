@@ -26,7 +26,10 @@ HEADERS += \
     src/models/photocontainer.h \
     src/models/registrationformdata.h \
     src/containers/serializationinfo.h \
-    src/behaviours/iserializable.h
+    src/behaviours/iserializable.h \
+    src/behaviours/iserviceprovider.h \
+    src/behaviours/iservicerequest.h \
+    src/photo_service/requestfactory.h
 
 SOURCES += \
     src/core/applicationsettings.cpp \
@@ -36,7 +39,8 @@ SOURCES += \
     src/core/paymentandroid.cpp \
     src/models/photocontainer.cpp \
     src/models/registrationformdata.cpp \
-    src/containers/serializationinfo.cpp
+    src/containers/serializationinfo.cpp \
+    src/photo_service/requestfactory.cpp
 
 OTHER_FILES += \
     android/AndroidManifest.xml \
