@@ -29,7 +29,7 @@ HEADERS += \
     src/behaviours/iserializable.h \
     src/behaviours/iserviceprovider.h \
     src/photo_service/requestfactory.h \
-    src/behaviours/servicerequest.h
+    src/photo_service/servicerequest.h
 
 SOURCES += \
     src/core/applicationsettings.cpp \

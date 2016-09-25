@@ -1,7 +1,7 @@
 #ifndef ISERVICEREQUEST_H
 #define ISERVICEREQUEST_H
 
-namespace PhotoFlyBehaviours {
+namespace PhotoFlyService {
 
 class IServiceRequest{
 public:
