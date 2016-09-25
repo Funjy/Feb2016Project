@@ -1,14 +1,18 @@
 #ifndef ISERVICEPROVIDER_H
 #define ISERVICEPROVIDER_H
 
+#include "../photo_service/servicerequest.h"
+
 namespace PhotoFlyBehaviours {
+
+using namespace PhotoFlyService;
 
 class IServiceProvider{
 public:
-    enum class RequestResult{
-        Ok,
-        Fail
-    };
+
+    virtual void makeRequest(ServiceRequest &request) = 0;
+
+
 };
 
 }

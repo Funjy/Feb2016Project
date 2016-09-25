@@ -28,8 +28,9 @@ HEADERS += \
     src/containers/serializationinfo.h \
     src/behaviours/iserializable.h \
     src/behaviours/iserviceprovider.h \
-    src/photo_service/requestfactory.h \
-    src/photo_service/servicerequest.h
+    src/photo_service/servicerequest.h \
+    src/photo_service/servicerequestfactory.h \
+    src/photo_service/loginrequest.h
 
 SOURCES += \
     src/core/applicationsettings.cpp \
@@ -40,7 +41,9 @@ SOURCES += \
     src/models/photocontainer.cpp \
     src/models/registrationformdata.cpp \
     src/containers/serializationinfo.cpp \
-    src/photo_service/requestfactory.cpp
+    src/photo_service/servicerequestfactory.cpp \
+    src/photo_service/servicerequest.cpp \
+    src/photo_service/loginrequest.cpp
 
 OTHER_FILES += \
     android/AndroidManifest.xml \
