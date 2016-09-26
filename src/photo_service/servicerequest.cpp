@@ -2,16 +2,22 @@
 
 using namespace PhotoFlyService;
 
-ServiceRequest::ServiceRequest() {
-    m_result = Result::Initialized;
+ServiceRequest::ServiceRequest(QObject *parent) : QObject(parent)
+{
+    m_resultStatus = ResultStatus::Initialized;
 }
 
-ServiceRequest::Result PhotoFlyService::ServiceRequest::getResult() const
+ServiceRequest::ResultStatus PhotoFlyService::ServiceRequest::getResultStatus() const
+{
+    return m_resultStatus;
+}
+
+void ServiceRequest::setResultStatus(ServiceRequest::ResultStatus value)
+{
+    m_resultStatus = value;
+}
+
+QSharedPointer<ServiceMessage> ServiceRequest::getResult() const
 {
     return m_result;
-}
-
-void ServiceRequest::setResult(ServiceRequest::Result value)
-{
-    m_result = value;
 }

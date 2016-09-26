@@ -16,6 +16,8 @@ public:
     QVariant value(QString name);
     bool equals(const SerializationInfo& other);
 
+    QList<QString> getKeys() const;
+
 signals:
 
 public slots:

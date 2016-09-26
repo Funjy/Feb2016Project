@@ -1,37 +1,38 @@
 #ifndef SERVICEREQUEST_H
 #define SERVICEREQUEST_H
 
-#include <QtGlobal>
+#include <QSharedPointer>
+#include <QObject>
+
+#include "servicemessage.h"
 
 namespace PhotoFlyService {
 
-class ServiceRequest{
-
+class ServiceRequest : public QObject, public ServiceMessage
+{
+    Q_OBJECT
     Q_DISABLE_COPY(ServiceRequest)
 
 public:
-    enum class Type{
-        Login
-    };
-    enum class Result{
+    enum class ResultStatus{
         Initialized,
         Ok,
         Fail
     };
 
-
     virtual ~ServiceRequest(){}
 
-    virtual Type getType() const = 0;
+    ResultStatus getResultStatus() const;
+    void setResultStatus(ResultStatus value);
 
-    Result getResult() const;
-    void setResult(Result value);
+    QSharedPointer<ServiceMessage> getResult() const;
 
 protected:
-    explicit ServiceRequest();
+    explicit ServiceRequest(QObject *parent = nullptr);
 
 private:
-    Result  m_result;
+    ResultStatus    m_resultStatus;
+    QSharedPointer<ServiceMessage>  m_result;
 
 };
 

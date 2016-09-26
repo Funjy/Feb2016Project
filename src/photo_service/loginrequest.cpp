@@ -2,7 +2,10 @@
 
 using namespace PhotoFlyService;
 
-LoginRequest::LoginRequest()
+const QString LoginRequest::LoginKey =    "Login";
+const QString LoginRequest::PasswordKey = "Password";
+
+LoginRequest::LoginRequest(QObject *parent) : ServiceRequest(parent)
 {
 
 }
@@ -18,7 +21,14 @@ ServiceRequest::Type LoginRequest::getType() const
     return ServiceRequest::Type::Login;
 }
 
-QString LoginRequest::getLogin() const
+void LoginRequest::getObjectInfo(PhotoFlyContainers::SerializationInfo &info)
+{
+    ServiceMessage::getObjectInfo(info);
+    info.addValue(LoginKey, m_login);
+    info.addValue(PasswordKey, m_password);
+}
+
+QString LoginRequest::login() const
 {
     return m_login;
 }
@@ -28,7 +38,7 @@ void LoginRequest::setLogin(const QString &login)
     m_login = login;
 }
 
-QString LoginRequest::getPassword() const
+QString LoginRequest::password() const
 {
     return m_password;
 }

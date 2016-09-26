@@ -10,8 +10,7 @@ using namespace PhotoFlyService;
 class IServiceProvider{
 public:
 
-    virtual void makeRequest(ServiceRequest &request) = 0;
-
+    virtual void makeRequest(const ServiceRequest *request) = 0;
 
 };
 

@@ -31,3 +31,8 @@ bool SerializationInfo::equals(const SerializationInfo &other)
 
     return true;
 }
+
+QList<QString> SerializationInfo::getKeys() const
+{
+    return m_data.keys();
+}

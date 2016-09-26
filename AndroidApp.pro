@@ -30,7 +30,8 @@ HEADERS += \
     src/behaviours/iserviceprovider.h \
     src/photo_service/servicerequest.h \
     src/photo_service/servicerequestfactory.h \
-    src/photo_service/loginrequest.h
+    src/photo_service/loginrequest.h \
+    src/photo_service/servicemessage.h
 
 SOURCES += \
     src/core/applicationsettings.cpp \
@@ -43,7 +44,8 @@ SOURCES += \
     src/containers/serializationinfo.cpp \
     src/photo_service/servicerequestfactory.cpp \
     src/photo_service/servicerequest.cpp \
-    src/photo_service/loginrequest.cpp
+    src/photo_service/loginrequest.cpp \
+    src/photo_service/servicemessage.cpp
 
 OTHER_FILES += \
     android/AndroidManifest.xml \
