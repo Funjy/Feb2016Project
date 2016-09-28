@@ -4,6 +4,7 @@
 #include <QtGlobal>
 
 #include "../behaviours/iserializable.h"
+#define ServiceMessageType PhotoFlyService::ServiceMessage::Type
 
 namespace PhotoFlyService {
 using namespace PhotoFlyBehaviours;
@@ -18,19 +19,19 @@ public:
     static const QString LoginTypeString;
     static const QString UndefinedTypeString;
 
-    enum class Type{
+    enum Type{
         Undefined,
         Login
     };
-    Q_ENUM(Type)
+    Q_ENUM(ServiceMessageType)
 
     virtual ~ServiceMessage(){}
 
     virtual Type getType() const = 0;
     QString getTypeString() const;
 
-    static QString getTypeString(Type value);
-    static Type getTypeByString(const QString& value);
+    static QString getTypeString(ServiceMessageType value);
+    static ServiceMessageType getTypeByString(const QString& value);
 
 
     // ISerializable interface
@@ -42,9 +43,11 @@ protected:
     static const QString TypeKey;
 
 private:
-    static QMap<QString, Type> m_typeByString;
-    static QMap<Type, QString> m_stringByType;
+    static QMap<const QString*, Type> m_typeByString;
+    static QMap<Type, const QString*> m_stringByType;
     static void addPair(const QString& str, Type type);
+
+    static QList<QString>   m_stringTypes;
 
 
 

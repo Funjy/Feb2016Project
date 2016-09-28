@@ -6,8 +6,9 @@ const QString ServiceMessage::TypeKey =             "MessageType";
 const QString ServiceMessage::LoginTypeString =     "Login";
 const QString ServiceMessage::UndefinedTypeString = "Undefined";
 
-QMap<QString, ServiceMessage::Type> ServiceMessage::m_typeByString;
-QMap<ServiceMessage::Type, QString> ServiceMessage::m_stringByType;
+QMap<const QString*, ServiceMessage::Type>  ServiceMessage::m_typeByString;
+QMap<ServiceMessage::Type, const QString*>  ServiceMessage::m_stringByType;
+QList<QString>                              ServiceMessage::m_stringTypes;
 
 QString ServiceMessage::getTypeString() const
 {
@@ -20,20 +21,26 @@ QString ServiceMessage::getTypeString() const
     //    }
 }
 
-QString ServiceMessage::getTypeString(ServiceMessage::Type value)
+QString ServiceMessage::getTypeString(ServiceMessageType value)
 {
     if(!m_stringByType.contains(value)){
         return UndefinedTypeString;
     }
-    return m_stringByType[value];
+    return *m_stringByType[value];
 }
 
-ServiceMessage::Type ServiceMessage::getTypeByString(const QString &value)
+ServiceMessageType ServiceMessage::getTypeByString(const QString &value)
 {
-    if(!m_typeByString.contains(value)){
-        return Type::Undefined;
+//    if(!m_typeByString.contains(&value)){
+//        return Type::Undefined;
+//    }
+    for(auto key: m_typeByString.keys())
+    {
+        if(*key == value)
+            return m_typeByString[key];
+
     }
-    return m_typeByString[value];
+    return Type::Undefined;
 }
 
 void ServiceMessage::getObjectInfo(PhotoFlyContainers::SerializationInfo &info)
@@ -49,6 +56,7 @@ ServiceMessage::ServiceMessage()
 
 void ServiceMessage::addPair(const QString &str, ServiceMessage::Type type)
 {
-    m_typeByString.insert(str, type);
-    m_stringByType.insert(type, str);
+    m_stringTypes << str;
+    m_typeByString.insert(&m_stringTypes.last(), type);
+    m_stringByType.insert(type, &m_stringTypes.last());
 }
