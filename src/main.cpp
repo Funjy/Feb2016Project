@@ -4,6 +4,7 @@
 
 #include "models/registrationformdata.h"
 #include "core/applicationsettings.h"
+#include "photo_service/servicerequestfactory.h"
 //#include <QtGui>
 //#include <QtQuick>
 
@@ -20,6 +21,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<RegistrationFormData>           ("com.riftekit.Containers", 1, 0, "RegistrationFormData");
     qmlRegisterType<MainWorker>                     ("com.riftekit.Workers",    1, 0, "MainWorker");
     qmlRegisterSingletonType<ApplicationSettings>   ("com.riftekit.Workers",    1, 0, "ApplicationSettings", ApplicationSettings_provider);
+
+    qmlRegisterSingletonType<PhotoFlyService::ServiceRequestFactory>
+            ("com.riftekit.PhotoFlyService",    1, 0, "ApplicationSettings", PhotoFlyService::ServiceRequestFactory_provider);
 
     QQmlApplicationEngine engine;
     QPM_INIT(engine)

@@ -15,6 +15,8 @@ class LoginRequest : public ServiceRequest
 public:
     explicit LoginRequest(QObject *parent = nullptr);
     explicit LoginRequest(const QString& login, const QString& password);
+    LoginRequest(const LoginRequest& other) {}
+    LoginRequest &operator=(const LoginRequest &other) {return *this;}
 
     // ServiceMessage interface
     virtual Type getType() const override;
@@ -43,5 +45,6 @@ private:
 };
 
 }
+Q_DECLARE_METATYPE(PhotoFlyService::LoginRequest)
 
 #endif // LOGINREQUEST_H

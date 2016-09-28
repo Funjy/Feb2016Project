@@ -2,10 +2,15 @@
 
 using namespace PhotoFlyService;
 
-ServiceRequestFactory *ServiceRequestFactory::Get()
+ServiceRequestFactory &ServiceRequestFactory::instance()
 {
     static ServiceRequestFactory instance;
-    return &instance;
+    return instance;
+}
+
+void ServiceRequestFactory::init()
+{
+    QQmlEngine::setObjectOwnership(&requestFactory, QQmlEngine::CppOwnership);
 }
 
 ServiceRequest* ServiceRequestFactory::buildRequest(ServiceRequest::Type type)
@@ -15,6 +20,12 @@ ServiceRequest* ServiceRequestFactory::buildRequest(ServiceRequest::Type type)
         return new LoginRequest();
         break;
     }
+}
+
+ServiceRequest *ServiceRequestFactory::buildRequest(const QString &type, const QVariantMap &content)
+{
+    auto message = new GenericServiceMessage();
+//    message->sett
 }
 
 ServiceRequestFactory::ServiceRequestFactory(QObject *parent) : QObject(parent)

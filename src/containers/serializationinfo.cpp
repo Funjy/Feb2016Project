@@ -7,6 +7,11 @@ SerializationInfo::SerializationInfo(QObject *parent) : QObject(parent)
 
 }
 
+SerializationInfo::SerializationInfo(QVariantMap map, QObject *parent) : SerializationInfo(parent)
+{
+    m_data = map;
+}
+
 void SerializationInfo::addValue(QString name, QVariant value)
 {
     m_data.insert(name, value);

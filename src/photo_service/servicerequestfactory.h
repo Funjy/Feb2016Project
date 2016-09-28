@@ -2,9 +2,13 @@
 #define SERVICEREQUESTFACTORY_H
 
 #include <QObject>
+#include <QQmlEngine>
 
 #include "servicerequest.h"
 #include "loginrequest.h"
+#include "genericservicemessage.h"\
+
+#define requestFactory ServiceRequestFactory::instance()
 
 namespace PhotoFlyService {
 
@@ -14,18 +18,30 @@ class ServiceRequestFactory : public QObject
 
 public:
 
-    static ServiceRequestFactory *Get();
+    static ServiceRequestFactory &instance();
+    void init();
 
     ServiceRequest* buildRequest(ServiceRequest::Type type);
+
+    Q_INVOKABLE ServiceRequest* buildRequest(const QString& type, const QVariantMap& content);
 
 signals:
 
 public slots:
+
 private:
     explicit ServiceRequestFactory(QObject *parent = 0);
     ServiceRequestFactory(const ServiceRequestFactory &) { }
     ServiceRequestFactory &operator=(const ServiceRequestFactory &) { return *this; }
 };
+
+static QObject *ServiceRequestFactory_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+
+    return &requestFactory;
+}
 
 }
 

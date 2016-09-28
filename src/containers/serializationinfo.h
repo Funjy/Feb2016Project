@@ -11,6 +11,7 @@ class SerializationInfo : public QObject
     Q_OBJECT
 public:
     explicit SerializationInfo(QObject *parent = 0);
+    explicit SerializationInfo(QVariantMap map, QObject *parent = 0);
 
     void addValue(QString name, QVariant value);
     QVariant value(QString name);
