@@ -7,8 +7,8 @@ import Material 0.3
 
 import "myControls"
 import "qrc:/Material"
-import com.riftekit.Containers 1.0
-import com.riftekit.Workers 1.0
+import ca.riftekit.Containers 1.0
+import ca.riftekit.Workers 1.0
 
 DefaultPanelPF {
     id: root

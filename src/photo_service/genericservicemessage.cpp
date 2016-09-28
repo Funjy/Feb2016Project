@@ -12,7 +12,6 @@ GenericServiceMessage::GenericServiceMessage(QObject *parent) : QObject(parent)
 GenericServiceMessage::GenericServiceMessage(const GenericServiceMessage &other) :
    QObject(other.parent()), m_type(other.m_type), m_content(other.m_content)
 {
-    qDebug() << "copy ctor";
 }
 
 //GenericServiceMessage::GenericServiceMessage(GenericServiceMessage &&other) :
@@ -27,10 +26,7 @@ GenericServiceMessage &GenericServiceMessage::operator=(const GenericServiceMess
 {
      if(this != &other)
          GenericServiceMessage(other).swap(*this);
-//    swap(*this, other);
-
-    qDebug() << "equation";
-
+//    using std::swap;
 //    std::swap(*this, other);
     return *this;
 }
@@ -38,13 +34,10 @@ GenericServiceMessage &GenericServiceMessage::operator=(const GenericServiceMess
 void GenericServiceMessage::swap(GenericServiceMessage &_v) throw()
 {
     GenericServiceMessage::swap(*this, _v);
-//    std::swap(m_type, _v.m_type);
-//    m_content.swap(_v.m_content);
 }
 
 void GenericServiceMessage::swap(GenericServiceMessage &first, GenericServiceMessage &second) throw()
 {
-    qDebug() << "swap 2";
     std::swap(first.m_type, second.m_type);
     first.m_content.swap(second.m_content);
 }

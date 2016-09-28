@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 import "myControls"
 import Material 0.3
 
-import com.riftekit.Containers 1.0
+import ca.riftekit.Containers 1.0
 
 Item {
     id: root

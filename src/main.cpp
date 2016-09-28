@@ -22,27 +22,13 @@ int main(int argc, char *argv[])
     app.setApplicationName("PhotoFly");
 
 //    qRegisterMetaType<ServiceMessageType>();
-    qmlRegisterType<RegistrationFormData>           ("com.riftekit.Containers", 1, 0, "RegistrationFormData");
-    qmlRegisterType<MainWorker>                     ("com.riftekit.Workers",    1, 0, "MainWorker");
-    qmlRegisterSingletonType<ApplicationSettings>   ("com.riftekit.Workers",    1, 0, "ApplicationSettings", ApplicationSettings_provider);
+    qmlRegisterType<RegistrationFormData>           ("ca.riftekit.Containers", 1, 0, "RegistrationFormData");
+    qmlRegisterType<MainWorker>                     ("ca.riftekit.Workers",    1, 0, "MainWorker");
+    qmlRegisterSingletonType<ApplicationSettings>   ("ca.riftekit.Workers",    1, 0, "ApplicationSettings", ApplicationSettings_provider);
 
     qmlRegisterSingletonType<PhotoFlyService::ServiceRequestFactory>
-            ("com.riftekit.PhotoFlyService",    1, 0, "ApplicationSettings", PhotoFlyService::ServiceRequestFactory_provider);
-
-    PhotoFlyService::GenericServiceMessage m1, m2;
-
-    m2.setType(ServiceMessageType::Login);
-    QVariantMap map;
-    map.insert("key1", "value1");
-    map.insert("key2", 0.0350);
-    m2.setContent(map);
-
-    qDebug() << "main 1";
-
-    m1 = m2;
-
-    qDebug() << "m1: " << m1.getContent().keys();
-    qDebug() << "m2: " << m2.getContent().keys();
+            ("ca.riftekit.PhotoFlyService",    1, 0, "ApplicationSettings", PhotoFlyService::ServiceRequestFactory_provider);
+    qmlRegisterType<PhotoFlyService::GenericServiceMessage>("ca.riftekit.PhotoFlyService",    1, 0, "ServiceMessage");
 
     QQmlApplicationEngine engine;
     QPM_INIT(engine)

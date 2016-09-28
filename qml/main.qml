@@ -9,7 +9,7 @@ import "qrc:/Material"
 import Material 0.3
 import Material.ListItems 0.1 as ListItem
 
-import com.riftekit.Workers 1.0
+import ca.riftekit.Workers 1.0
 
 ApplicationWindow {
     id: root
