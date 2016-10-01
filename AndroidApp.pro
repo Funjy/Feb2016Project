@@ -1,4 +1,8 @@
-QT += quick androidextras svg
+QT += quick  svg
+
+android {
+QT += androidextras
+}
 
 TEMPLATE = app
 TARGET = PhotoFly
@@ -19,10 +23,8 @@ DEPENDPATH +=	$${DEP_INCLUDES}
 INCLUDEPATH +=	$${DEP_INCLUDES}
 
 HEADERS += \
-    src/core/applicationsettings.h \
-    src/core/imagepickerandroid.h \
+    src/core/applicationsettings.h \    
     src/core/mainworker.h \
-    src/core/paymentandroid.h \
     src/models/photocontainer.h \
     src/models/registrationformdata.h \
     src/containers/serializationinfo.h \
@@ -32,14 +34,13 @@ HEADERS += \
     src/photo_service/servicerequestfactory.h \
     src/photo_service/loginrequest.h \
     src/photo_service/servicemessage.h \
-    src/photo_service/genericservicemessage.h
+    src/photo_service/genericservicemessage.h \
+    src/behaviours/iimagegalleryprovider.h
 
 SOURCES += \
     src/core/applicationsettings.cpp \
-    src/core/imagepickerandroid.cpp \
     src/main.cpp \
     src/core/mainworker.cpp \
-    src/core/paymentandroid.cpp \
     src/models/photocontainer.cpp \
     src/models/registrationformdata.cpp \
     src/containers/serializationinfo.cpp \
@@ -49,10 +50,19 @@ SOURCES += \
     src/photo_service/servicemessage.cpp \
     src/photo_service/genericservicemessage.cpp
 
+linux:android {
 OTHER_FILES += \
     android/AndroidManifest.xml \
     android/res/values/libs.xml
-    android/build.gradle \
+    android/build.gradle
+
+HEADERS += \
+    src/core/imagepickerandroid.h \
+    src/core/paymentandroid.h
+
+SOURCES += \
+    src/core/imagepickerandroid.cpp \
+    src/core/paymentandroid.cpp
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
@@ -68,5 +78,9 @@ DISTFILES += \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew.bat \
     android/ma_file.txt \
+}
+
+
+DISTFILES += \
     saved_for_later_use/MyPayment.java
 

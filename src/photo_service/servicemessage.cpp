@@ -2,9 +2,11 @@
 
 using namespace PhotoFlyService;
 
-const QString ServiceMessage::TypeKey =             "MessageType";
-const QString ServiceMessage::LoginTypeString =     "Login";
-const QString ServiceMessage::UndefinedTypeString = "Undefined";
+const QString ServiceMessage::TypeKey =                 "MessageType";
+const QString ServiceMessage::LoginTypeString =         "Login";
+const QString ServiceMessage::RegisterTypeString =      "Register";
+const QString ServiceMessage::SendPhotosTypeString =    "SendPhotos";
+const QString ServiceMessage::UndefinedTypeString =     "Undefined";
 
 QMap<const QString*, ServiceMessage::Type>  ServiceMessage::m_typeByString;
 QMap<ServiceMessage::Type, const QString*>  ServiceMessage::m_stringByType;
@@ -51,7 +53,9 @@ void ServiceMessage::getObjectInfo(PhotoFlyContainers::SerializationInfo &info)
 
 ServiceMessage::ServiceMessage()
 {
-    addPair(LoginTypeString, Type::Login);
+    addPair(LoginTypeString,        Type::Login);
+    addPair(RegisterTypeString,     Type::Register);
+    addPair(SendPhotosTypeString,   Type::SendPhotos);
 }
 
 void ServiceMessage::addPair(const QString &str, ServiceMessage::Type type)

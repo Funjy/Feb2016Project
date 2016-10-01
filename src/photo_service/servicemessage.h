@@ -17,11 +17,15 @@ class ServiceMessage : public ISerializable
 
 public:
     static const QString LoginTypeString;
+    static const QString RegisterTypeString;
+    static const QString SendPhotosTypeString;
     static const QString UndefinedTypeString;
 
     enum Type{
         Undefined,
-        Login
+        Login,
+        Register,
+        SendPhotos
     };
     Q_ENUM(ServiceMessageType)
 

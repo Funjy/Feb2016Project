@@ -7,11 +7,14 @@
 //#include <QtAndroidExtras>
 #include <QAndroidJniObject>
 #include <QtAndroid>
+#include "imagepickerandroid.h"
+#include "paymentandroid.h"
 #endif
 
-#include "imagepickerandroid.h"
+#include "behaviours/iimagegalleryprovider.h"
 #include "models/registrationformdata.h"
-#include "paymentandroid.h"
+
+using namespace PhotoFlyBehaviours;
 
 class MainWorker : public QObject
 {
@@ -38,7 +41,8 @@ private slots:
     void onImagesSelected(QStringList imagePaths);
 
 private:
-    ImagePickerAndroid m_imPicker;
+    IImageGalleryProvider *m_imPicker;
+//    ImagePickerAndroid m_imPicker;
 
 
 

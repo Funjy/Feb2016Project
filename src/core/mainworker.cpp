@@ -2,8 +2,8 @@
 
 MainWorker::MainWorker(QObject *parent) : QObject(parent){
 
-//    connect(&m_imPicker, &ImagePickerAndroid::imageSelected, this, &MainWorker::onImageSelected);
-    connect(&m_imPicker, &ImagePickerAndroid::imagesSelected, this, &MainWorker::onImagesSelected);
+    m_imPicker = nullptr;
+    connect(m_imPicker, &IImageGalleryProvider::imagesSelected, this, &MainWorker::onImagesSelected);
     emit setMessage("Ready");
 }
 
@@ -11,13 +11,13 @@ void MainWorker::selectImageFromGallery()
 {
     emit setMessage("Open clicked");
 
-    m_imPicker.openGallery();
+    m_imPicker->openGallery();
 
 }
 
 void MainWorker::openCamera()
 {
-    m_imPicker.openCamera();
+//    m_imPicker.openCamera();
 }
 
 void MainWorker::testFunc(RegistrationFormData* data)

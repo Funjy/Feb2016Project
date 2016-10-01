@@ -5,26 +5,27 @@
 #include <QtAndroidExtras>
 #include <QDebug>
 
+#include "behaviours/iimagegalleryprovider.h"
+
 #define NATIVE_CODE_PATH            QString("ca/riftekit/photofly/")
 #define NATIVE_CODE_CLASSNAME       QString("MyJavaClass")
 
-class ImagePickerAndroid : public QObject, public QAndroidActivityResultReceiver
+class ImagePickerAndroid : public PhotoFlyBehaviours::IImageGalleryProvider, public QAndroidActivityResultReceiver
 {
     Q_OBJECT
 public:
     explicit ImagePickerAndroid(QObject *parent = 0);
 
 
-    void openGallery();
+    virtual void openGallery() override;
     void openCamera();
 
     virtual void handleActivityResult(int receiverRequestCode, int resultCode, const QAndroidJniObject & data);
 
-signals:
-
-    void imageSelected(QString imagePath);
-    void error(QString error);
-    void imagesSelected(QStringList imagePaths);
+//signals:
+//    void imageSelected(QString imagePath);
+//    void error(QString error);
+//    void imagesSelected(QStringList imagePaths);
 
 public slots:
 };
