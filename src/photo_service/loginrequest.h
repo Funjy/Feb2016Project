@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "servicerequest.h"
+#include "genericservicerequest.h"
 
 namespace PhotoFlyService {
 

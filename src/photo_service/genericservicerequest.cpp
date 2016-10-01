@@ -1,4 +1,4 @@
-#include "servicerequest.h"
+#include "genericservicerequest.h"
 
 using namespace PhotoFlyService;
 

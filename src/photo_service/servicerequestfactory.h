@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QQmlEngine>
 
-#include "servicerequest.h"
+#include "genericservicerequest.h"
 #include "loginrequest.h"
 #include "genericservicemessage.h"\
 

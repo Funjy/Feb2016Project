@@ -30,12 +30,12 @@ HEADERS += \
     src/containers/serializationinfo.h \
     src/behaviours/iserializable.h \
     src/behaviours/iserviceprovider.h \
-    src/photo_service/servicerequest.h \
     src/photo_service/servicerequestfactory.h \
 #    src/photo_service/loginrequest.h \
     src/photo_service/servicemessage.h \
     src/photo_service/genericservicemessage.h \
-    src/behaviours/iimagegalleryprovider.h
+    src/behaviours/iimagegalleryprovider.h \
+    src/photo_service/genericservicerequest.h
 
 SOURCES += \
     src/core/applicationsettings.cpp \
@@ -45,10 +45,10 @@ SOURCES += \
     src/models/registrationformdata.cpp \
     src/containers/serializationinfo.cpp \
     src/photo_service/servicerequestfactory.cpp \
-    src/photo_service/servicerequest.cpp \
 #    src/photo_service/loginrequest.cpp \
     src/photo_service/servicemessage.cpp \
-    src/photo_service/genericservicemessage.cpp
+    src/photo_service/genericservicemessage.cpp \
+    src/photo_service/genericservicerequest.cpp
 
 android {
 OTHER_FILES += \
