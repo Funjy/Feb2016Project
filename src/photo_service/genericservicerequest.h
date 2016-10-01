@@ -15,7 +15,7 @@ class GenericServiceRequest : public GenericServiceMessage
     Q_DISABLE_COPY(GenericServiceRequest)
 
 public:
-
+    static const QString ResultKey;
 
     enum class ResultStatus{
         Initialized,
@@ -37,7 +37,7 @@ public:
     const ServiceMessage * const getResult();
 
 protected:
-    static const QString ResultKey;
+
 
 private:
     ResultStatus                    m_resultStatus;

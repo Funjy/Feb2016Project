@@ -15,6 +15,8 @@ class GenericServiceMessage : public QObject, public ServiceMessage
     Q_PROPERTY(QVariantMap content READ getContent WRITE setContent NOTIFY contentChanged)
 
 public:
+    static const QString ContentKey;
+
     explicit GenericServiceMessage(QObject *parent = nullptr);
     explicit GenericServiceMessage(
             ServiceMessageType type,
@@ -50,8 +52,6 @@ signals:
 public slots:
 
 protected:
-    static const QString ContentKey;
-
     QVariantMap &contentData();
 
 private:

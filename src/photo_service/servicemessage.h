@@ -16,6 +16,8 @@ class ServiceMessage : public ISerializable
     Q_GADGET
 
 public:
+    static const QString TypeKey;
+
     static const QString LoginTypeString;
     static const QString RegisterTypeString;
     static const QString SendPhotosTypeString;
@@ -37,14 +39,11 @@ public:
     static QString getTypeString(ServiceMessageType value);
     static ServiceMessageType getTypeByString(const QString& value);
 
-
     // ISerializable interface
     virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const override;
 
 protected:
     explicit ServiceMessage();
-
-    static const QString TypeKey;
 
 private:
     static QMap<const QString*, Type> m_typeByString;
