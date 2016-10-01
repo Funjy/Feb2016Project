@@ -15,17 +15,18 @@ void ServiceRequestFactory::init()
 
 ServiceRequest* ServiceRequestFactory::buildRequest(ServiceRequest::Type type)
 {
-    switch(type){
-    case ServiceRequest::Type::Login:
-        return new LoginRequest();
-        break;
-    }
+    return nullptr;
+//    switch(type){
+//    case ServiceRequest::Type::Login:
+//        return new LoginRequest();
+//        break;
+//    }
 }
 
 ServiceRequest *ServiceRequestFactory::buildRequest(const QString &type, const QVariantMap &content)
 {
     auto message = new GenericServiceMessage();
-//    message->sett
+//    message->setType();
 }
 
 ServiceRequestFactory::ServiceRequestFactory(QObject *parent) : QObject(parent)

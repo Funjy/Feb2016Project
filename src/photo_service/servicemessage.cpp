@@ -45,7 +45,7 @@ ServiceMessageType ServiceMessage::getTypeByString(const QString &value)
     return Type::Undefined;
 }
 
-void ServiceMessage::getObjectInfo(PhotoFlyContainers::SerializationInfo &info)
+void ServiceMessage::getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const
 {
 //    info.addValue(TypeKey, (int)getType());
     info.addValue(TypeKey, getTypeString());

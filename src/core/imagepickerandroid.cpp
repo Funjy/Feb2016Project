@@ -3,7 +3,7 @@
 static const int ACTIVITY_REQUEST_CODE = 1;
 static const int ACTIVITY_REQUEST_CODE_OPEN_CAMERA = 2;
 
-ImagePickerAndroid::ImagePickerAndroid(QObject *parent) : QObject(parent)
+ImagePickerAndroid::ImagePickerAndroid(QObject *parent) : IImageGalleryProvider(parent)
 {
 
 }

@@ -5,12 +5,20 @@
 using namespace PhotoFlyService;
 
 GenericServiceMessage::GenericServiceMessage(QObject *parent) : QObject(parent)
-{    
+{
     m_type = Type::Undefined;
 }
 
+GenericServiceMessage::GenericServiceMessage(ServiceMessage::Type type, const QVariantMap &content, QObject *parent) :
+    GenericServiceMessage(parent)
+{
+    m_type = type;
+    m_content = content;
+}
+
 GenericServiceMessage::GenericServiceMessage(const GenericServiceMessage &other) :
-   QObject(other.parent()), m_type(other.m_type), m_content(other.m_content)
+//   QObject(other.parent()), m_type(other.m_type), m_content(other.m_content)
+    GenericServiceMessage(other.m_type, other.m_content, other.parent())
 {
 }
 
@@ -42,10 +50,14 @@ void GenericServiceMessage::swap(GenericServiceMessage &first, GenericServiceMes
     first.m_content.swap(second.m_content);
 }
 
-void GenericServiceMessage::getObjectInfo(PhotoFlyContainers::SerializationInfo &info)
+QVariantMap &GenericServiceMessage::contentData()
+{
+    return m_content;
+}
+
+void GenericServiceMessage::getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const
 {
     ServiceMessage::getObjectInfo(info);
-    //    foreach(auto key, )
     for( auto key : m_content.keys() )
     {
         info.addValue(key, m_content[key]);

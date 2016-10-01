@@ -10,15 +10,26 @@
 #include <QApplication>
 #include <QScreen>
 
-#include "models/registrationformdata.h"
+//#include "models/registrationformdata.h"
 
-#define appSettings ApplicationSettings::instance()
+#define appSettings PhotoFlySettings::ApplicationSettings::instance()
 #define appSettingsCore appSettings.settings()
 
-#define GROUP_GENERAL           "general"
+#define AppSettingsKeys PhotoFlySettings::ApplicationSettings::SettingsKeys
 
-#define OPTION_IS_REGISTERED    "isRegistered"
-#define OPTION_IS_FIRST_LAUNCH  "isFirstLaunch"
+//#define GROUP_GENERAL           "general"
+
+//#define OPTION_IS_REGISTERED    "isRegistered"
+//#define OPTION_IS_FIRST_LAUNCH  "isFirstLaunch"
+
+#define FULL_PARAM_KEY(g,p) QString(g) + "/" + p
+
+namespace PhotoFlySettings{
+
+// General group
+static const char* GroupGeneral =       "general";
+static const char* KeyIsRegistered =    "isRegistered";
+static const char* KeyIsFirstLaunch =   "isFirstLaunch";
 
 class ApplicationSettings : public QObject
 {
@@ -39,12 +50,20 @@ public:
     QSettings&  settings();    
 
     Q_INVOKABLE void        setValue(const QString& key, const QVariant &value);
-    Q_INVOKABLE QVariant    getValue(const QString& key);
+    Q_INVOKABLE QVariant    getValue(const QString& key, const QVariant &defaultValue = QVariant());
     Q_INVOKABLE bool        isFirstLaunch() const;
 
     QString keyIsRegistered() const;
     qreal ratio() const;
     qreal fontRatio() const;
+
+    enum SettingsKeys{
+        SK_IsRegistered,
+        SK_IsFirsLaunch
+    };
+    Q_ENUM(SettingsKeys)
+
+    Q_INVOKABLE static QString getSettingsKeyString(AppSettingsKeys key);
 
 signals:
 
@@ -71,6 +90,8 @@ static QObject *ApplicationSettings_provider(QQmlEngine *engine, QJSEngine *scri
     Q_UNUSED(scriptEngine)
 
     return &appSettings;
+}
+
 }
 
 #endif // APPLICATIONSETTINGS_H

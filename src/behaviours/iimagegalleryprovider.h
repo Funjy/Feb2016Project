@@ -11,6 +11,9 @@ class IImageGalleryProvider : public QObject
 public:
     virtual void openGallery() = 0;
 
+protected:
+    explicit IImageGalleryProvider(QObject * parent = nullptr) : QObject(parent) {}
+
 signals:
 
     void imageSelected(QString imagePath);

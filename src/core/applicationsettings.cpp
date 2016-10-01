@@ -1,5 +1,6 @@
 #include "applicationsettings.h"
 
+using namespace PhotoFlySettings;
 
 void ApplicationSettings::init()
 {
@@ -17,8 +18,8 @@ void ApplicationSettings::init()
         m_settings = new QSettings(QSettings::UserScope, qApp->organizationName(), qApp->applicationName(), this);
     }
     // Registration data
-    m_isFirstLaunch = appSettingsCore.value(OPTION_IS_FIRST_LAUNCH, true).toBool();
-    setValue(OPTION_IS_FIRST_LAUNCH, false);
+    m_isFirstLaunch = appSettingsCore.value(KeyIsFirstLaunch, true).toBool();
+    setValue(KeyIsFirstLaunch, false);
     // note: debug
     m_isFirstLaunch = true;
 
@@ -35,9 +36,9 @@ void ApplicationSettings::setValue(const QString& key, const QVariant& value)
     m_settings->sync();
 }
 
-QVariant ApplicationSettings::getValue(const QString &key)
+QVariant ApplicationSettings::getValue(const QString &key, const QVariant &defaultValue)
 {
-    return m_settings->value(key);
+    return m_settings->value(key, defaultValue);
 }
 
 bool ApplicationSettings::isFirstLaunch() const
@@ -47,7 +48,7 @@ bool ApplicationSettings::isFirstLaunch() const
 
 QString ApplicationSettings::keyIsRegistered() const
 {
-    return QString(GROUP_GENERAL) + "/" + OPTION_IS_REGISTERED;
+    return FULL_PARAM_KEY(GroupGeneral, KeyIsRegistered);
 }
 
 qreal ApplicationSettings::ratio() const
@@ -77,4 +78,16 @@ void ApplicationSettings::calcRatio()
     qreal dpi = qApp->primaryScreen()->physicalDotsPerInch();
     m_ratio = qMin(height/refHeight, width/refWidth);
     m_fontRatio = qMin(height*refDpi/(dpi*refHeight), width*refDpi/(dpi*refWidth));
+}
+
+QString ApplicationSettings::getSettingsKeyString(AppSettingsKeys key)
+{
+    switch(key){
+    case AppSettingsKeys::SK_IsFirsLaunch:
+        return KeyIsFirstLaunch;
+    case AppSettingsKeys::SK_IsRegistered:
+        return KeyIsRegistered;
+    default:
+        return "";
+    }
 }

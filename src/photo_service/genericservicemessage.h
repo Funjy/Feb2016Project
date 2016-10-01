@@ -15,17 +15,14 @@ class GenericServiceMessage : public QObject, public ServiceMessage
     Q_PROPERTY(QVariantMap content READ getContent WRITE setContent NOTIFY contentChanged)
 
 public:
-    explicit GenericServiceMessage(QObject *parent = 0);
-    GenericServiceMessage(const GenericServiceMessage& other);
-//    GenericServiceMessage(GenericServiceMessage&& other);
-    GenericServiceMessage &operator=(const GenericServiceMessage &other);
-//    GenericServiceMessage &operator=(GenericServiceMessage other);
-    virtual ~GenericServiceMessage(){}
-    void swap(GenericServiceMessage &_v) throw();
-    static void swap(GenericServiceMessage &first, GenericServiceMessage &second) throw();
+    explicit GenericServiceMessage(QObject *parent = nullptr);
+    explicit GenericServiceMessage(
+            ServiceMessageType type,
+            const QVariantMap& content,
+            QObject *parent = nullptr);
 
     // ISerializable interface
-    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) override;
+    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const override;
 
     // ServiceMessage interface
     virtual ServiceMessageType getType() const override;
@@ -35,21 +32,33 @@ public:
     QVariantMap getContent() const;
     void setContent(const QVariantMap &content);
 
+    // ----------- Cope -----------
+
+    GenericServiceMessage(const GenericServiceMessage& other);
+//    GenericServiceMessage(GenericServiceMessage&& other);
+    GenericServiceMessage &operator=(const GenericServiceMessage &other);
+//    GenericServiceMessage &operator=(GenericServiceMessage other);
+    virtual ~GenericServiceMessage(){}
+    void swap(GenericServiceMessage &_v) throw();
+    static void swap(GenericServiceMessage &first, GenericServiceMessage &second) throw();
+    // ----------------------------
+
 signals:
     void messageTypeChanged();
     void contentChanged();
 
 public slots:
 
+protected:
+    QVariantMap &contentData();
+
 private:
-    ServiceMessageType        m_type;
-    QVariantMap m_content;
+    ServiceMessageType      m_type;
+    QVariantMap             m_content;
 
 };
 
 }
 Q_DECLARE_METATYPE(PhotoFlyService::GenericServiceMessage)
-//Q_DECLARE_METATYPE(ServiceMessageType)
-
 
 #endif // GENERICSERVICEMESSAGE_H

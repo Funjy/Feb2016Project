@@ -32,7 +32,7 @@ HEADERS += \
     src/behaviours/iserviceprovider.h \
     src/photo_service/servicerequest.h \
     src/photo_service/servicerequestfactory.h \
-    src/photo_service/loginrequest.h \
+#    src/photo_service/loginrequest.h \
     src/photo_service/servicemessage.h \
     src/photo_service/genericservicemessage.h \
     src/behaviours/iimagegalleryprovider.h
@@ -46,11 +46,11 @@ SOURCES += \
     src/containers/serializationinfo.cpp \
     src/photo_service/servicerequestfactory.cpp \
     src/photo_service/servicerequest.cpp \
-    src/photo_service/loginrequest.cpp \
+#    src/photo_service/loginrequest.cpp \
     src/photo_service/servicemessage.cpp \
     src/photo_service/genericservicemessage.cpp
 
-linux:android {
+android {
 OTHER_FILES += \
     android/AndroidManifest.xml \
     android/res/values/libs.xml
@@ -78,9 +78,5 @@ DISTFILES += \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew.bat \
     android/ma_file.txt \
-}
-
-
-DISTFILES += \
     saved_for_later_use/MyPayment.java
-
+}

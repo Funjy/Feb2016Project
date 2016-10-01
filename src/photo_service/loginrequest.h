@@ -22,7 +22,7 @@ public:
     virtual Type getType() const override;
 
     // ISerializable interface
-    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) override;
+    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const override;
 
     QString login() const;
     void setLogin(const QString &login);

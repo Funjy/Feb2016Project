@@ -21,7 +21,7 @@ ServiceRequest::Type LoginRequest::getType() const
     return ServiceRequest::Type::Login;
 }
 
-void LoginRequest::getObjectInfo(PhotoFlyContainers::SerializationInfo &info)
+void LoginRequest::getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const
 {
     ServiceMessage::getObjectInfo(info);
     info.addValue(LoginKey, m_login);

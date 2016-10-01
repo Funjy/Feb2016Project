@@ -28,7 +28,8 @@ int main(int argc, char *argv[])
 //    qRegisterMetaType<ServiceMessageType>();
     qmlRegisterType<RegistrationFormData>           (pf_containers_uri, 1, 0, "RegistrationFormData");
     qmlRegisterType<MainWorker>                     (pf_workers_uri,    1, 0, "MainWorker");
-    qmlRegisterSingletonType<ApplicationSettings>   (pf_workers_uri,    1, 0, "ApplicationSettings", ApplicationSettings_provider);
+    qmlRegisterSingletonType<PhotoFlySettings::ApplicationSettings>
+            (pf_workers_uri,    1, 0, "ApplicationSettings", PhotoFlySettings::ApplicationSettings_provider);
 
     qmlRegisterSingletonType<PhotoFlyService::ServiceRequestFactory>
             (pf_containers_pfServices,    1, 0, "PFServiceRequestFactory", PhotoFlyService::ServiceRequestFactory_provider);

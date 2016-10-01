@@ -12,7 +12,7 @@ using namespace PhotoFlyBehaviours;
 class ServiceMessage : public ISerializable
 {
 
-//    Q_DISABLE_COPY(ServiceMessage)
+    Q_DISABLE_COPY(ServiceMessage)
     Q_GADGET
 
 public:
@@ -39,7 +39,7 @@ public:
 
 
     // ISerializable interface
-    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) override;
+    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const override;
 
 protected:
     explicit ServiceMessage();

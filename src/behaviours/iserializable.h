@@ -8,7 +8,7 @@ namespace PhotoFlyBehaviours {
 class ISerializable
 {
 public:
-    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) = 0;
+    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const = 0;
 
 //    virtual void deserialize(PhotoFlyContainers::SerializationInfo &info) = 0;
 };

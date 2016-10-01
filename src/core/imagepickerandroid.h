@@ -10,7 +10,9 @@
 #define NATIVE_CODE_PATH            QString("ca/riftekit/photofly/")
 #define NATIVE_CODE_CLASSNAME       QString("MyJavaClass")
 
-class ImagePickerAndroid : public PhotoFlyBehaviours::IImageGalleryProvider, public QAndroidActivityResultReceiver
+using namespace PhotoFlyBehaviours;
+
+class ImagePickerAndroid : public IImageGalleryProvider, public QAndroidActivityResultReceiver
 {
     Q_OBJECT
 public:

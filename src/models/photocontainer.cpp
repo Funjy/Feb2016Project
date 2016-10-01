@@ -15,7 +15,7 @@ PhotoContainer::PhotoContainer(const PhotoContainer &other) : PhotoContainer(oth
 //    return *this;
 //}
 
-void PhotoContainer::getObjectInfo(PhotoFlyContainers::SerializationInfo &info)
+void PhotoContainer::getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const
 {
     Q_UNUSED(info)
 }

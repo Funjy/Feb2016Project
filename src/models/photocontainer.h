@@ -17,8 +17,7 @@ public:
 //    PhotoContainer &operator= (const PhotoContainer& other);
 
     // ISerializable interface
-public:
-    void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) override;
+    void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const override;
 
     QImage image() const;
     void image(const QImage &image);
