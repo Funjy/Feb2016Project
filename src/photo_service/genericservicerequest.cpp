@@ -2,6 +2,8 @@
 
 using namespace PhotoFlyService;
 
+const QString GenericServiceRequest::ResultKey = "Result";
+
 GenericServiceRequest::GenericServiceRequest(QObject *parent) : GenericServiceMessage(parent)
 {
     m_resultStatus = ResultStatus::Initialized;
@@ -11,6 +13,14 @@ GenericServiceRequest::GenericServiceRequest(ServiceMessage::Type type, QObject 
     GenericServiceRequest(parent)
 {
     setType(type);
+}
+
+void GenericServiceRequest::getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const
+{
+    GenericServiceMessage::getObjectInfo(info);
+    PhotoFlyContainers::SerializationInfo si;
+    m_result->getObjectInfo(si);
+    info.addValue(ResultKey, si);
 }
 
 GenericServiceRequest::ResultStatus PhotoFlyService::GenericServiceRequest::getResultStatus() const

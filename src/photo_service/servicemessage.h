@@ -53,7 +53,7 @@ private:
 
     static QList<QString>   m_stringTypes;
 
-
+    static const QString TypeId;
 
 };
 

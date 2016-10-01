@@ -50,6 +50,8 @@ signals:
 public slots:
 
 protected:
+    static const QString ContentKey;
+
     QVariantMap &contentData();
 
 private:

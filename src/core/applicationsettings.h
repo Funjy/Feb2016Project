@@ -27,9 +27,9 @@
 namespace PhotoFlySettings{
 
 // General group
-static const char* GroupGeneral =       "general";
-static const char* KeyIsRegistered =    "isRegistered";
-static const char* KeyIsFirstLaunch =   "isFirstLaunch";
+static constexpr const char* GroupGeneral =       "general";
+static constexpr const char* KeyIsRegistered =    "isRegistered";
+static constexpr const char* KeyIsFirstLaunch =   "isFirstLaunch";
 
 class ApplicationSettings : public QObject
 {

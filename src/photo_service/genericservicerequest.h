@@ -15,6 +15,8 @@ class GenericServiceRequest : public GenericServiceMessage
     Q_DISABLE_COPY(GenericServiceRequest)
 
 public:
+
+
     enum class ResultStatus{
         Initialized,
         Ok,
@@ -25,15 +27,22 @@ public:
     explicit GenericServiceRequest(ServiceMessageType type, QObject *parent = nullptr);
     virtual ~GenericServiceRequest(){}
 
+    // ISerializable interface
+    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const override;
+
     ResultStatus getResultStatus() const;
     void setResultStatus(ResultStatus value);
 
 //    QSharedPointer<ServiceMessage> getResult() const;
     const ServiceMessage * const getResult();
 
+protected:
+    static const QString ResultKey;
+
 private:
     ResultStatus                    m_resultStatus;
     QSharedPointer<ServiceMessage>  m_result;
+
 
 };
 
