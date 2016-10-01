@@ -8,20 +8,19 @@ void ApplicationSettings::init()
 
     // Init settings file
     if(!m_settings){
-        QString path = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
-        if(!QDir(path).exists()){
-            QDir().mkpath(path);
-        }
-        QString fullName = QString("%1/%2.conf").arg(path).arg(qApp->applicationName());
-        m_settings = new QSettings(fullName, QSettings::NativeFormat, this);
+//        QString path = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
+//        if(!QDir(path).exists()){
+//            QDir().mkpath(path);
+//        }
+//        QString fullName = QString("%1/%2.conf").arg(path).arg(qApp->applicationName());
+//        m_settings = new QSettings(fullName, QSettings::NativeFormat, this);
+        m_settings = new QSettings(QSettings::UserScope, qApp->organizationName(), qApp->applicationName(), this);
     }
-
     // Registration data
     m_isFirstLaunch = appSettingsCore.value(OPTION_IS_FIRST_LAUNCH, true).toBool();
     setValue(OPTION_IS_FIRST_LAUNCH, false);
     // note: debug
     m_isFirstLaunch = true;
-
 
 }
 

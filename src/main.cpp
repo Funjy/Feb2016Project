@@ -13,6 +13,10 @@
 
 #include "core/mainworker.h"
 
+const char* pf_workers_uri = "ca.riftekit.Workers";
+const char* pf_containers_uri = "ca.riftekit.Containers";
+const char* pf_containers_pfServices = "ca.riftekit.PhotoFlyServices";
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -22,13 +26,13 @@ int main(int argc, char *argv[])
     app.setApplicationName("PhotoFly");
 
 //    qRegisterMetaType<ServiceMessageType>();
-    qmlRegisterType<RegistrationFormData>           ("ca.riftekit.Containers", 1, 0, "RegistrationFormData");
-    qmlRegisterType<MainWorker>                     ("ca.riftekit.Workers",    1, 0, "MainWorker");
-    qmlRegisterSingletonType<ApplicationSettings>   ("ca.riftekit.Workers",    1, 0, "ApplicationSettings", ApplicationSettings_provider);
+    qmlRegisterType<RegistrationFormData>           (pf_containers_uri, 1, 0, "RegistrationFormData");
+    qmlRegisterType<MainWorker>                     (pf_workers_uri,    1, 0, "MainWorker");
+    qmlRegisterSingletonType<ApplicationSettings>   (pf_workers_uri,    1, 0, "ApplicationSettings", ApplicationSettings_provider);
 
     qmlRegisterSingletonType<PhotoFlyService::ServiceRequestFactory>
-            ("ca.riftekit.PhotoFlyService",    1, 0, "ApplicationSettings", PhotoFlyService::ServiceRequestFactory_provider);
-    qmlRegisterType<PhotoFlyService::GenericServiceMessage>("ca.riftekit.PhotoFlyService",    1, 0, "ServiceMessage");
+            (pf_containers_pfServices,    1, 0, "PFServiceRequestFactory", PhotoFlyService::ServiceRequestFactory_provider);
+    qmlRegisterType<PhotoFlyService::GenericServiceMessage>(pf_containers_pfServices,    1, 0, "ServiceMessage");
 
     QQmlApplicationEngine engine;
     QPM_INIT(engine)
