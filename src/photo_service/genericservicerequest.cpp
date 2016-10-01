@@ -2,23 +2,23 @@
 
 using namespace PhotoFlyService;
 
-ServiceRequest::ServiceRequest(QObject *parent) : GenericServiceMessage(parent)
+GenericServiceRequest::GenericServiceRequest(QObject *parent) : GenericServiceMessage(parent)
 {
     m_resultStatus = ResultStatus::Initialized;
 }
 
-ServiceRequest::ServiceRequest(ServiceMessage::Type type, QObject *parent) :
-    ServiceRequest(parent)
+GenericServiceRequest::GenericServiceRequest(ServiceMessage::Type type, QObject *parent) :
+    GenericServiceRequest(parent)
 {
     setType(type);
 }
 
-ServiceRequest::ResultStatus PhotoFlyService::ServiceRequest::getResultStatus() const
+GenericServiceRequest::ResultStatus PhotoFlyService::GenericServiceRequest::getResultStatus() const
 {
     return m_resultStatus;
 }
 
-void ServiceRequest::setResultStatus(ServiceRequest::ResultStatus value)
+void GenericServiceRequest::setResultStatus(GenericServiceRequest::ResultStatus value)
 {
     m_resultStatus = value;
 }
@@ -28,7 +28,7 @@ void ServiceRequest::setResultStatus(ServiceRequest::ResultStatus value)
 //    return m_result;
 //}
 
-const ServiceMessage * const ServiceRequest::getResult()
+const ServiceMessage * const GenericServiceRequest::getResult()
 {
     return m_result.data();
 }

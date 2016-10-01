@@ -9,10 +9,10 @@
 
 namespace PhotoFlyService {
 
-class ServiceRequest : public GenericServiceMessage
+class GenericServiceRequest : public GenericServiceMessage
 {
     Q_OBJECT
-    Q_DISABLE_COPY(ServiceRequest)
+    Q_DISABLE_COPY(GenericServiceRequest)
 
 public:
     enum class ResultStatus{
@@ -21,9 +21,9 @@ public:
         Fail
     };
 
-    explicit ServiceRequest(QObject *parent = nullptr);
-    explicit ServiceRequest(ServiceMessageType type, QObject *parent = nullptr);
-    virtual ~ServiceRequest(){}
+    explicit GenericServiceRequest(QObject *parent = nullptr);
+    explicit GenericServiceRequest(ServiceMessageType type, QObject *parent = nullptr);
+    virtual ~GenericServiceRequest(){}
 
     ResultStatus getResultStatus() const;
     void setResultStatus(ResultStatus value);

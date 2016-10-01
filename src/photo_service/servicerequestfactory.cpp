@@ -13,7 +13,7 @@ void ServiceRequestFactory::init()
     QQmlEngine::setObjectOwnership(&requestFactory, QQmlEngine::CppOwnership);
 }
 
-ServiceRequest* ServiceRequestFactory::buildRequest(ServiceRequest::Type type)
+GenericServiceRequest* ServiceRequestFactory::buildRequest(GenericServiceRequest::Type type)
 {
     return nullptr;
 //    switch(type){
@@ -23,7 +23,7 @@ ServiceRequest* ServiceRequestFactory::buildRequest(ServiceRequest::Type type)
 //    }
 }
 
-ServiceRequest *ServiceRequestFactory::buildRequest(const QString &type, const QVariantMap &content)
+GenericServiceRequest *ServiceRequestFactory::buildRequest(const QString &type, const QVariantMap &content)
 {
     auto message = new GenericServiceMessage();
 //    message->setType();

@@ -7,7 +7,7 @@
 
 namespace PhotoFlyService {
 
-class LoginRequest : public ServiceRequest
+class LoginRequest : public GenericServiceRequest
 {
     Q_OBJECT
     Q_PROPERTY(QString login READ login WRITE setLogin NOTIFY loginChanged)
