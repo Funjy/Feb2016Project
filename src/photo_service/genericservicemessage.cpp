@@ -4,7 +4,8 @@
 
 using namespace PhotoFlyService;
 
-const QString GenericServiceMessage::ContentKey = "Content";
+const QString GenericServiceMessage::TypeId =       "GenericServiceMessage";
+const QString GenericServiceMessage::ContentKey =   "Content";
 
 GenericServiceMessage::GenericServiceMessage(QObject *parent) : QObject(parent)
 {
@@ -61,11 +62,7 @@ void GenericServiceMessage::getObjectInfo(PhotoFlyContainers::SerializationInfo 
 {
     ServiceMessage::getObjectInfo(info);
     info.addValue(ContentKey, m_content);
-//    for( auto key : m_content.keys() )
-//    {
-//        info.addValue(key, m_content[key]);
-//    }
-
+    info.setTypeId(metaObject()->className());
 }
 
 ServiceMessageType GenericServiceMessage::getType() const

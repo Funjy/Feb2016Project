@@ -15,6 +15,19 @@ SerializationInfo::SerializationInfo(QVariantMap map, QObject *parent) : Seriali
     m_data = map;
 }
 
+SerializationInfo::SerializationInfo(const SerializationInfo &other) : QObject(other.parent())
+{
+    m_data = other.m_data;
+}
+
+SerializationInfo &SerializationInfo::operator=(const SerializationInfo &other)
+{
+    if(this != &other){
+        SerializationInfo(other).swap(*this);
+    }
+    return *this;
+}
+
 void SerializationInfo::addValue(QString name, QVariant value)
 {
     m_data.insert(name, value);
@@ -33,17 +46,6 @@ QVariant SerializationInfo::value(QString name)
 bool SerializationInfo::equals(const SerializationInfo &other)
 {
     return m_data == other.m_data;
-//    if(other.m_data.count() != m_data.count())
-//        return false;
-
-//    foreach(auto key, m_data.keys()){
-//        if(!other.m_data.contains(key))
-//            return false;
-//        if(other.m_data[key] != m_data[key])
-//            return false;
-//    }
-
-    //    return true;
 }
 
 QString SerializationInfo::getTypeId() const
@@ -53,7 +55,17 @@ QString SerializationInfo::getTypeId() const
     return m_data[TypeIdKey].toString();
 }
 
+void SerializationInfo::setTypeId(const QString &typeId)
+{
+    m_data[TypeIdKey] = typeId;
+}
+
 QList<QString> SerializationInfo::getKeys() const
 {
     return m_data.keys();
+}
+
+void SerializationInfo::swap(SerializationInfo &_v) throw()
+{
+    m_data.swap(_v.m_data);
 }

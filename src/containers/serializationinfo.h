@@ -12,10 +12,11 @@ class SerializationInfo : public QObject
 public:
     static const QString TypeIdKey;
     static const QString UndefinedTypeIdStr;
-//    static constexpr auto TypeIdKey =  "TypeId";
 
     explicit SerializationInfo(QObject *parent = 0);
     explicit SerializationInfo(QVariantMap map, QObject *parent = 0);
+    explicit SerializationInfo(const SerializationInfo& other);
+    SerializationInfo &operator=(const SerializationInfo& other);
 
     void addValue(QString name, QVariant value);
     void addValue(QString name, const SerializationInfo& value);
@@ -23,8 +24,11 @@ public:
     bool equals(const SerializationInfo& other);
 
     QString getTypeId() const;
+    void setTypeId(const QString& typeId);
 
     QList<QString> getKeys() const;
+
+    void swap(SerializationInfo &_v) throw();
 
 signals:
 

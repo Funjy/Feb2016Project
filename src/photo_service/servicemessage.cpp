@@ -50,8 +50,8 @@ ServiceMessageType ServiceMessage::getTypeByString(const QString &value)
 void ServiceMessage::getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const
 {
 //    info.addValue(TypeKey, (int)getType());
-    info.addValue(PhotoFlyContainers::SerializationInfo::TypeIdKey, TypeId);
     info.addValue(TypeKey, getTypeString());
+    info.setTypeId(TypeId);
 }
 
 ServiceMessage::ServiceMessage()

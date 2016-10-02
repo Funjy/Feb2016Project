@@ -14,6 +14,7 @@ class GenericServiceRequest : public GenericServiceMessage
     Q_OBJECT
     Q_DISABLE_COPY(GenericServiceRequest)
 
+    static const QString TypeId;
 public:
     static const QString ResultKey;
 
@@ -24,7 +25,8 @@ public:
     };
 
     explicit GenericServiceRequest(QObject *parent = nullptr);
-    explicit GenericServiceRequest(ServiceMessageType type, QObject *parent = nullptr);
+//    explicit GenericServiceRequest(ServiceMessageType type, QObject *parent = nullptr);
+    using GenericServiceMessage::GenericServiceMessage;
     virtual ~GenericServiceRequest(){}
 
     // ISerializable interface
@@ -35,9 +37,7 @@ public:
 
 //    QSharedPointer<ServiceMessage> getResult() const;
     const ServiceMessage * const getResult();
-
-protected:
-
+    void setResult(ServiceMessage* result);
 
 private:
     ResultStatus                    m_resultStatus;

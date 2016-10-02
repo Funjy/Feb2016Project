@@ -14,6 +14,7 @@ class GenericServiceMessage : public QObject, public ServiceMessage
     Q_PROPERTY(ServiceMessageType messageType READ getType WRITE setType NOTIFY messageTypeChanged)
     Q_PROPERTY(QVariantMap content READ getContent WRITE setContent NOTIFY contentChanged)
 
+    static const QString TypeId;
 public:
     static const QString ContentKey;
 
