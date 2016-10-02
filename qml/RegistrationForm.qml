@@ -1,7 +1,7 @@
-import QtQuick 2.6
+import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
-import QtQuick.Controls.Styles 1.4
+//import QtQuick.Controls.Styles 1.4
 //import QtQuick.Window 2.2
 //import Material 0.3
 
@@ -47,6 +47,10 @@ Page{
 
     header: TabBar{
         id: tabBar
+
+        readonly property int loginIndex:       0
+        readonly property int registerIndex:    1
+
         currentIndex: swipeView.currentIndex
         TabButton{ text: qsTr("Login") }
         TabButton{ text: qsTr("Registration") }
@@ -64,11 +68,12 @@ Page{
 
     GridLayout{
         anchors.fill: parent
+        anchors.margins: Math.min(parent.width, parent.height) * 0.05
         columns: 1
+        clip: true
 
         SwipeView {
             id: swipeView
-//            anchors.fill: parent
             Layout.fillHeight: true
             anchors.left: parent.left
             anchors.right: parent.right
@@ -78,29 +83,33 @@ Page{
                 width: swipeView.width
                 height: swipeView.height
 
+                function buildData(){
+                    var rData = Qt.createQmlObject("import ca.riftekit.Containers 1.0; RegistrationFormData {}", this)
+                    rData.email = loginEmail.text
+                    rData.password = loginPassword.text
+                    return rData
+//                    registrationData.email = loginEmail.text
+//                    registrationData.password = loginPassword.text
+                }
+
                 GridLayout{
-                    anchors.centerIn: parent
+//                    anchors.centerIn: parent
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.right: parent.right
                     columns: 1
                     rowSpacing: 16 * global_scale_factor
 
-                    Column{
-                        LabelPF{
-                            id: emailLabel
-                            text: qsTr("Email address")
-                        }
-                        TextBoxPF{
-                            placeholderText: emailLabel.text
-                        }
+                    TextFieldWithLabel{
+                        id: loginEmail
+                        title: qsTr("Email address")
+                        expandWidth: true
                     }
 
-                    Column{
-                        LabelPF{
-                            id: passwordLabel
-                            text: qsTr("Password")
-                        }
-                        TextBoxPF{
-                            placeholderText: passwordLabel.text
-                        }
+                    TextFieldWithLabel{
+                        id: loginPassword
+                        title: qsTr("Password")
+                        expandWidth: true
                     }
 
                 }
@@ -110,35 +119,46 @@ Page{
             Pane{
                 width: swipeView.width
                 height: swipeView.height
+
+                function buildData(){
+                    var rData = Qt.createQmlObject("import ca.riftekit.Containers 1.0; RegistrationFormData {}", this)
+                    rData.name = registerName.text
+                    rData.email = registerEmail.text
+                    rData.password = registerPassword.text
+                    return rData
+//                    registrationData.name = registerName.text
+//                    registrationData.email = registerEmail.text
+//                    registrationData.password = registerPassword.text
+                }
+
                 GridLayout{
-//                    anchors.fill: parent
-//                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.centerIn: parent
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.right: parent.right
                     columns: 1
                     rowSpacing: 16 * global_scale_factor
-                    property int marginValue: parent.width * 0.1
-                    anchors.leftMargin: marginValue
-                    anchors.rightMargin: marginValue
 
-                    TextBoxPF{
-                        placeholderText: qsTr("Name")
-                        text: global_scale_factor
+                    TextFieldWithLabel{
+                        id: registerName
+                        title: qsTr("Name")
+                        expandWidth: true
                     }
 
-                    TextBoxPF{
-                        placeholderText: qsTr("Email address")
+                    TextFieldWithLabel{
+                        id: registerEmail
+                        title: qsTr("Email address")
+                        expandWidth: true
                     }
 
-                    TextBoxPF{
-                        placeholderText: qsTr("Phone number")
+                    TextFieldWithLabel{
+                        id: registerPassword
+                        title: qsTr("Password")
+                        expandWidth: true
                     }
 
-                    Item{
-                        Layout.fillHeight: true
-                    }
-
-
-
+//                    Item{
+//                        Layout.fillHeight: true
+//                    }
 
                 }
             }
@@ -146,28 +166,32 @@ Page{
         }
 
         GridLayout{
-            ButtonPF{
-                id: skipButton
-                visible: root.firstLaunch
-                text: "Skip"
-                Layout.fillWidth: true
-                onClicked: backClicked()
-            }
+//            ButtonPF{
+//                id: skipButton
+//                visible: root.firstLaunch
+//                text: "Skip"
+//                Layout.fillWidth: true
+//                onClicked: backClicked()
+//            }
             ButtonPF{
                 id: acceptButton
                 text: "Accept"
                 highlighted: true
                 Layout.fillWidth: true
-                onClicked: sucRes.open()
+                onClicked: {
+
+                    var rData = swipeView.currentItem.buildData()
+                    rData.destroy()
+
+                    sucRes.open()
+                }
             }
         }
     }
 
-
-
-    RegistrationFormData{
-        id: registrationData
-    }
+//    RegistrationFormData{
+//        id: registrationData
+//    }
 
     PopupPF{
         id: sucRes

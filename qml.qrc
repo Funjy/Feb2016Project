@@ -28,5 +28,6 @@
         <file>qml/RegistrationFormContent.qml</file>
         <file>qml/myControls/PopupPF.qml</file>
         <file>qml/myControls/ButtonPF.qml</file>
+        <file>qml/myControls/TextFieldWithLabel.qml</file>
     </qresource>
 </RCC>

@@ -9,6 +9,8 @@ RegistrationFormData::RegistrationFormData(const RegistrationFormData &other) : 
 {
     m_name = other.m_name;
     m_surname = other.m_surname;
+    m_email = other.m_email;
+    m_password = other.m_password;
 }
 
 bool RegistrationFormData::isValid() const
