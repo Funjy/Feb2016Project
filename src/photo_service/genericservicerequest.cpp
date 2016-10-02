@@ -45,6 +45,8 @@ RequestResultStatus GenericServiceRequest::getResultStatus() const
 void GenericServiceRequest::setResultStatus(RequestResultStatus value)
 {
     m_resultStatus = value;
+    if(m_resultStatus != RequestResultStatus::Fail)
+        m_errorString = QString();
 }
 
 //QSharedPointer<ServiceMessage> ServiceRequest::getResult() const
@@ -67,5 +69,15 @@ void GenericServiceRequest::setResult(const QVariantMap &result)
     auto message = new GenericServiceMessage();
     message->deserialize(SerializationInfo(result));
     setResult(message);
+}
+
+QString GenericServiceRequest::getErrorString() const
+{
+    return m_errorString;
+}
+
+void GenericServiceRequest::setErrorString(const QString &errorString)
+{
+    m_errorString = errorString;
 }
 

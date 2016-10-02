@@ -42,10 +42,9 @@ private:
     static QJsonDocument jsonFromBytes(const QByteArray &data);
     static QByteArray bytesFromJson(const QJsonDocument &data);
 
-
     QNetworkReply *prepareRequest(GenericServiceRequest *request);
 
-    void handleReply(GenericServiceRequest *request, QNetworkReply *reply);
+    static void handleReply(GenericServiceRequest *request, QNetworkReply *reply);
 
 };
 

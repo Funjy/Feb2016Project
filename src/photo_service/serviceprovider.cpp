@@ -108,6 +108,7 @@ void ServiceProvider::handleReply(GenericServiceRequest *request, QNetworkReply 
         request->setResult(json.toVariant().toMap());
     } else {
         request->setResultStatus(RequestResultStatus::Fail);
+        request->setErrorString(reply->errorString());
     }
 
     reply->deleteLater();

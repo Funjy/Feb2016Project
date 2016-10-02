@@ -47,8 +47,12 @@ public:
     void setResult(ServiceMessage* result);
     void setResult(const QVariantMap& result);
 
+    QString getErrorString() const;
+    void setErrorString(const QString &errorString);
+
 private:
     ResultStatus                    m_resultStatus;
+    QString                         m_errorString;
     QSharedPointer<ServiceMessage>  m_result;
 
 };
