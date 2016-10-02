@@ -15,6 +15,7 @@ void ServiceRequestFactory::init()
 
 GenericServiceRequest* ServiceRequestFactory::buildRequest(GenericServiceRequest::MessageType type)
 {
+    Q_UNUSED(type)
     return nullptr;
 //    switch(type){
 //    case ServiceRequest::Type::Login:
@@ -25,7 +26,10 @@ GenericServiceRequest* ServiceRequestFactory::buildRequest(GenericServiceRequest
 
 GenericServiceRequest *ServiceRequestFactory::buildRequest(const QString &type, const QVariantMap &content)
 {
-    auto message = new GenericServiceMessage();
+    Q_UNUSED(type)
+    Q_UNUSED(content)
+    return nullptr;
+//    auto message = new GenericServiceMessage();
 //    message->setType();
 }
 

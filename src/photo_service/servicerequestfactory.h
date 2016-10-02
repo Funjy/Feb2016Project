@@ -15,6 +15,7 @@ namespace PhotoFlyService {
 class ServiceRequestFactory : public QObject
 {
     Q_OBJECT
+    Q_DISABLE_COPY(ServiceRequestFactory)
 
 public:
 
@@ -31,14 +32,15 @@ public slots:
 
 private:
     explicit ServiceRequestFactory(QObject *parent = 0);
-    ServiceRequestFactory(const ServiceRequestFactory &) { }
-    ServiceRequestFactory &operator=(const ServiceRequestFactory &) { return *this; }
+//    ServiceRequestFactory(const ServiceRequestFactory &) : ServiceRequestFactory() { }
+//    ServiceRequestFactory &operator=(const ServiceRequestFactory &) { return *this; }
 };
 
 static QObject *ServiceRequestFactory_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
+    Q_UNUSED(ServiceRequestFactory_provider)
 
     return &requestFactory;
 }

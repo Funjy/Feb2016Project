@@ -34,6 +34,7 @@ static constexpr const char* KeyIsFirstLaunch =   "isFirstLaunch";
 class ApplicationSettings : public QObject
 {
     Q_OBJECT
+    Q_DISABLE_COPY(ApplicationSettings)
     Q_PROPERTY(QString keyIsRegistered READ keyIsRegistered CONSTANT)
 
     Q_PROPERTY(qreal ratio READ ratio CONSTANT)
@@ -72,8 +73,8 @@ public slots:
 protected:
     explicit ApplicationSettings(QObject *parent = nullptr);
     ~ApplicationSettings() {}
-    ApplicationSettings(const ApplicationSettings&);                 // Prevent copy-construction
-    ApplicationSettings& operator=(const ApplicationSettings&);      // Prevent assignment
+//    ApplicationSettings(const ApplicationSettings&);                 // Prevent copy-construction
+//    ApplicationSettings& operator=(const ApplicationSettings&);      // Prevent assignment
 
 private:
     void calcRatio();
@@ -88,6 +89,7 @@ static QObject *ApplicationSettings_provider(QQmlEngine *engine, QJSEngine *scri
 {
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
+    Q_UNUSED(ApplicationSettings_provider)
 
     return &appSettings;
 }

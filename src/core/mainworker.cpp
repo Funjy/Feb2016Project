@@ -22,6 +22,7 @@ void MainWorker::openCamera()
 
 void MainWorker::testFunc(RegistrationFormData* data)
 {
+    Q_UNUSED(data)
 }
 
 void MainWorker::Init()
