@@ -26,7 +26,7 @@ void GenericServiceRequest::getObjectInfo(SerializationInfo &info) const
     info.addValue(ResultKey, si);
     info.addValue(ResultStatusKey, QVariant::fromValue(m_resultStatus));
 
-    info.setTypeId(metaObject()->className());
+//    info.setTypeId(metaObject()->className());
 }
 
 void GenericServiceRequest::deserialize(const SerializationInfo &info)

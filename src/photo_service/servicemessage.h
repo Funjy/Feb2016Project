@@ -6,6 +6,8 @@
 #include "../behaviours/iserializable.h"
 #define ServiceMessageType  PhotoFlyService::ServiceMessage::MessageType
 
+#define USE_ServiceMessage_TYPEID 0
+
 namespace PhotoFlyService {
 using namespace PhotoFlyBehaviours;
 

@@ -6,10 +6,14 @@ Popup{
     modal: true
     focus: true
 
-    x: (parent.width - width) / 2
-    y: (parent.height - height) / 2
-    width: Math.min(parent.width, parent.height) / 3 * 2
-//    height: Math.max(parent.width, parent.height) / 3 * 2
+    property var sizeSource: null
+
+    property var _useSource: sizeSource ? sizeSource : parent
+
+    x: (_useSource.width - width) / 2
+    y: (_useSource.height - height) / 2
+    width: Math.min(_useSource.width, _useSource.height) / 3 * 2
+//    height: Math.max(_useSource.width, _useSource.height) / 3 * 2
 //    height: parent.implicitHeight + topPadding + bottomPadding
 
 }

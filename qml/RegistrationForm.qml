@@ -196,8 +196,7 @@ Page{
     PopupPF{
         id: sucRes
         width: root.width
-        //        width: Math.min(root.width, root.height) / 3 * 2
-        contentHeight: sucResColumn.height
+        height: sucResColumn.height + topPadding + bottomPadding
 
         Column{
             id: sucResColumn

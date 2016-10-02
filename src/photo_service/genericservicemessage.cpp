@@ -62,7 +62,9 @@ void GenericServiceMessage::getObjectInfo(SerializationInfo &info) const
 {
     ServiceMessage::getObjectInfo(info);
     info.addValue(ContentKey, m_content);
+#if USE_ServiceMessage_TYPEID == 1
     info.setTypeId(metaObject()->className());
+#endif
 }
 
 void GenericServiceMessage::deserialize(const SerializationInfo &info)
