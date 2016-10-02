@@ -21,7 +21,7 @@ public:
     static ServiceRequestFactory &instance();
     void init();
 
-    GenericServiceRequest* buildRequest(GenericServiceRequest::RequestType type);
+    GenericServiceRequest* buildRequest(GenericServiceRequest::MessageType type);
 
     Q_INVOKABLE GenericServiceRequest* buildRequest(const QString& type, const QVariantMap& content);
 

@@ -13,7 +13,7 @@ void ServiceRequestFactory::init()
     QQmlEngine::setObjectOwnership(&requestFactory, QQmlEngine::CppOwnership);
 }
 
-GenericServiceRequest* ServiceRequestFactory::buildRequest(GenericServiceRequest::RequestType type)
+GenericServiceRequest* ServiceRequestFactory::buildRequest(GenericServiceRequest::MessageType type)
 {
     return nullptr;
 //    switch(type){

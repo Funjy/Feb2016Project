@@ -19,7 +19,7 @@ public:
     LoginRequest &operator=(const LoginRequest &other) {return *this;}
 
     // ServiceMessage interface
-    virtual RequestType getType() const override;
+    virtual MessageType getMessageType() const override;
 
     // ISerializable interface
     virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const override;
