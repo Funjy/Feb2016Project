@@ -4,7 +4,8 @@
 #include <QtGlobal>
 
 #include "../behaviours/iserializable.h"
-#define ServiceMessageType PhotoFlyService::ServiceMessage::Type
+#define ServiceRequestType  PhotoFlyService::ServiceMessage::RequestType
+#define ServiceResponseType PhotoFlyService::ServiceMessage::ResponseType
 
 namespace PhotoFlyService {
 using namespace PhotoFlyBehaviours;
@@ -23,36 +24,43 @@ public:
     static const QString SendPhotosTypeString;
     static const QString UndefinedTypeString;
 
-    enum Type{
-        Undefined,
-        Login,
-        Register,
-        SendPhotos
+    enum RequestType{
+        Req_Undefined,
+        Req_Login,
+        Req_Register,
+        Req_SendPhotos
     };
-    Q_ENUM(ServiceMessageType)
+    Q_ENUM(ServiceRequestType)
+
+    enum ResponseType{
+        Resp_Undefined
+    };
+    Q_ENUM(ServiceResponseType)
 
     virtual ~ServiceMessage(){}
 
-    virtual Type getType() const = 0;
+    virtual RequestType getType() const = 0;
     QString getTypeString() const;
 
-    static QString getTypeString(ServiceMessageType value);
-    static ServiceMessageType getTypeByString(const QString& value);
+    static QString getTypeString(ServiceRequestType value);
+    static ServiceRequestType getTypeByString(const QString& value);
 
     // ISerializable interface
     virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const override;
 
 protected:
-    explicit ServiceMessage();
+    explicit ServiceMessage() {}
 
 private:
-    static QMap<const QString*, Type> m_typeByString;
-    static QMap<Type, const QString*> m_stringByType;
-    static void addPair(const QString& str, Type type);
+    static QMap<const QString*, RequestType> m_typeByString;
+    static QMap<RequestType, const QString*> m_stringByType;
+    static void addPair(const QString& str, RequestType type);
 
     static QList<QString>   m_stringTypes;
 
     static const QString TypeId;
+
+    static void initTypes();
 
 };
 

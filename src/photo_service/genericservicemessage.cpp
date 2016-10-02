@@ -9,10 +9,10 @@ const QString GenericServiceMessage::ContentKey =   "Content";
 
 GenericServiceMessage::GenericServiceMessage(QObject *parent) : QObject(parent)
 {
-    m_type = Type::Undefined;
+    m_type = RequestType::Req_Undefined;
 }
 
-GenericServiceMessage::GenericServiceMessage(ServiceMessage::Type type, const QVariantMap &content, QObject *parent) :
+GenericServiceMessage::GenericServiceMessage(ServiceMessage::RequestType type, const QVariantMap &content, QObject *parent) :
     GenericServiceMessage(parent)
 {
     m_type = type;
@@ -65,12 +65,12 @@ void GenericServiceMessage::getObjectInfo(PhotoFlyContainers::SerializationInfo 
     info.setTypeId(metaObject()->className());
 }
 
-ServiceMessageType GenericServiceMessage::getType() const
+ServiceRequestType GenericServiceMessage::getType() const
 {
     return m_type;
 }
 
-void GenericServiceMessage::setType(ServiceMessageType value)
+void GenericServiceMessage::setType(ServiceRequestType value)
 {
     m_type = value;
 }
