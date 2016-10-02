@@ -41,6 +41,11 @@ QVariant ApplicationSettings::getValue(const QString &key, const QVariant &defau
     return m_settings->value(key, defaultValue);
 }
 
+bool ApplicationSettings::getBoolValue(const QString &key, bool defaultValue)
+{
+    return m_settings->value(key, defaultValue).toBool();
+}
+
 bool ApplicationSettings::isFirstLaunch() const
 {
     return m_isFirstLaunch;

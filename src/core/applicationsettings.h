@@ -52,6 +52,7 @@ public:
 
     Q_INVOKABLE void        setValue(const QString& key, const QVariant &value);
     Q_INVOKABLE QVariant    getValue(const QString& key, const QVariant &defaultValue = QVariant());
+    Q_INVOKABLE bool        getBoolValue(const QString& key, bool defaultValue = false);
     Q_INVOKABLE bool        isFirstLaunch() const;
 
     QString keyIsRegistered() const;
@@ -73,8 +74,6 @@ public slots:
 protected:
     explicit ApplicationSettings(QObject *parent = nullptr);
     ~ApplicationSettings() {}
-//    ApplicationSettings(const ApplicationSettings&);                 // Prevent copy-construction
-//    ApplicationSettings& operator=(const ApplicationSettings&);      // Prevent assignment
 
 private:
     void calcRatio();

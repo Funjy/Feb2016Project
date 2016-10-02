@@ -52,9 +52,16 @@ ApplicationWindow {
     Component.onCompleted: {
         global_scale_factor = ApplicationSettings.ratio
 
-        var isFirstLaunch = ApplicationSettings.isFirstLaunch()
+        var key = ApplicationSettings.getSettingsKeyString(ApplicationSettings.SK_IsRegistered)
+        var isRegistered = ApplicationSettings.getBoolValue(key)
 
-        overlay.open(initPage)
+//        if(!isRegistered)
+//            registrationOverlay.open(initPage)
+
+//        var isFirstLaunch = ApplicationSettings.isFirstLaunch()
+
+//        if(isFirstLaunch === true)
+//            registrationOverlay.open(initPage)
 
 //        if(isFirstLaunch){
 //            root.pageStack.push(regFormComponent)
@@ -73,21 +80,24 @@ ApplicationWindow {
         MainForm{}
     }
 
-    initialPage: initPage
+    initialPage: initComp
 
-    MainForm{
-        id: initPage
-        menuList: root.menuList
+    Component{
+        id: initComp
+        MainForm{
+            id: initPage
+            menuList: root.menuList
+        }
     }
 
     OverlayView{
-        id: overlay
+        id: registrationOverlay
         width: root.width
         height: root.height
 
         RegistrationFormContent{
             firstLaunch: true
-            onSkipClicked: overlay.close()
+            onSkipClicked: registrationOverlay.close()
         }
 
 //        Text {
