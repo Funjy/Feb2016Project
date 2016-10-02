@@ -16,7 +16,7 @@ class ServiceMessage : public ISerializable
     Q_GADGET
 
 public:
-    static const QString TypeKey;
+    static const QString MessageTypeKey;
 
     static const QString LoginTypeString;
     static const QString RegisterTypeString;

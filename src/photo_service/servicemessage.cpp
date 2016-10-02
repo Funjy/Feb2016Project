@@ -4,7 +4,7 @@ using namespace PhotoFlyService;
 
 const QString ServiceMessage::TypeId =                  "ServiceMessage";
 
-const QString ServiceMessage::TypeKey =                 "RequestType";
+const QString ServiceMessage::MessageTypeKey =                 "MessageType";
 const QString ServiceMessage::LoginTypeString =         "Login";
 const QString ServiceMessage::RegisterTypeString =      "Register";
 const QString ServiceMessage::SendPhotosTypeString =    "SendPhotos";
@@ -49,7 +49,7 @@ ServiceMessageType ServiceMessage::getTypeByString(const QString &value)
 void ServiceMessage::getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const
 {
 //    info.addValue(TypeKey, (int)getType());
-    info.addValue(TypeKey, getTypeString());
+    info.addValue(MessageTypeKey, getTypeString());
     info.setTypeId(TypeId);
 }
 

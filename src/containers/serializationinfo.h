@@ -30,6 +30,8 @@ public:
 
     void swap(SerializationInfo &_v) throw();
 
+    QVariantMap toMap() const;
+
 signals:
 
 public slots:

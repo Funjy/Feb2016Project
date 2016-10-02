@@ -7,11 +7,12 @@
 
 
 namespace PhotoFlyService {
+using namespace PhotoFlyContainers;
 
 class GenericServiceMessage : public QObject, public ServiceMessage
 {
     Q_OBJECT
-    Q_PROPERTY(ServiceMessageType messageType READ getMessageType WRITE setType NOTIFY messageTypeChanged)
+    Q_PROPERTY(ServiceMessageType messageType READ getMessageType WRITE setMessageType NOTIFY messageTypeChanged)
     Q_PROPERTY(QVariantMap content READ getContent WRITE setContent NOTIFY contentChanged)
 
     static const QString TypeId;
@@ -25,12 +26,14 @@ public:
             QObject *parent = nullptr);
 
     // ISerializable interface
-    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const override;
+    virtual void getObjectInfo(SerializationInfo &info) const override;
+    virtual void deserialize(const SerializationInfo &info) override;
 
     // ServiceMessage interface
     virtual ServiceMessageType getMessageType() const override;
 
-    void setType(ServiceMessageType value);
+    void setMessageType(ServiceMessageType value);
+    void setMessageType(const QString& value);
 
     QVariantMap getContent() const;
     void setContent(const QVariantMap &content);

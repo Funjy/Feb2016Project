@@ -69,3 +69,8 @@ void SerializationInfo::swap(SerializationInfo &_v) throw()
 {
     m_data.swap(_v.m_data);
 }
+
+QVariantMap SerializationInfo::toMap() const
+{
+    return m_data;
+}

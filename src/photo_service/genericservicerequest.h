@@ -7,7 +7,11 @@
 //#include "servicemessage.h"
 #include "genericservicemessage.h"
 
+#define RequestResultStatus PhotoFlyService::GenericServiceRequest::ResultStatus
+
 namespace PhotoFlyService {
+using namespace PhotoFlyContainers;
+
 
 class GenericServiceRequest : public GenericServiceMessage
 {
@@ -17,12 +21,14 @@ class GenericServiceRequest : public GenericServiceMessage
     static const QString TypeId;
 public:
     static const QString ResultKey;
+    static const QString ResultStatusKey;
 
     enum class ResultStatus{
         Initialized,
         Ok,
         Fail
     };
+    Q_ENUM(ResultStatus)
 
     explicit GenericServiceRequest(QObject *parent = nullptr);
 //    explicit GenericServiceRequest(ServiceMessageType type, QObject *parent = nullptr);
@@ -30,7 +36,8 @@ public:
     virtual ~GenericServiceRequest(){}
 
     // ISerializable interface
-    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const override;
+    virtual void getObjectInfo(SerializationInfo &info) const override;
+    virtual void deserialize(const SerializationInfo &info) Q_DECL_OVERRIDE;
 
     ResultStatus getResultStatus() const;
     void setResultStatus(ResultStatus value);
@@ -38,11 +45,11 @@ public:
 //    QSharedPointer<ServiceMessage> getResult() const;
     const ServiceMessage *getResult() const;
     void setResult(ServiceMessage* result);
+    void setResult(const QVariantMap& result);
 
 private:
     ResultStatus                    m_resultStatus;
     QSharedPointer<ServiceMessage>  m_result;
-
 
 };
 

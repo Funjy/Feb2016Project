@@ -15,6 +15,7 @@
 #include "models/registrationformdata.h"
 
 using namespace PhotoFlyBehaviours;
+using namespace PhotoFlyModels;
 
 class MainWorker : public QObject
 {

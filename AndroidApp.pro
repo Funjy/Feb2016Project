@@ -35,7 +35,8 @@ HEADERS += \
     src/photo_service/servicemessage.h \
     src/photo_service/genericservicemessage.h \
     src/behaviours/iimagegalleryprovider.h \
-    src/photo_service/genericservicerequest.h
+    src/photo_service/genericservicerequest.h \
+    src/photo_service/serviceprovider.h
 
 SOURCES += \
     src/core/applicationsettings.cpp \
@@ -48,7 +49,8 @@ SOURCES += \
 #    src/photo_service/loginrequest.cpp \
     src/photo_service/servicemessage.cpp \
     src/photo_service/genericservicemessage.cpp \
-    src/photo_service/genericservicerequest.cpp
+    src/photo_service/genericservicerequest.cpp \
+    src/photo_service/serviceprovider.cpp
 
 android {
 OTHER_FILES += \

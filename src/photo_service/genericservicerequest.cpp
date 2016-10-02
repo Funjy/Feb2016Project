@@ -2,8 +2,9 @@
 
 using namespace PhotoFlyService;
 
-const QString GenericServiceRequest::TypeId =       "GenericServiceRequest";
-const QString GenericServiceRequest::ResultKey =    "Result";
+const QString GenericServiceRequest::TypeId =           "GenericServiceRequest";
+const QString GenericServiceRequest::ResultKey =        "Result";
+const QString GenericServiceRequest::ResultStatusKey =  "ResultStatus";
 
 GenericServiceRequest::GenericServiceRequest(QObject *parent) : GenericServiceMessage(parent)
 {
@@ -16,23 +17,32 @@ GenericServiceRequest::GenericServiceRequest(QObject *parent) : GenericServiceMe
 //    setType(type);
 //}
 
-void GenericServiceRequest::getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const
+void GenericServiceRequest::getObjectInfo(SerializationInfo &info) const
 {
     GenericServiceMessage::getObjectInfo(info);
 
-    PhotoFlyContainers::SerializationInfo si;
+    SerializationInfo si;
     m_result->getObjectInfo(si);
     info.addValue(ResultKey, si);
+    info.addValue(ResultStatusKey, QVariant::fromValue(m_resultStatus));
 
     info.setTypeId(metaObject()->className());
 }
 
-GenericServiceRequest::ResultStatus PhotoFlyService::GenericServiceRequest::getResultStatus() const
+void GenericServiceRequest::deserialize(const SerializationInfo &info)
+{
+    GenericServiceMessage::deserialize(info);
+    auto map = info.toMap();
+    setResult(map);
+    setResultStatus(map[ResultStatusKey].value<ResultStatus>());
+}
+
+RequestResultStatus GenericServiceRequest::getResultStatus() const
 {
     return m_resultStatus;
 }
 
-void GenericServiceRequest::setResultStatus(GenericServiceRequest::ResultStatus value)
+void GenericServiceRequest::setResultStatus(RequestResultStatus value)
 {
     m_resultStatus = value;
 }
@@ -51,3 +61,11 @@ void GenericServiceRequest::setResult(ServiceMessage *result)
 {
     m_result = QSharedPointer<ServiceMessage>(result);
 }
+
+void GenericServiceRequest::setResult(const QVariantMap &result)
+{
+    auto message = new GenericServiceMessage();
+    message->deserialize(SerializationInfo(result));
+    setResult(message);
+}
+

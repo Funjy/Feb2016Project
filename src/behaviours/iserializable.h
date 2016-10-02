@@ -4,11 +4,13 @@
 #include "../containers/serializationinfo.h"
 
 namespace PhotoFlyBehaviours {
+using namespace PhotoFlyContainers;
 
 class ISerializable
 {
 public:    
-    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const = 0;
+    virtual void getObjectInfo(SerializationInfo &info) const = 0;
+    virtual void deserialize(const SerializationInfo& info) { Q_UNUSED(info) }
 
 //    virtual void deserialize(PhotoFlyContainers::SerializationInfo &info) = 0;
 };

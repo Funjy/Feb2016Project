@@ -63,7 +63,7 @@ Page{
     }
 
     Keys.onEscapePressed: {
-        skipButton.clicked()
+        backClicked()
     }
 
     GridLayout{

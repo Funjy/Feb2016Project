@@ -58,11 +58,18 @@ QVariantMap &GenericServiceMessage::contentData()
     return m_content;
 }
 
-void GenericServiceMessage::getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const
+void GenericServiceMessage::getObjectInfo(SerializationInfo &info) const
 {
     ServiceMessage::getObjectInfo(info);
     info.addValue(ContentKey, m_content);
     info.setTypeId(metaObject()->className());
+}
+
+void GenericServiceMessage::deserialize(const SerializationInfo &info)
+{
+    auto map = info.toMap();
+    setMessageType(map[MessageTypeKey].toString());
+    setContent(map[ContentKey].toMap());
 }
 
 ServiceMessageType GenericServiceMessage::getMessageType() const
@@ -70,9 +77,14 @@ ServiceMessageType GenericServiceMessage::getMessageType() const
     return m_type;
 }
 
-void GenericServiceMessage::setType(ServiceMessageType value)
+void GenericServiceMessage::setMessageType(ServiceMessageType value)
 {
     m_type = value;
+}
+
+void GenericServiceMessage::setMessageType(const QString &value)
+{
+    m_type = getTypeByString(value);
 }
 
 QVariantMap GenericServiceMessage::getContent() const
