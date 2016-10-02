@@ -24,16 +24,16 @@ Item {
         anchors.rightMargin: marginValue
 
         TextBoxPF{
-            placeHolderText: qsTr("Name")
+            placeholderText: qsTr("Name")
             text: global_scale_factor
         }
 
         TextBoxPF{
-            placeHolderText: qsTr("Email")
+            placeholderText: qsTr("Email")
         }
 
         TextBoxPF{
-            placeHolderText: qsTr("Phone number")
+            placeholderText: qsTr("Phone number")
         }
 
         Item{

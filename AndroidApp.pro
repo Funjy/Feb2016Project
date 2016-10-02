@@ -1,4 +1,4 @@
-QT += quick  svg
+QT += quick quickcontrols2 svg
 
 android {
 QT += androidextras

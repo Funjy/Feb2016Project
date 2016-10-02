@@ -26,5 +26,7 @@
         <file>qml/RegistrationForm.qml</file>
         <file>qml/SuccessRegistration.qml</file>
         <file>qml/RegistrationFormContent.qml</file>
+        <file>qml/myControls/PopupPF.qml</file>
+        <file>qml/myControls/ButtonPF.qml</file>
     </qresource>
 </RCC>

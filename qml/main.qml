@@ -1,52 +1,94 @@
-import QtQuick 2.5
+import QtQuick 2.6
 import QtQuick.Window 2.2
-import QtQuick.Controls 2.0 as Controls
+import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.3
 
 import "myScripts/Styles.js" as ScriptStyles
 import "myControls"
-import "qrc:/Material"
-import Material 0.3
-import Material.ListItems 0.1 as ListItem
+//import "qrc:/Material"
+//import Material 0.3
+//import Material.ListItems 0.1 as ListItem
 
 import ca.riftekit.Workers 1.0
 
 ApplicationWindow {
     id: root
     visible: true
-//    width: 800
-//    height: 600
+    width: 360
+    height: 520
+    title: "PhotoFly"
     visibility: global_requestedFullScreen ? Window.FullScreen : Window.AutomaticVisibility
+
+    Material.primary: Material.Blue
+    Material.accent: Material.LightBlue
+    Material.theme: Material.Light
 
     property bool   global_requestedFullScreen: false
     property int    global_scale_factor: 1
 
     property MainWorker global_mainWorker: mainWorker
+    property StackView  global_stackView: stackView
 
-    property list<Action> menuList: [
-        Action{
-            name: qsTr("Payment")
-            onTriggered: console.log("pay")
-        },
-        Action{
-            name: qsTr("History")
-            onTriggered: console.log("hist")
-        },
-        Action{
-            name: qsTr("Settings")
-        }
-    ]
+//    header: ToolBar {
+//        RowLayout {
+//            spacing: 20
+//            anchors.fill: parent
 
+//            ToolButton {
+//                id: menuButton
+//                contentItem: Image {
+//                    fillMode: Image.Pad
+//                    horizontalAlignment: Image.AlignHCenter
+//                    verticalAlignment: Image.AlignVCenter
+//                    source: "qrc:/icons/navigation/menu.svg"
+//                }
+//                onClicked: drawer.open()
+//            }
 
-//    function openItem(openItem, props)
-//    {
-//        stack.push(openItem, {destroyOnPop: true, properties: props})
+//            Label {
+//                id: titleLabel
+//                text: root.title
+//                font.pixelSize: 20
+//                elide: Label.ElideRight
+//                horizontalAlignment: Qt.AlignHCenter
+//                verticalAlignment: Qt.AlignVCenter
+//                Layout.fillWidth: true
+//            }
+
+//            Item{
+//                width: menuButton.width
+//            }
+
+//        }
 //    }
-//    function closeItem()
-//    {
-//        console.log("depth: " + stack.depth)
-//        if ( stack.depth > 1 )
-//            stack.pop();
+
+//    Drawer {
+//        id: drawer
+//        width: Math.min(root.width, root.height) / 3 * 2
+//        height: root.height
+
+//        ListView {
+//            id: listView
+//            currentIndex: -1
+//            anchors.fill: parent
+
+//            delegate: ItemDelegate {
+//                width: parent.width
+//                text: model.title
+//                highlighted: ListView.isCurrentItem
+//                onClicked: {
+//                    if (listView.currentIndex != index) {
+//                        listView.currentIndex = index
+////                        titleLabel.text = model.title
+////                        stackView.replace(model.source)
+//                    }
+//                    drawer.close()
+//                }
+//            }
+
+//            ScrollIndicator.vertical: ScrollIndicator { }
+//        }
 //    }
 
     Component.onCompleted: {
@@ -55,17 +97,22 @@ ApplicationWindow {
         var key = ApplicationSettings.getSettingsKeyString(ApplicationSettings.SK_IsRegistered)
         var isRegistered = ApplicationSettings.getBoolValue(key)
 
-//        if(!isRegistered)
-//            registrationOverlay.open(initPage)
+        if(!isRegistered)
+            stackView.push(regFormComponent)
 
-//        var isFirstLaunch = ApplicationSettings.isFirstLaunch()
+    }
 
-//        if(isFirstLaunch === true)
-//            registrationOverlay.open(initPage)
+    function backClicked(){
+        if(stackView.depth > 1)
+            stackView.pop()
+        else
+            Qt.quit()
+    }
 
-//        if(isFirstLaunch){
-//            root.pageStack.push(regFormComponent)
-//        }
+    StackView{
+        id: stackView
+        anchors.fill: parent
+
     }
 
     Component{
@@ -80,47 +127,11 @@ ApplicationWindow {
         MainForm{}
     }
 
-    initialPage: initComp
-
-    Component{
-        id: initComp
-        MainForm{
-            id: initPage
-            menuList: root.menuList
-        }
-    }
-
-    OverlayView{
-        id: registrationOverlay
-        width: root.width
-        height: root.height
-
-        RegistrationFormContent{
-            firstLaunch: true
-            onSkipClicked: registrationOverlay.close()
-        }
-
-//        Text {
-//            anchors.centerIn: parent
-//            text: qsTr("tap to close")
-//        }
-//        MouseArea{
-//            anchors.fill: parent
-//            onClicked: overlay.close()
-//        }
-    }
-
-//    StackView{
-//        id: stack
-//        anchors.fill: parent
-//        initialItem: mainFormComponent
-//        focus: true
-//        Keys.onReleased: {
-//            if (event.key === Qt.Key_Back && stack.depth > 1)
-//            {
-//                stack.pop();
-//                event.accepted = true;
-//            }
+//    Component{
+//        id: initComp
+//        MainForm{
+//            id: initPage
+//            menuList: root.menuList
 //        }
 //    }
 

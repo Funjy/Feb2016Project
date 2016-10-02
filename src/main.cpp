@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include <QVariantMap>
 #include <QDebug>
+#include <QQuickStyle>
 
 #include "models/registrationformdata.h"
 #include "core/applicationsettings.h"
@@ -19,11 +20,12 @@ const char* pf_containers_pfServices = "ca.riftekit.PhotoFlyServices";
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
+    QGuiApplication::setOrganizationName("Riftek IT");
+    QGuiApplication::setOrganizationDomain("riftekit.ca");
+    QGuiApplication::setApplicationName("PhotoFly");
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    app.setOrganizationName("Riftek IT");
-    app.setOrganizationDomain("riftekit.ca");
-    app.setApplicationName("PhotoFly");
+    QGuiApplication app(argc, argv);
 
 //    qRegisterMetaType<ServiceMessageType>();
     qmlRegisterType<RegistrationFormData>           (pf_containers_uri, 1, 0, "RegistrationFormData");
@@ -34,6 +36,8 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType<PhotoFlyService::ServiceRequestFactory>
             (pf_containers_pfServices,    1, 0, "PFServiceRequestFactory", PhotoFlyService::ServiceRequestFactory_provider);
     qmlRegisterType<PhotoFlyService::GenericServiceMessage>(pf_containers_pfServices,    1, 0, "ServiceMessage");
+
+    QQuickStyle::setStyle("Material");
 
     QQmlApplicationEngine engine;
     QPM_INIT(engine)

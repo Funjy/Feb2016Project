@@ -1,11 +1,11 @@
 import QtQuick 2.4
 import "myControls"
 
-Rectangle {
+Item {
     height: 315 * global_scale_factor
 //    anchors.left: parent.left
 //    anchors.right: parent.right
-    color: "white"
+//    color: "white"
 
     Item{
         anchors.fill: parent
