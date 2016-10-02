@@ -15,8 +15,8 @@ class LoginRequest : public GenericServiceRequest
 public:
     explicit LoginRequest(QObject *parent = nullptr);
     explicit LoginRequest(const QString& login, const QString& password);
-    LoginRequest(const LoginRequest& other) {}
-    LoginRequest &operator=(const LoginRequest &other) {return *this;}
+    LoginRequest(const LoginRequest& other) : LoginRequest(other.parent()) { Q_UNUSED(other) }
+    LoginRequest &operator=(const LoginRequest &other) { Q_UNUSED(other) return *this;}
 
     // ServiceMessage interface
     virtual MessageType getMessageType() const override;

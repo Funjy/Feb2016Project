@@ -42,7 +42,7 @@ void GenericServiceRequest::setResultStatus(GenericServiceRequest::ResultStatus 
 //    return m_result;
 //}
 
-const ServiceMessage * const GenericServiceRequest::getResult()
+const ServiceMessage *GenericServiceRequest::getResult() const
 {
     return m_result.data();
 }

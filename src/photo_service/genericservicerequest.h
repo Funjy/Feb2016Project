@@ -36,7 +36,7 @@ public:
     void setResultStatus(ResultStatus value);
 
 //    QSharedPointer<ServiceMessage> getResult() const;
-    const ServiceMessage * const getResult();
+    const ServiceMessage *getResult() const;
     void setResult(ServiceMessage* result);
 
 private:
