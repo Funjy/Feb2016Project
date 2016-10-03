@@ -7,7 +7,7 @@ using namespace PhotoFlySettings;
 
 RegistrationFormController::RegistrationFormController(QObject *parent) : QObject(parent)
 {
-
+    m_status = S_Ready;
 }
 
 //RegistrationFormController::RegistrationFormController(const RegistrationFormController &other) : QObject(other.parent())
@@ -26,8 +26,7 @@ void RegistrationFormController::processLogin(RegistrationFormData *data)
     req->setMessageType(ServiceMessageType::Req_Login);
     req->setContent(map);
 
-    m_service.makeRequest(req);
-    req->deleteLater();
+    handleRequest(req);
 }
 
 void RegistrationFormController::processRegistration(RegistrationFormData *data)
@@ -40,7 +39,39 @@ void RegistrationFormController::processRegistration(RegistrationFormData *data)
     req->setMessageType(ServiceMessageType::Req_Register);
     req->setContent(map);
 
-    m_service.makeRequest(req);
-    req->deleteLater();
+    handleRequest(req);
+}
 
+RegFormReqStatus RegistrationFormController::status() const
+{
+    return m_status;
+}
+
+void RegistrationFormController::setStatus(const RegFormReqStatus &status)
+{
+    m_status = status;
+}
+
+void RegistrationFormController::handleRequest(GenericServiceRequest *request)
+{
+    m_status = S_InProgress;
+    emit requstStatusChanged();
+
+    QtConcurrent::run([&, request]{
+//        m_service.makeRequest(request);
+        QThread::msleep(2000);
+        request->deleteLater();
+        m_status = S_Ready;
+        emit requstStatusChanged();
+    });
+}
+
+//        QMetaObject::invokeMethod(this, "handleResponse",
+//                                  Qt::QueuedConnection,
+//                                  Q_ARG(GenericServiceRequest *, request));
+void RegistrationFormController::handleResponse(GenericServiceRequest *request)
+{
+    request->deleteLater();
+    m_status = S_Ready;
+    emit requstStatusChanged();
 }

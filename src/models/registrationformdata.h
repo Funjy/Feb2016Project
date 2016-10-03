@@ -55,10 +55,6 @@ public:
     explicit RegistrationFormData(QObject *parent = 0);
     RegistrationFormData(const RegistrationFormData &other);
 
-    ~RegistrationFormData(){
-        qDebug() << "RegistrationFormData destroyed: " << m_name;
-    }
-
     // ISerializable interface
     virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const override;
 

@@ -5,17 +5,27 @@ using namespace PhotoFlyContainers;
 const QString SerializationInfo::TypeIdKey =            "TypeId";
 const QString SerializationInfo::UndefinedTypeIdStr =   "Undefined";
 
-SerializationInfo::SerializationInfo(QObject *parent) : QObject(parent)
-{
+//SerializationInfo::SerializationInfo(QObject *parent) : QObject(parent)
+//{
 
-}
+//}
 
-SerializationInfo::SerializationInfo(QVariantMap map, QObject *parent) : SerializationInfo(parent)
+//SerializationInfo::SerializationInfo(QVariantMap map, QObject *parent) : SerializationInfo(parent)
+//{
+//    m_data = map;
+//}
+
+SerializationInfo::SerializationInfo(const QVariantMap &map)
 {
     m_data = map;
 }
 
-SerializationInfo::SerializationInfo(const SerializationInfo &other) : QObject(other.parent())
+SerializationInfo::SerializationInfo(const QJsonObject &json)
+{
+    m_data = json.toVariantMap();
+}
+
+SerializationInfo::SerializationInfo(const SerializationInfo &other)// : QObject(other.parent())
 {
     m_data = other.m_data;
 }
@@ -73,4 +83,9 @@ void SerializationInfo::swap(SerializationInfo &_v) throw()
 QVariantMap SerializationInfo::toMap() const
 {
     return m_data;
+}
+
+QJsonObject SerializationInfo::toJson() const
+{
+    return QJsonObject::fromVariantMap(m_data);
 }

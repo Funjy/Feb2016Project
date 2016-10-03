@@ -10,9 +10,11 @@ Popup{
 
     property var _useSource: sizeSource ? sizeSource : parent
 
+    property real widthScale: 2/3
+
     x: (_useSource.width - width) / 2
     y: (_useSource.height - height) / 2
-    width: Math.min(_useSource.width, _useSource.height) / 3 * 2
+    width: Math.min(_useSource.width, _useSource.height) * widthScale
 //    height: Math.max(_useSource.width, _useSource.height) / 3 * 2
 //    height: parent.implicitHeight + topPadding + bottomPadding
 

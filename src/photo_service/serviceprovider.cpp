@@ -145,7 +145,7 @@ QJsonDocument ServiceProvider::reqToJson(GenericServiceRequest *request)
     SerializationInfo info;
     request->getObjectInfo(info);
 
-    QJsonDocument json(QJsonObject::fromVariantMap(info.toMap()));
+    QJsonDocument json(info.toJson());
     return json;
 }
 
@@ -173,7 +173,7 @@ QNetworkReply *ServiceProvider::prepareRequest(GenericServiceRequest *request)
 {
     QNetworkRequest req(m_seriveUrl);
 
-    auto content = bytesFromJson(reqToJson(request));
+    auto content = bytesFromJson( reqToJson(request) );
 
     QNetworkReply *reply = nullptr;
 

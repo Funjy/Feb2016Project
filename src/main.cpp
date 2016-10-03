@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     QQuickStyle::setStyle("Material");
 
     QQmlApplicationEngine engine;
-    QPM_INIT(engine)
+//    QPM_INIT(engine)
 
     appSettings.init();
 
@@ -78,9 +78,11 @@ inline void registerTypes(){
     qmlRegisterType<PhotoFlyService::GenericServiceMessage>
             ("ca.riftekit.PhotoFlyServices",    1, 0, "ServiceMessage");
 
+    qRegisterMetaType<GenericServiceRequest *>("GenericServiceRequest *");
+
     // Controllers
-    qmlRegisterUncreatableType<PhotoFlyControllers::RegistrationFormController>
-            ("ca.riftekit.Controllers", 1, 0, "RegistrationFormController", "Reg controller creation attempt!");
-//    qmlRegisterType<PhotoFlyControllers::RegistrationFormController>
-//            ("ca.riftekit.Controllers",    1, 0, "RegistrationFormController");
+//    qmlRegisterUncreatableType<PhotoFlyControllers::RegistrationFormController>
+//            ("ca.riftekit.Controllers", 1, 0, "RegistrationFormController", "Reg controller creation attempt!");
+    qmlRegisterType<PhotoFlyControllers::RegistrationFormController>
+            ("ca.riftekit.Controllers", 1, 0, "RegistrationFormController");
 }

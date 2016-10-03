@@ -122,10 +122,10 @@ ApplicationWindow {
         }
     }
 
-    Component{
-        id: mainFormComponent
-        MainForm{}
-    }
+//    Component{
+//        id: mainFormComponent
+//        MainForm{}
+//    }
 
 //    Component{
 //        id: initComp

@@ -59,4 +59,6 @@ private:
 
 }
 
+Q_DECLARE_METATYPE(PhotoFlyService::GenericServiceRequest *)
+
 #endif // SERVICEREQUEST_H

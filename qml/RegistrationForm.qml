@@ -8,6 +8,7 @@ import QtQuick.Controls 2.0
 import "myControls"
 //import "qrc:/Material"
 import ca.riftekit.Containers 1.0
+import ca.riftekit.Controllers 1.0
 
 Page{
     id: root
@@ -85,7 +86,7 @@ Page{
 
                     }
 
-                    ScrollIndicator.vertical: ScrollIndicator { }
+//                    ScrollIndicator.vertical: ScrollIndicator { }
 
 //                }
 
@@ -158,9 +159,11 @@ Page{
                     var rData = swipeView.currentItem.buildData()
 
                     if(swipeView.currentIndex === loginIndex)
-                        global_mainWorker.regFormController.processLogin(rData)
+//                        global_mainWorker.regFormController.processLogin(rData)
+                        controller.processLogin(rData)
                     else if(swipeView.currentIndex === registrationIndex)
-                        global_mainWorker.regFormController.processRegistration(rData)
+//                        global_mainWorker.regFormController.processRegistration(rData)
+                        controller.processRegistration(rData)
 
                     rData.destroy()
 
@@ -170,6 +173,36 @@ Page{
         }
     }
 
+    RegistrationFormController{
+        id: controller
+    }
+
+    PopupPF{
+        id: waitDialog
+        closePolicy: Popup.NoAutoClose
+        visible: controller.requstStatus === RegistrationFormController.S_InProgress
+
+        contentItem: Column{
+            id: waitDialogLayout
+            spacing: 20 * global_scale_factor
+            BusyIndicator{
+                readonly property int size: waitDialog.availableWidth * 3/4
+                running: waitDialog.visible
+                width: size
+                height: size
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            LabelPF{
+                width: parent.width
+                text: qsTr("Sending data to server...")
+                wrapMode: Label.Wrap
+                horizontalAlignment: Qt.AlignHCenter
+            }
+        }
+
+    }
+
     PopupPF{
         id: sucRes
         width: root.width
@@ -177,11 +210,12 @@ Page{
 
         Column{
             id: sucResColumn
-            spacing: 20
+            spacing: 30 * global_scale_factor
 
             LabelPF{
                 width: sucRes.availableWidth
                 text: qsTr("Successful registration!")
+                font.bold: true
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
             }

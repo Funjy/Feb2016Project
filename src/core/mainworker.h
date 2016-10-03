@@ -25,7 +25,7 @@ class MainWorker : public QObject
     Q_OBJECT
 
 //    Q_PROPERTY(RegistrationFormController* regFormController MEMBER m_regFormController NOTIFY regFormControllerChanged)
-    Q_PROPERTY(RegistrationFormController* regFormController MEMBER m_regFormController CONSTANT)
+//    Q_PROPERTY(RegistrationFormController* regFormController MEMBER m_regFormController CONSTANT)
 
 public:
     MainWorker(QObject *parent = 0);
@@ -51,7 +51,7 @@ private slots:
 
 private:
     IImageGalleryProvider *m_imPicker;
-    RegistrationFormController *m_regFormController;
+//    RegistrationFormController *m_regFormController;
 //    ImagePickerAndroid m_imPicker;
 
 

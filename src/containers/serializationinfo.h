@@ -1,20 +1,25 @@
-#ifndef ISERIALIZATIONINFO_H
-#define ISERIALIZATIONINFO_H
+#ifndef SERIALIZATIONINFO_H
+#define SERIALIZATIONINFO_H
 
 #include <QObject>
 #include <QVariantMap>
+#include <QJsonObject>
 
 namespace PhotoFlyContainers {
 
-class SerializationInfo : public QObject
+class SerializationInfo// : public QObject
 {
-    Q_OBJECT
+//    Q_OBJECT
 public:
     static const QString TypeIdKey;
     static const QString UndefinedTypeIdStr;
 
-    explicit SerializationInfo(QObject *parent = 0);
-    explicit SerializationInfo(QVariantMap map, QObject *parent = 0);
+//    explicit SerializationInfo(QObject *parent = 0);
+//    explicit SerializationInfo(QVariantMap map, QObject *parent = 0);
+    explicit SerializationInfo() {}
+    explicit SerializationInfo(const QVariantMap &map);
+//    explicit SerializationInfo(QVariantMap map, QObject *parent = 0);
+    explicit SerializationInfo(const QJsonObject &json);
     explicit SerializationInfo(const SerializationInfo& other);
     SerializationInfo &operator=(const SerializationInfo& other);
 
@@ -31,10 +36,7 @@ public:
     void swap(SerializationInfo &_v) throw();
 
     QVariantMap toMap() const;
-
-signals:
-
-public slots:
+    QJsonObject toJson() const;
 
 private:
     QVariantMap m_data;
@@ -42,5 +44,6 @@ private:
 };
 
 }
+Q_DECLARE_METATYPE(PhotoFlyContainers::SerializationInfo)
 
-#endif // ISERIALIZATIONINFO_H
+#endif // SERIALIZATIONINFO_H

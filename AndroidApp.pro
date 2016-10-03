@@ -12,9 +12,9 @@ CONFIG += c++11
 RESOURCES += qml.qrc
 include(deployment.pri)
 
-DEFINES += QPM_INIT\\(E\\)=\"E.addImportPath(QStringLiteral(\\\"qrc:/\\\"));\"
+#DEFINES += QPM_INIT\\(E\\)=\"E.addImportPath(QStringLiteral(\\\"qrc:/\\\"));\"
 
-include(../resources/material/material.pri)
+#include(../resources/material/material.pri)
 
 DEP_INCLUDES = \
     src
