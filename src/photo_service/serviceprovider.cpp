@@ -40,6 +40,92 @@ QUrl ServiceProvider::getHostUrl()
     return m_seriveUrl;
 }
 
+#define TEST_REQ 2      // 1 - get
+                        // 2 - post
+
+#include <QElapsedTimer>
+
+void ServiceProvider::testRequest()
+{
+    QElapsedTimer elTim;
+    elTim.start();
+
+    m_service->connectToHost("http://91.149.189.150:5000");
+
+    qDebug() << "Connect timeout: " << elTim.elapsed();
+
+    elTim.restart();
+
+    QString resStr;
+    bool isValid;
+
+    QNetworkRequest req(QUrl("http://91.149.189.150:5000/photofly/api/v0.1/letters"));
+
+
+#if TEST_REQ == 1
+
+    auto reply = m_service->get(req);
+    QEventLoop loop;
+    loop.connect(reply, SIGNAL(finished()), SLOT(quit()));
+    loop.exec();
+
+//    reply->waitForReadyRead(-1);
+
+    if( reply->error() != QNetworkReply::NoError ){
+        qDebug() << "Reply error: " << reply->errorString();
+    } else {
+
+        auto data = reply->readAll();
+        resStr = data;
+
+        auto json = jsonFromBytes(data);
+
+        isValid = !json.isNull();
+
+    }
+
+#elif TEST_REQ == 2
+
+    req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QVariantMap map2send;
+
+    map2send.insert("rec_fname",    "1");
+    map2send.insert("rec_lname",    "2");
+    map2send.insert("rec_address",  "3");
+    map2send.insert("rec_postindex", "4");
+    map2send.insert("sender_name",  "5");
+    map2send.insert("photo_size",   "6");
+
+    QJsonDocument doc(QJsonObject::fromVariantMap(map2send));
+
+    auto reply = m_service->post(req, bytesFromJson(doc));
+    QEventLoop loop;
+    loop.connect(reply, SIGNAL(finished()), SLOT(quit()));
+    loop.exec();
+
+    if( reply->error() != QNetworkReply::NoError ){
+        qDebug() << "Reply error: " << reply->errorString();
+    } else {
+
+        auto data = reply->readAll();
+
+        resStr = data;
+
+        auto json = jsonFromBytes(data);
+
+        isValid = !json.isNull();
+
+    }
+
+#endif
+
+    qDebug() << "isValidResponse: " << isValid;
+//    qDebug() << "Response: " << resStr;
+    qDebug() << "Operation time: " << elTim.elapsed();
+
+}
+
 void ServiceProvider::onReplyFinished()
 {
     auto reply = qobject_cast<QNetworkReply *>(sender());
@@ -70,12 +156,17 @@ QJsonDocument ServiceProvider::nmReplyToJson(QNetworkReply *reply)
 
 QJsonDocument ServiceProvider::jsonFromBytes(const QByteArray& data)
 {
-    return QJsonDocument::fromBinaryData(data);
+    QJsonParseError error;
+    auto ret = QJsonDocument::fromJson(data, &error);
+    if(error.error != QJsonParseError::NoError)
+        qDebug() << "Parse error: " << error.errorString();
+    return ret;
+//    return QJsonDocument::fromBinaryData(data);
 }
 
 QByteArray ServiceProvider::bytesFromJson(const QJsonDocument &data)
 {
-    return data.toBinaryData();
+    return data.toJson();
 }
 
 QNetworkReply *ServiceProvider::prepareRequest(GenericServiceRequest *request)

@@ -13,6 +13,7 @@
 
 #include "behaviours/iimagegalleryprovider.h"
 #include "models/registrationformdata.h"
+#include "photo_service/serviceprovider.h"
 
 using namespace PhotoFlyBehaviours;
 using namespace PhotoFlyModels;

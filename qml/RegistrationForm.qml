@@ -12,44 +12,9 @@ import ca.riftekit.Containers 1.0
 Page{
     id: root
     title: "Registration"
-    //    header: ToolBar {
-    //        RowLayout {
-    //            spacing: 20
-    //            anchors.fill: parent
-
-    //            ToolButton {
-    //                id: menuButton
-    //                contentItem: Image {
-    //                    fillMode: Image.Pad
-    //                    horizontalAlignment: Image.AlignHCenter
-    //                    verticalAlignment: Image.AlignVCenter
-    //                    source: "qrc:/images/close.svg"
-    //                }
-    //                onClicked: backClicked()
-    //            }
-
-    //            Label {
-    //                id: titleLabel
-    //                text: root.title
-    //                font.pixelSize: 20
-    //                elide: Label.ElideRight
-    //                horizontalAlignment: Qt.AlignHCenter
-    //                verticalAlignment: Qt.AlignVCenter
-    //                Layout.fillWidth: true
-    //            }
-
-    //            Item{
-    //                width: menuButton.width
-    //            }
-
-    //        }
-    //    }
 
     header: TabBar{
         id: tabBar
-
-        readonly property int loginIndex:       0
-        readonly property int registerIndex:    1
 
         currentIndex: swipeView.currentIndex
         TabButton{ text: qsTr("Login") }
@@ -87,6 +52,7 @@ Page{
                     var rData = Qt.createQmlObject("import ca.riftekit.Containers 1.0; RegistrationFormData {}", this)
                     rData.email = loginEmail.text
                     rData.password = loginPassword.text
+                    rData.sourceForm = RegistrationFormData.SF_Login
                     return rData
 //                    registrationData.email = loginEmail.text
 //                    registrationData.password = loginPassword.text
@@ -125,6 +91,7 @@ Page{
                     rData.name = registerName.text
                     rData.email = registerEmail.text
                     rData.password = registerPassword.text
+                    rData.sourceForm = RegistrationFormData.SF_Registration
                     return rData
 //                    registrationData.name = registerName.text
 //                    registrationData.email = registerEmail.text
@@ -181,9 +148,12 @@ Page{
                 onClicked: {
 
                     var rData = swipeView.currentItem.buildData()
+
+                    global_mainWorker.testFunc(rData)
+
                     rData.destroy()
 
-                    sucRes.open()
+//                    sucRes.open()
                 }
             }
         }

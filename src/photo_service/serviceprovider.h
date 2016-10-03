@@ -5,6 +5,7 @@
 #include <QNetworkReply>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QEventLoop>
 
 #include "behaviours/iserviceprovider.h"
 
@@ -23,6 +24,8 @@ public:
     virtual void makeRequest(GenericServiceRequest *request, int timeout = 10000) Q_DECL_OVERRIDE;
     virtual void beginMakeRequest(GenericServiceRequest *request) Q_DECL_OVERRIDE;
     virtual QUrl getHostUrl() Q_DECL_OVERRIDE;
+
+    void testRequest();
 
 public slots:
 

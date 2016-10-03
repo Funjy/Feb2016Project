@@ -22,7 +22,13 @@ void MainWorker::openCamera()
 
 void MainWorker::testFunc(RegistrationFormData* data)
 {
-    Q_UNUSED(data)
+
+    auto provider = new ServiceProvider(this);
+
+    provider->testRequest();
+
+    provider->deleteLater();
+
 }
 
 void MainWorker::Init()

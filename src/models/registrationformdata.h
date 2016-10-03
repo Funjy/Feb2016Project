@@ -8,6 +8,7 @@
 #include "behaviours/iserializable.h"
 
 #define PasswordStorageType PhotoFlyModels::RegistrationFormData::PasswordType
+#define SourceFormType PhotoFlyModels::RegistrationFormData::SourceForm
 
 namespace PhotoFlyModels{
 
@@ -24,6 +25,7 @@ class RegistrationFormData : public QObject, ISerializable
     Q_PROPERTY(QString password MEMBER m_password           NOTIFY passwordChanged)
     Q_PROPERTY(QString address  MEMBER m_poastalAddress     NOTIFY addressChanged)
     Q_PROPERTY(QVariant ccnList READ ccnList                NOTIFY ccnListChanged)
+    Q_PROPERTY(SourceFormType sourceForm MEMBER m_sourceForm NOTIFY sourceFormChanged)
 
 public:
 
@@ -39,6 +41,12 @@ public:
         PT_Hash
     };
     Q_ENUM(PasswordType)
+
+    enum SourceForm{
+        SF_Login,
+        SF_Registration
+    };
+    Q_ENUM(SourceForm)
 
     explicit RegistrationFormData(QObject *parent = 0);
     RegistrationFormData(const RegistrationFormData &other);
@@ -85,6 +93,7 @@ signals:
     void ccnListChanged();
     void isValidChanged();
     void passwordChanged();
+    void sourceFormChanged();
 
 public slots:
 
@@ -97,7 +106,7 @@ private:
     QMap<uint, QString>     m_ccnList;
     QString                 m_poastalAddress;
     PasswordType            m_passwordType;
-
+    SourceForm              m_sourceForm;
 
 };
 
