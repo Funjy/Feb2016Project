@@ -46,6 +46,7 @@ Page{
             anchors.left: parent.left
             anchors.right: parent.right
             currentIndex: tabBar.currentIndex
+            onCurrentIndexChanged: focus = false
 
             Pane{
                 id: loginForm
@@ -76,12 +77,14 @@ Page{
                             id: loginEmail
                             title: qsTr("Email address")
                             expandWidth: true
+                            KeyNavigation.tab: loginPassword
                         }
 
                         TextFieldWithLabel{
                             id: loginPassword
                             title: qsTr("Password")
                             expandWidth: true
+                            KeyNavigation.tab: acceptButton
                         }
 
                     }
@@ -118,19 +121,22 @@ Page{
                         id: registerName
                         title: qsTr("Name")
                         expandWidth: true
+                        KeyNavigation.tab: registerEmail
                     }
 
                     TextFieldWithLabel{
                         id: registerEmail
                         title: qsTr("Email address")
                         expandWidth: true
+                        KeyNavigation.tab: registerPassword
                     }
 
                     TextFieldWithLabel{
                         id: registerPassword
                         title: qsTr("Password")
                         expandWidth: true
-                    }
+                        KeyNavigation.tab: acceptButton
+                    }                    
 
 //                    Item{
 //                        Layout.fillHeight: true
