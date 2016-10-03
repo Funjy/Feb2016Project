@@ -7,6 +7,7 @@ const QString RegistrationFormData::SurnameKey =            "Surname";
 const QString RegistrationFormData::EmailKey =              "Email";
 const QString RegistrationFormData::PasswordKey =           "Password";
 const QString RegistrationFormData::PostalAddressKey =      "PostalAddress";
+const QString RegistrationFormData::PhoneNumberKey =        "PhoneNumber";
 const QString RegistrationFormData::CCNListKey =            "CCNList";
 
 RegistrationFormData::RegistrationFormData(QObject *parent) : QObject(parent)
@@ -19,17 +20,24 @@ RegistrationFormData::RegistrationFormData(const RegistrationFormData &other) : 
 {
     m_name = other.m_name;
     m_surname = other.m_surname;
+    m_postalAddress = other.m_postalAddress;
     m_email = other.m_email;
     m_password = other.m_password;
+    m_phoneNumber = other.m_phoneNumber;
 }
 
 void RegistrationFormData::getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const
 {
+#if USE_RegistrationFormData_TYPEID == 1
     info.setTypeId(metaObject()->className());
+#endif
 
-    info.addValue(NameKey, m_name);
-    info.addValue(EmailKey, m_email);
-    info.addValue(PasswordKey, m_password);
+    info.addValue(NameKey,          getName());
+    info.addValue(SurnameKey,       getSurname());
+    info.addValue(PostalAddressKey, getPostalAddress());
+    info.addValue(EmailKey,         getEmail());
+    info.addValue(PasswordKey,      getPassword());
+    info.addValue(PhoneNumberKey,   getPhoneNumber());
 }
 
 bool RegistrationFormData::isValid() const
@@ -92,14 +100,14 @@ void RegistrationFormData::setCcnList(const QMap<uint, QString> &ccnList)
     m_ccnList = ccnList;
 }
 
-QString RegistrationFormData::getPoastalAddress() const
+QString RegistrationFormData::getPostalAddress() const
 {
-    return m_poastalAddress;
+    return m_postalAddress;
 }
 
-void RegistrationFormData::setPoastalAddress(const QString &poastalAddress)
+void RegistrationFormData::setPostalAddress(const QString &postalAddress)
 {
-    m_poastalAddress = poastalAddress;
+    m_postalAddress = postalAddress;
 }
 
 PasswordStorageType RegistrationFormData::getPasswordType() const
@@ -110,4 +118,14 @@ PasswordStorageType RegistrationFormData::getPasswordType() const
 void RegistrationFormData::setPasswordType(const PasswordType &passwordType)
 {
     m_passwordType = passwordType;
+}
+
+QString RegistrationFormData::getPhoneNumber() const
+{
+    return m_phoneNumber;
+}
+
+void RegistrationFormData::setPhoneNumber(const QString &phoneNumber)
+{
+    m_phoneNumber = phoneNumber;
 }

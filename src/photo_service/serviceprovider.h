@@ -34,7 +34,7 @@ private slots:
     void onReplyFinished();
 
 private:
-    const QUrl       m_seriveUrl = QUrl("");
+    const QUrl       m_seriveUrl = QUrl("http://91.149.189.150:5000");
     QNetworkAccessManager   *m_service;
 
     QHash<QNetworkReply*, GenericServiceRequest *>  m_requests;

@@ -40,7 +40,7 @@ QUrl ServiceProvider::getHostUrl()
     return m_seriveUrl;
 }
 
-#define TEST_REQ 2      // 1 - get
+#define TEST_REQ 1      // 1 - get
                         // 2 - post
 
 #include <QElapsedTimer>

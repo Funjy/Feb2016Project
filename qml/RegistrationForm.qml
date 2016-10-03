@@ -13,9 +13,11 @@ Page{
     id: root
     title: "Registration"
 
+    readonly property int loginIndex:           0
+    readonly property int registrationIndex:    1
+
     header: TabBar{
         id: tabBar
-
         currentIndex: swipeView.currentIndex
         TabButton{ text: qsTr("Login") }
         TabButton{ text: qsTr("Registration") }
@@ -45,40 +47,47 @@ Page{
             currentIndex: tabBar.currentIndex
 
             Pane{
+                id: loginForm
                 width: swipeView.width
                 height: swipeView.height
 
-                function buildData(){
-                    var rData = Qt.createQmlObject("import ca.riftekit.Containers 1.0; RegistrationFormData {}", this)
-                    rData.email = loginEmail.text
-                    rData.password = loginPassword.text
-                    rData.sourceForm = RegistrationFormData.SF_Login
-                    return rData
-//                    registrationData.email = loginEmail.text
-//                    registrationData.password = loginPassword.text
-                }
+//                Flickable{
+//                    anchors.fill: parent
 
-                GridLayout{
-//                    anchors.centerIn: parent
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    columns: 1
-                    rowSpacing: 16 * global_scale_factor
+//                    contentHeight: loginFormLayout.implicitHeight
 
-                    TextFieldWithLabel{
-                        id: loginEmail
-                        title: qsTr("Email address")
-                        expandWidth: true
+                    function buildData(){
+                        var rData = Qt.createQmlObject("import ca.riftekit.Containers 1.0; RegistrationFormData {}", this)
+                        rData.email = loginEmail.text
+                        rData.password = loginPassword.text
+                        return rData
                     }
 
-                    TextFieldWithLabel{
-                        id: loginPassword
-                        title: qsTr("Password")
-                        expandWidth: true
+                    GridLayout{
+                        id: loginFormLayout
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        columns: 1
+                        rowSpacing: 16 * global_scale_factor
+
+                        TextFieldWithLabel{
+                            id: loginEmail
+                            title: qsTr("Email address")
+                            expandWidth: true
+                        }
+
+                        TextFieldWithLabel{
+                            id: loginPassword
+                            title: qsTr("Password")
+                            expandWidth: true
+                        }
+
                     }
 
-                }
+                    ScrollIndicator.vertical: ScrollIndicator { }
+
+//                }
 
             }
 
@@ -91,7 +100,6 @@ Page{
                     rData.name = registerName.text
                     rData.email = registerEmail.text
                     rData.password = registerPassword.text
-                    rData.sourceForm = RegistrationFormData.SF_Registration
                     return rData
 //                    registrationData.name = registerName.text
 //                    registrationData.email = registerEmail.text
@@ -149,7 +157,10 @@ Page{
 
                     var rData = swipeView.currentItem.buildData()
 
-                    global_mainWorker.testFunc(rData)
+                    if(swipeView.currentIndex === loginIndex)
+                        global_mainWorker.regFormController.processLogin(rData)
+                    else if(swipeView.currentIndex === registrationIndex)
+                        global_mainWorker.regFormController.processRegistration(rData)
 
                     rData.destroy()
 
@@ -158,10 +169,6 @@ Page{
             }
         }
     }
-
-//    RegistrationFormData{
-//        id: registrationData
-//    }
 
     PopupPF{
         id: sucRes

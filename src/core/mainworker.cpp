@@ -4,7 +4,11 @@ MainWorker::MainWorker(QObject *parent) : QObject(parent){
 
     m_imPicker = nullptr;
     connect(m_imPicker, &IImageGalleryProvider::imagesSelected, this, &MainWorker::onImagesSelected);
-    emit setMessage("Ready");
+//    emit setMessage("Ready");
+
+    m_regFormController = new RegistrationFormController(this);
+//    emit regFormControllerChanged();
+
 }
 
 void MainWorker::selectImageFromGallery()

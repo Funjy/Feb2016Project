@@ -10,6 +10,8 @@
 #define PasswordStorageType PhotoFlyModels::RegistrationFormData::PasswordType
 #define SourceFormType PhotoFlyModels::RegistrationFormData::SourceForm
 
+#define USE_RegistrationFormData_TYPEID 0
+
 namespace PhotoFlyModels{
 
 using namespace PhotoFlyBehaviours;
@@ -23,9 +25,10 @@ class RegistrationFormData : public QObject, ISerializable
     Q_PROPERTY(QString surname  MEMBER m_surname            NOTIFY surnameChanged)
     Q_PROPERTY(QString email    MEMBER m_email              NOTIFY emailChanged)
     Q_PROPERTY(QString password MEMBER m_password           NOTIFY passwordChanged)
-    Q_PROPERTY(QString address  MEMBER m_poastalAddress     NOTIFY addressChanged)
+    Q_PROPERTY(QString address  MEMBER m_postalAddress      NOTIFY addressChanged)
+    Q_PROPERTY(QString phoneNumber  MEMBER m_phoneNumber    NOTIFY phoneNumberChanged)
     Q_PROPERTY(QVariant ccnList READ ccnList                NOTIFY ccnListChanged)
-    Q_PROPERTY(SourceFormType sourceForm MEMBER m_sourceForm NOTIFY sourceFormChanged)
+//    Q_PROPERTY(SourceFormType sourceForm MEMBER m_sourceForm NOTIFY sourceFormChanged)
 
 public:
 
@@ -34,6 +37,7 @@ public:
     static const QString EmailKey;
     static const QString PasswordKey;
     static const QString PostalAddressKey;
+    static const QString PhoneNumberKey;
     static const QString CCNListKey;
 
     enum PasswordType{
@@ -42,11 +46,11 @@ public:
     };
     Q_ENUM(PasswordType)
 
-    enum SourceForm{
-        SF_Login,
-        SF_Registration
-    };
-    Q_ENUM(SourceForm)
+//    enum SourceForm{
+//        SF_Login,
+//        SF_Registration
+//    };
+//    Q_ENUM(SourceForm)
 
     explicit RegistrationFormData(QObject *parent = 0);
     RegistrationFormData(const RegistrationFormData &other);
@@ -79,11 +83,14 @@ public:
     QMap<uint, QString> getCcnList() const;
     void setCcnList(const QMap<uint, QString> &ccnList);
 
-    QString getPoastalAddress() const;
-    void setPoastalAddress(const QString &poastalAddress);
+    QString getPostalAddress() const;
+    void setPostalAddress(const QString &postalAddress);
 
     PasswordType getPasswordType() const;
     void setPasswordType(const PasswordType &passwordType);
+
+    QString getPhoneNumber() const;
+    void setPhoneNumber(const QString &phoneNumber);
 
 signals:
     void nameChanged();
@@ -93,7 +100,8 @@ signals:
     void ccnListChanged();
     void isValidChanged();
     void passwordChanged();
-    void sourceFormChanged();
+    void phoneNumberChanged();
+//    void sourceFormChanged();
 
 public slots:
 
@@ -103,10 +111,11 @@ private:
     QString                 m_surname;
     QString                 m_email;
     QString                 m_password;
+    QString                 m_phoneNumber;
     QMap<uint, QString>     m_ccnList;
-    QString                 m_poastalAddress;
+    QString                 m_postalAddress;
     PasswordType            m_passwordType;
-    SourceForm              m_sourceForm;
+//    SourceForm              m_sourceForm;
 
 };
 
