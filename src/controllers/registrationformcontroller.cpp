@@ -57,12 +57,10 @@ void RegistrationFormController::handleRequest(GenericServiceRequest *request)
     m_status = S_InProgress;
     emit requstStatusChanged();
 
-    QtConcurrent::run([&, request]{
+    QtConcurrent::run( [&, request] {
 //        m_service.makeRequest(request);
-        QThread::msleep(2000);
-        request->deleteLater();
-        m_status = S_Ready;
-        emit requstStatusChanged();
+        QThread::msleep(500);
+        handleResponse(request);
     });
 }
 
@@ -71,7 +69,15 @@ void RegistrationFormController::handleRequest(GenericServiceRequest *request)
 //                                  Q_ARG(GenericServiceRequest *, request));
 void RegistrationFormController::handleResponse(GenericServiceRequest *request)
 {
+
+    auto status = request->getResultStatus();
+    // Debug
+    status = RequestResultStatus::Ok;
+
+    bool ok = status != RequestResultStatus::Fail;
+
     request->deleteLater();
     m_status = S_Ready;
     emit requstStatusChanged();
+    emit requestResult(ok, "No connection");
 }

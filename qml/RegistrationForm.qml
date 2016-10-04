@@ -4,6 +4,7 @@ import QtQuick.Controls 2.0
 //import QtQuick.Controls.Styles 1.4
 //import QtQuick.Window 2.2
 //import Material 0.3
+import QtQuick.Controls.Material 2.0
 
 import "myControls"
 //import "qrc:/Material"
@@ -222,6 +223,14 @@ Page{
 
     RegistrationFormController{
         id: controller
+        onRequestResult: {
+            if (!status) {
+                sucRes.errorMessage = message
+                sucRes.showDialog(sucRes.error)
+            } else {
+                sucRes.showDialog(sucRes.successRegistration)
+            }
+        }
     }
 
     PopupPF{
@@ -241,25 +250,47 @@ Page{
             }
 
             LabelPF{
-                width: parent.width
+                width: waitDialog.availableWidth
                 text: qsTr("Sending data to server...")
                 wrapMode: Label.Wrap
                 horizontalAlignment: Qt.AlignHCenter
-            }
+            }            
         }
 
     }
 
     PopupPF{
         id: sucRes
-        width: root.width
+//        width: root.width
         height: sucResColumn.height + topPadding + bottomPadding
+
+        readonly property int error:                0
+        readonly property int successRegistration:  1
+
+        property string errorMessage
+
+        function showDialog(messageCode){
+            switch(messageCode){
+            case error:
+                headerLabel.text = qsTr("Error")
+                messageLabel.text = errorMessage
+                break;
+            case successRegistration:
+                headerLabel.text = qsTr("Successful registration!")
+                messageLabel.text = qsTr("You can now take pictures or select them from gallery to send.")
+                break;
+            default:
+                return;
+            }
+            open()
+        }
 
         Column{
             id: sucResColumn
             spacing: 30 * global_scale_factor
 
             LabelPF{
+                id: headerLabel
                 width: sucRes.availableWidth
                 text: qsTr("Successful registration!")
                 font.bold: true
@@ -268,10 +299,40 @@ Page{
             }
 
             LabelPF{
+                id: messageLabel
                 width: sucRes.availableWidth
                 text: qsTr("You can now take pictures or select them from gallery to send.")
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
+            }
+
+            Item{
+                width: sucRes.availableWidth
+                height: okButton.height
+                Button{
+                    id: okButton
+                    text: "Ok"
+                    anchors.right: parent.right
+                    onClicked: sucRes.close()
+
+                    contentItem: Text {
+                        text: okButton.text
+                        font: okButton.font
+                        opacity: enabled ? 1.0 : 0.3
+                        color: okButton.down ? "#0277B8" : Material.primary
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        elide: Text.ElideRight
+
+                        Behavior on color {
+                            ColorAnimation {  }
+                        }
+
+                    }
+
+                    background: Item{}
+
+                }
             }
 
         }

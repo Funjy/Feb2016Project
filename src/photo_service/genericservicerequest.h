@@ -12,7 +12,6 @@
 namespace PhotoFlyService {
 using namespace PhotoFlyContainers;
 
-
 class GenericServiceRequest : public GenericServiceMessage
 {
     Q_OBJECT

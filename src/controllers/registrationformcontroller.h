@@ -38,6 +38,7 @@ public:
 
 signals:
     void requstStatusChanged();
+    void requestResult(bool status, QString message);
 
 public slots:
 
