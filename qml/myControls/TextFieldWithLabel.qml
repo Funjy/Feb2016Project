@@ -1,12 +1,15 @@
 import QtQuick 2.7
+import QtQuick.Layouts 1.1
 
-Column{
+GridLayout{
     id: root
     property alias title: label.text
     property alias text: textBox.text
     property bool expandWidth: false
+    rows: 2
+    columns: 1
 
-    anchors {left: expandWidth ? parent.left : undefined; right: expandWidth ? parent.right : undefined}
+//    anchors {left: expandWidth ? parent.left : undefined; right: expandWidth ? parent.right : undefined}
 
     LabelPF{
         id: label
@@ -14,7 +17,8 @@ Column{
     TextBoxPF{
         id: textBox
         placeholderText: label.text
-        anchors {left: root.left; right: root.right}
+        Layout.fillWidth: true
+//        anchors {left: root.left; right: root.right}
 //        anchors.left: parent.left
 //        anchors.right: parent.right
     }

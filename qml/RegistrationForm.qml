@@ -31,7 +31,10 @@ Page{
     }
 
     Keys.onEscapePressed: {
-        backClicked()
+        if(swipeView.focus)
+            swipeView.focus = false
+        else
+            backClicked()
     }
 
     GridLayout{
@@ -76,14 +79,16 @@ Page{
                         TextFieldWithLabel{
                             id: loginEmail
                             title: qsTr("Email address")
-                            expandWidth: true
+//                            expandWidth: true
+                            Layout.fillWidth: true
                             KeyNavigation.tab: loginPassword
                         }
 
                         TextFieldWithLabel{
                             id: loginPassword
                             title: qsTr("Password")
-                            expandWidth: true
+//                            expandWidth: true
+                            Layout.fillWidth: true
                             KeyNavigation.tab: acceptButton
                         }
 
@@ -110,37 +115,73 @@ Page{
 //                    registrationData.password = registerPassword.text
                 }
 
-                GridLayout{
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    columns: 1
-                    rowSpacing: 16 * global_scale_factor
+                Flickable{
+                    anchors.fill: parent
+                    contentHeight: registrationLayout.implicitHeight
+                    clip: true
+                    ScrollIndicator.vertical: ScrollIndicator { }
 
-                    TextFieldWithLabel{
-                        id: registerName
-                        title: qsTr("Name")
-                        expandWidth: true
-                        KeyNavigation.tab: registerEmail
+                    GridLayout{
+                        id: registrationLayout
+//                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        columns: 1
+                        rowSpacing: 16 * global_scale_factor
+
+                        GridLayout{
+                            Layout.fillWidth: true
+                            columns: 2
+                            rows: 1
+
+                            TextFieldWithLabel{
+                                id: registerName
+                                title: qsTr("Name")
+                                KeyNavigation.tab: registerSurname
+                                Layout.fillWidth: true
+                            }
+
+                            TextFieldWithLabel{
+                                id: registerSurname
+                                title: qsTr("Surname")
+                                KeyNavigation.tab: registerAddress
+                                Layout.fillWidth: true
+                            }
+                        }
+
+                        TextFieldWithLabel{
+                            id: registerAddress
+                            title: qsTr("Postal address")
+                            KeyNavigation.tab: registerPhone
+                            Layout.fillWidth: true
+                        }
+
+                        TextFieldWithLabel{
+                            id: registerPhone
+                            title: qsTr("Phone number")
+                            KeyNavigation.tab: registerEmail
+                            Layout.fillWidth: true
+                        }
+
+                        TextFieldWithLabel{
+                            id: registerEmail
+                            title: qsTr("Email address")
+                            KeyNavigation.tab: registerPassword
+                            Layout.fillWidth: true
+                        }
+
+                        TextFieldWithLabel{
+                            id: registerPassword
+                            title: qsTr("Password")
+                            KeyNavigation.tab: acceptButton
+                            Layout.fillWidth: true
+                        }
+
+                        //                    Item{
+                        //                        Layout.fillHeight: true
+                        //                    }
+
                     }
-
-                    TextFieldWithLabel{
-                        id: registerEmail
-                        title: qsTr("Email address")
-                        expandWidth: true
-                        KeyNavigation.tab: registerPassword
-                    }
-
-                    TextFieldWithLabel{
-                        id: registerPassword
-                        title: qsTr("Password")
-                        expandWidth: true
-                        KeyNavigation.tab: acceptButton
-                    }                    
-
-//                    Item{
-//                        Layout.fillHeight: true
-//                    }
 
                 }
             }
