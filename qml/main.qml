@@ -17,12 +17,14 @@ ApplicationWindow {
     visible: true
     width: 360
     height: 520
-    title: "PhotoFly"
+    title: global_appTitle
     visibility: global_requestedFullScreen ? Window.FullScreen : Window.AutomaticVisibility
 
     Material.primary: Material.Blue
     Material.accent: Material.LightBlue
     Material.theme: Material.Light
+
+    property string global_appTitle: "PhotoFly"
 
     property bool   global_requestedFullScreen: false
     property int    global_scale_factor: 1
@@ -91,6 +93,17 @@ ApplicationWindow {
 //        }
 //    }
 
+    function backClicked(){
+        if(stackView.depth > 1)
+            stackView.pop()
+        else
+            Qt.quit()
+    }
+
+    function registrationComplete(){
+        stackView.replace(mainFormComponent)
+    }
+
     Component.onCompleted: {
         global_scale_factor = ApplicationSettings.ratio
 
@@ -99,14 +112,8 @@ ApplicationWindow {
 
         if(!isRegistered)
             stackView.push(regFormComponent)
-
-    }
-
-    function backClicked(){
-        if(stackView.depth > 1)
-            stackView.pop()
         else
-            Qt.quit()
+            stackView.push(mainFormComponent)
     }
 
     StackView{
@@ -122,10 +129,10 @@ ApplicationWindow {
         }
     }
 
-//    Component{
-//        id: mainFormComponent
-//        MainForm{}
-//    }
+    Component{
+        id: mainFormComponent
+        MainForm{}
+    }
 
 //    Component{
 //        id: initComp

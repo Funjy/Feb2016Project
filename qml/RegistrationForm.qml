@@ -1,9 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
-//import QtQuick.Controls.Styles 1.4
-//import QtQuick.Window 2.2
-//import Material 0.3
 import QtQuick.Controls.Material 2.0
 
 import "myControls"
@@ -17,6 +14,10 @@ Page{
 
     readonly property int loginIndex:           0
     readonly property int registrationIndex:    1
+
+    function closeFormAndProceed(){
+        registrationComplete()
+    }
 
     header: TabBar{
         id: tabBar
@@ -228,7 +229,7 @@ Page{
                 sucRes.errorMessage = message
                 sucRes.showDialog(sucRes.error)
             } else {
-                sucRes.showDialog(sucRes.successRegistration)
+                closeFormAndProceed()
             }
         }
     }

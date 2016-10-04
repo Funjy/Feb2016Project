@@ -21,7 +21,7 @@
         <file>qml/myScripts/Styles.js</file>
         <file>qml/CameraForm.qml</file>
         <file>qml/main.qml</file>
-        <file>qml/MainForm.qml</file>
+        <file>qml/MainForm_.qml</file>
         <file>qml/MainForm_mypf.qml</file>
         <file>qml/RegistrationForm.qml</file>
         <file>qml/SuccessRegistration.qml</file>
@@ -29,5 +29,6 @@
         <file>qml/myControls/PopupPF.qml</file>
         <file>qml/myControls/ButtonPF.qml</file>
         <file>qml/myControls/TextFieldWithLabel.qml</file>
+        <file>qml/MainForm.qml</file>
     </qresource>
 </RCC>
