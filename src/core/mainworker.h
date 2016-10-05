@@ -15,6 +15,7 @@
 #include "models/registrationformdata.h"
 #include "photo_service/serviceprovider.h"
 #include "controllers/registrationformcontroller.h"
+#include "controllers/mainformcontroller.h"
 
 using namespace PhotoFlyBehaviours;
 using namespace PhotoFlyModels;
@@ -23,9 +24,12 @@ using namespace PhotoFlyControllers;
 class MainWorker : public QObject
 {
     Q_OBJECT
+    Q_DISABLE_COPY(MainWorker)
 
 //    Q_PROPERTY(RegistrationFormController* regFormController MEMBER m_regFormController NOTIFY regFormControllerChanged)
 //    Q_PROPERTY(RegistrationFormController* regFormController MEMBER m_regFormController CONSTANT)
+
+    Q_PROPERTY(MainFormController* mainFormController MEMBER m_mainFormController CONSTANT)
 
 public:
     MainWorker(QObject *parent = 0);
@@ -50,7 +54,8 @@ private slots:
     void onImagesSelected(QStringList imagePaths);
 
 private:
-    IImageGalleryProvider *m_imPicker;
+    IImageGalleryProvider   *m_imPicker;
+    MainFormController      *m_mainFormController;
 //    RegistrationFormController *m_regFormController;
 //    ImagePickerAndroid m_imPicker;
 

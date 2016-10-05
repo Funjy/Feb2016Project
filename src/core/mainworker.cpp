@@ -9,6 +9,8 @@ MainWorker::MainWorker(QObject *parent) : QObject(parent){
 //    m_regFormController = new RegistrationFormController(this);
 //    emit regFormControllerChanged();
 
+    m_mainFormController = new MainFormController(this);
+
 }
 
 void MainWorker::selectImageFromGallery()

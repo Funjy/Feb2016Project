@@ -32,6 +32,8 @@ ApplicationWindow {
     property MainWorker global_mainWorker: mainWorker
     property StackView  global_stackView: stackView
 
+    property var global_selectedStyle: ScriptStyles.DefaultStyle
+
 //    header: ToolBar {
 //        RowLayout {
 //            spacing: 20

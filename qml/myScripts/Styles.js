@@ -1,6 +1,8 @@
 
 var default_pix_density = 22
 
+var commonMargins = 8
+
 var myriad_set_pro = "Myriad Set Pro"
 var roboto_regular = "Roboto Regular"
 

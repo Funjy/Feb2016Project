@@ -4,12 +4,15 @@ import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 
 import "myScripts/Styles.js" as ScriptStyles
+import "myControls"
 
 import ca.riftekit.Controllers 1.0
 
 Page {
     id: root
     title: global_appTitle
+
+//    property MainFormController formController: global_mainWorker.mainFormController
 
     header: ToolBar {
 
@@ -86,43 +89,88 @@ Page {
     GridLayout{
         columns: 1
         anchors.fill: parent
-//        Item {
-//            anchors.left: parent.left
-//            anchors.right: parent.right
-//            Layout.fillHeight: true
+        anchors.margins: ScriptStyles.commonMargins * global_scale_factor
 
-//            AwesomeIcon{
-//                name: "image"
-//                anchors.centerIn: parent
-//                size: parent.height / 2
-//                Ink {
-//                    anchors.fill: parent
-//                    onClicked: mainWorker.selectImageFromGallery()
+        ListView{
+            id: selectedPhotosView
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            currentIndex: -1
+
+            delegate: SwipeDelegate {
+                id: delRoot
+                width: parent.width
+                text: modelData.title
+                highlighted: ListView.isCurrentItem
+
+                contentItem: RowLayout {
+                    width: delRoot.width - 2 * (ScriptStyles.commonMargins * global_scale_factor)
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    spacing: 20 * global_scale_factor
+                    Item{
+                        Layout.fillWidth: true
+                        height: 70 * global_scale_factor
+                        Image{
+                            id: dImage
+                            fillMode: Image.PreserveAspectFit
+                            source: modelData.imagePath
+                            horizontalAlignment: Image.AlignHCenter
+                            verticalAlignment: Image.AlignVCenter
+                            sourceSize.height: parent.height
+//                            anchors.fill: parent
+                        }
+                    }
+                    Item{
+                        Layout.fillWidth: true
+                        implicitHeight: parent.height
+                        LabelPF{
+                            id: imTitle
+                            width: parent.width
+                            maximumLineCount: 1
+                            text: dImage.status === Image.Error ? qsTr("Loading error") : delRoot.text
+//                            wrapMode: Label.WrapAnywhere
+                            elide: Label.ElideMiddle
+                            horizontalAlignment: Label.AlignHCenter
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                }
+
+            }
+
+            model: global_mainWorker.mainFormController.photos
+
+//            model: ListModel{
+//                ListElement{
+//                    source: "file:/C:/Users/Antony/Pictures/fOq9QNU.jpg"
+//                    title: "Halo"
+//                }
+//                ListElement{
+//                    source: "file:/C:/Users/Antony/Pictures/temporal_flux_wallpaper_version_by_magicnaanavi-d671cua.jpg"
+//                    title:  "file:/C:/Users/Antony/Pictures/temporal_flux_wallpaper_version_by_magicnaanavi-d671cua.jpg"
 //                }
 //            }
+        }
 
-
-//        }
-//        Item {
-//            anchors.left: parent.left
-//            anchors.right: parent.right
-//            Layout.fillHeight: true
-//            AwesomeIcon{
-//                name: "camera"
-//                anchors.centerIn: parent
-//                size: parent.height / 2
-//                Ink {
-//                    anchors.fill: parent
-//                    onClicked: mainWorker.openCamera()
-//                }
-//            }
-//        }
     }
 
     footer: ToolBar{
         Material.primary: "white"
         RowLayout{
+            spacing: 20 * global_scale_factor
+            anchors.fill: parent
 
+            ToolButton {
+                id: cameraButton
+                text: "Camera"
+                Layout.fillWidth: true
+            }
+            ToolButton {
+                id: nextButton
+                text: "Next"
+                Layout.fillWidth: true
+            }
         }
     }
 

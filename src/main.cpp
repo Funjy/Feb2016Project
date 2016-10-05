@@ -10,6 +10,7 @@
 #include "photo_service/servicerequestfactory.h"
 #include "photo_service/genericservicemessage.h"
 #include "controllers/registrationformcontroller.h"
+#include "controllers/mainformcontroller.h"
 //#include <QtGui>
 //#include <QtQuick>
 
@@ -78,11 +79,20 @@ inline void registerTypes(){
     qmlRegisterType<PhotoFlyService::GenericServiceMessage>
             ("ca.riftekit.PhotoFlyServices",    1, 0, "ServiceMessage");
 
+
+    qRegisterMetaType<QQmlListProperty<PhotoFlyModels::PhotoContainer>>();
     qRegisterMetaType<GenericServiceRequest *>("GenericServiceRequest *");
+
+    qmlRegisterType<PhotoFlyModels::PhotoContainer>
+            ("ca.riftekit.models", 1, 0, "PhotoContainer");
 
     // Controllers
 //    qmlRegisterUncreatableType<PhotoFlyControllers::RegistrationFormController>
 //            ("ca.riftekit.Controllers", 1, 0, "RegistrationFormController", "Reg controller creation attempt!");
     qmlRegisterType<PhotoFlyControllers::RegistrationFormController>
             ("ca.riftekit.Controllers", 1, 0, "RegistrationFormController");
+
+    qmlRegisterUncreatableType<PhotoFlyControllers::MainFormController>
+            ("ca.riftekit.Controllers", 1, 0, "MainFormController", "MainFormController");
+
 }

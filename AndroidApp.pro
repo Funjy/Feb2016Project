@@ -37,7 +37,8 @@ HEADERS += \
     src/behaviours/iimagegalleryprovider.h \
     src/photo_service/genericservicerequest.h \
     src/photo_service/serviceprovider.h \
-    src/controllers/registrationformcontroller.h
+    src/controllers/registrationformcontroller.h \
+    src/controllers/mainformcontroller.h
 
 SOURCES += \
     src/core/applicationsettings.cpp \
@@ -52,7 +53,8 @@ SOURCES += \
     src/photo_service/genericservicemessage.cpp \
     src/photo_service/genericservicerequest.cpp \
     src/photo_service/serviceprovider.cpp \
-    src/controllers/registrationformcontroller.cpp
+    src/controllers/registrationformcontroller.cpp \
+    src/controllers/mainformcontroller.cpp
 
 android {
 OTHER_FILES += \
