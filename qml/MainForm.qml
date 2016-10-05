@@ -1,6 +1,9 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
+
+import "myScripts/Styles.js" as ScriptStyles
 
 import ca.riftekit.Controllers 1.0
 
@@ -9,18 +12,26 @@ Page {
     title: global_appTitle
 
     header: ToolBar {
+
+        Material.primary: "white"
+
         RowLayout {
-            spacing: 20
+            spacing: 20 * global_scale_factor
             anchors.fill: parent
 
             ToolButton {
                 id: menuButton
-                contentItem: Image {
-                    fillMode: Image.Pad
-                    horizontalAlignment: Image.AlignHCenter
-                    verticalAlignment: Image.AlignVCenter
-                    source: "qrc:/images/close-128.png"
-                    sourceSize.height: 40
+                contentItem: Item {
+                    height: 40 * global_scale_factor
+                    width: 40 * global_scale_factor
+                    Image {
+                        id: menuImage
+                        fillMode: Image.PreserveAspectFit
+                        horizontalAlignment: Image.AlignHCenter
+                        verticalAlignment: Image.AlignVCenter
+                        source: "qrc:/images/close-128.png"
+                        anchors.fill: parent
+                    }
                 }
                 onClicked: drawer.open()
             }
@@ -106,6 +117,13 @@ Page {
 //                }
 //            }
 //        }
+    }
+
+    footer: ToolBar{
+        Material.primary: "white"
+        RowLayout{
+
+        }
     }
 
 }
