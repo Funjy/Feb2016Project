@@ -35,9 +35,8 @@ FocusScope{
             Keys.onEnterPressed:    moveFocus()
             Keys.onReturnPressed:   moveFocus()
 
-            function moveFocus(){
+            function moveFocus() {
                 if(root.enterKeyType === Qt.EnterKeyNext && root.onNextClickedItem !== null){
-                    console.log("invoked next")
                     root.onNextClickedItem.forceActiveFocus()
                 } else if (root.enterKeyType === Qt.EnterKeyDone) {
                     root.focus = false
