@@ -131,6 +131,8 @@ Page{
                         columns: 1
                         rowSpacing: 16 * global_scale_factor
 
+
+
                         GridLayout{
                             Layout.fillWidth: true
                             columns: 2
@@ -139,44 +141,51 @@ Page{
                             TextFieldWithLabel{
                                 id: registerName
                                 title: qsTr("Name")
-                                KeyNavigation.tab: registerSurname
                                 Layout.fillWidth: true
+                                onNextClickedItem: registerSurname
+                                enterKeyType: Qt.EnterKeyNext
+
                             }
 
                             TextFieldWithLabel{
                                 id: registerSurname
                                 title: qsTr("Surname")
-                                KeyNavigation.tab: registerAddress
                                 Layout.fillWidth: true
+                                onNextClickedItem: registerAddress
+                                enterKeyType: Qt.EnterKeyNext
                             }
                         }
 
                         TextFieldWithLabel{
                             id: registerAddress
                             title: qsTr("Postal address")
-                            KeyNavigation.tab: registerPhone
                             Layout.fillWidth: true
+                            onNextClickedItem: registerPhone
+                            enterKeyType: Qt.EnterKeyNext
                         }
 
                         TextFieldWithLabel{
                             id: registerPhone
                             title: qsTr("Phone number")
-                            KeyNavigation.tab: registerEmail
                             Layout.fillWidth: true
+                            onNextClickedItem: registerEmail
+                            enterKeyType: Qt.EnterKeyNext
                         }
 
                         TextFieldWithLabel{
                             id: registerEmail
                             title: qsTr("Email address")
-                            KeyNavigation.tab: registerPassword
                             Layout.fillWidth: true
+                            onNextClickedItem: registerPassword
+                            enterKeyType: Qt.EnterKeyNext
                         }
 
                         TextFieldWithLabel{
                             id: registerPassword
                             title: qsTr("Password")
-                            KeyNavigation.tab: acceptButton
                             Layout.fillWidth: true
+                            enterKeyType: Qt.EnterKeyDone
+                            onDoneClicked: acceptButton.clicked()
                         }
 
                         //                    Item{

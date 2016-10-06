@@ -1,25 +1,49 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
 
-GridLayout{
+FocusScope{
     id: root
     property alias title: label.text
     property alias text: textBox.text
     property bool expandWidth: false
-    rows: 2
-    columns: 1
+    property int enterKeyType: Qt.EnterKeyDefault
+    property var onNextClickedItem: null
 
-//    anchors {left: expandWidth ? parent.left : undefined; right: expandWidth ? parent.right : undefined}
+    height: grid.height
+    width: if(!root.Layout.fillWidth) grid.width
 
-    LabelPF{
-        id: label
-    }
-    TextBoxPF{
-        id: textBox
-        placeholderText: label.text
-        Layout.fillWidth: true
-//        anchors {left: root.left; right: root.right}
-//        anchors.left: parent.left
-//        anchors.right: parent.right
+    signal doneClicked()
+
+    GridLayout{
+        id: grid
+        rows: 2
+        columns: 1
+
+        anchors.left: if(root.Layout.fillWidth) root.left
+        anchors.right: if(root.Layout.fillWidth) root.right
+
+        LabelPF{
+            id: label
+        }
+        TextBoxPF{
+            id: textBox
+            focus: true
+            placeholderText: label.text
+            Layout.fillWidth: true
+            EnterKey.type: root.enterKeyType
+
+            Keys.onEnterPressed:    moveFocus()
+            Keys.onReturnPressed:   moveFocus()
+
+            function moveFocus(){
+                if(root.enterKeyType === Qt.EnterKeyNext && root.onNextClickedItem !== null){
+                    console.log("invoked next")
+                    root.onNextClickedItem.forceActiveFocus()
+                } else if (root.enterKeyType === Qt.EnterKeyDone) {
+                    root.focus = false
+                    root.doneClicked()
+                }
+            }
+        }
     }
 }
