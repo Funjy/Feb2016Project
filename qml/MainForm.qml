@@ -55,6 +55,12 @@ Page {
 
             Item{
                 width: menuButton.width
+                height: proceedButton.implicitHeight
+                ToolButton {
+                    id: proceedButton
+                    text: "Proceed"
+                    width: parent.width
+                }
             }
 
         }
