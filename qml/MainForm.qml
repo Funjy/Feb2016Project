@@ -46,7 +46,7 @@ Page {
             Label {
                 id: titleLabel
                 text: root.title
-                font.pixelSize: 20
+                font.pixelSize: 20 * global_scale_factor
                 elide: Label.ElideRight
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
@@ -58,6 +58,7 @@ Page {
                 height: proceedButton.implicitHeight
                 ToolButton {
                     id: proceedButton
+                    font.pixelSize: titleLabel.font.pixelSize * 0.8
                     text: "Proceed"
                     width: parent.width
                 }
@@ -176,12 +177,12 @@ Page {
                                 maximumLineCount: 1
 //                                text: dImage.status === Image.Error ? qsTr("Loading error") : delRoot.text
                                 text: modelData.title
-//                                wrapMode: Label.WrapAnywhere
+                                wrapMode: Label.WrapAnywhere
 //                                elide: Label.ElideLeft
                                 horizontalAlignment: Label.AlignHCenter
                                 verticalAlignment: Label.AlignVCenter
-                                anchors.bottom: parent.bottom
-                                anchors.top: parent.top
+//                                anchors.bottom: parent.bottom
+//                                anchors.top: parent.top
                                 anchors.fill: parent
 //                                anchors.right: parent.right
 //                                contentWidth: parent.width
