@@ -170,7 +170,7 @@ Page {
 
                     Rectangle {
 //                        color: delRoot.swipe.complete && delRoot.pressed ? "#333" : "#444"
-                        color: delRoot.swipe.complete && delRoot.pressed ? ScriptStyles.pressedColor : Material.primary
+                        color: delRoot.swipe.complete && delRoot.pressed ? global_selectedStyle.pressedColor : Material.primary
                         width: parent.width
                         height: parent.height
 //                        clip: true
