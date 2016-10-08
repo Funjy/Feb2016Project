@@ -12,16 +12,19 @@
 
 using namespace PhotoFlyBehaviours;
 
-class ImagePickerAndroid : public IImageGalleryProvider, public QAndroidActivityResultReceiver
+class ImagePickerAndroid : public IImageGalleryProvider, protected QAndroidActivityResultReceiver
 {
     Q_OBJECT
+    Q_DISABLE_COPY(ImagePickerAndroid)
+
 public:
     explicit ImagePickerAndroid(QObject *parent = 0);
 
 
-    virtual void openGallery() override;
-    void openCamera();
+    Q_INVOKABLE virtual void openGallery() override;
+    Q_INVOKABLE virtual void openCamera() override;
 
+protected:
     virtual void handleActivityResult(int receiverRequestCode, int resultCode, const QAndroidJniObject & data);
 
 //signals:

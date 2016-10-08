@@ -5,9 +5,18 @@
 #include <QQmlListProperty>
 
 #include "models/photocontainer.h"
+#include "behaviours/iimagegalleryprovider.h"
+#ifdef __ANDROID__
+//#include <QtAndroidExtras>
+#include <QAndroidJniObject>
+#include <QtAndroid>
+#include "core/imagepickerandroid.h"
+//#include "paymentandroid.h"
+#endif
 
 namespace PhotoFlyControllers{
 using namespace PhotoFlyModels;
+using namespace PhotoFlyBehaviours;
 
 class MainFormController : public QObject
 {
@@ -15,12 +24,14 @@ class MainFormController : public QObject
     Q_DISABLE_COPY(MainFormController)
 
     Q_PROPERTY(QQmlListProperty<PhotoFlyModels::PhotoContainer> photos READ photos NOTIFY photosChanged)
+    Q_PROPERTY(IImageGalleryProvider* imagesProvider READ imagesProvider CONSTANT)
 
 public:
     explicit MainFormController(QObject *parent = 0);
     ~MainFormController();
 
     QQmlListProperty<PhotoContainer> photos();
+    IImageGalleryProvider *imagesProvider() const;
 
 signals:
     void photosChanged();
@@ -28,9 +39,13 @@ signals:
 public slots:
 
 private:
+    IImageGalleryProvider *m_galleryProvider;
+
     PhotosList  m_photos;
     static int photosCount(QQmlListProperty<PhotoContainer> *list);
     static PhotoContainer *photoItem(QQmlListProperty<PhotoContainer> *list, int i);
+
+    void imagePickerFactory(IImageGalleryProvider *&picker);
 
 };
 

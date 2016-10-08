@@ -32,7 +32,7 @@ void ImagePickerAndroid::openCamera()
                 "getOpenCameraIntent",
                 "()Landroid/content/Intent;");
 
-    if(!res.isValid()){
+    if (!res.isValid()) {
         qDebug() << "Wrong intent";
         return;
     }

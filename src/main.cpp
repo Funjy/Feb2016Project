@@ -11,6 +11,7 @@
 #include "photo_service/genericservicemessage.h"
 #include "controllers/registrationformcontroller.h"
 #include "controllers/mainformcontroller.h"
+#include "behaviours/iimagegalleryprovider.h"
 //#include <QtGui>
 //#include <QtQuick>
 
@@ -95,4 +96,10 @@ inline void registerTypes(){
     qmlRegisterUncreatableType<PhotoFlyControllers::MainFormController>
             ("ca.riftekit.Controllers", 1, 0, "MainFormController", "MainFormController");
 
+    // Behaviours
+//    qmlRegisterUncreatableType<PhotoFlyBehaviours::IImageGalleryProvider>
+//            ("ca.riftekit.Behaviours", 1, 0, "IImageGalleryProvider", "IImageGalleryProvider");
+
+    qmlRegisterInterface<PhotoFlyBehaviours::IImageGalleryProvider>
+            ("IImageGalleryProvider");
 }

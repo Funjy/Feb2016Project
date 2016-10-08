@@ -15,6 +15,10 @@ MainFormController::MainFormController(QObject *parent) : QObject(parent)
     m_photos << pc;
 
     emit photosChanged();
+
+    m_galleryProvider = nullptr;
+    imagePickerFactory(m_galleryProvider);
+
 }
 
 MainFormController::~MainFormController()
@@ -32,6 +36,11 @@ QQmlListProperty<PhotoContainer> MainFormController::photos()
                 &MainFormController::photoItem);
 }
 
+IImageGalleryProvider *MainFormController::imagesProvider() const
+{
+    return m_galleryProvider;
+}
+
 int MainFormController::photosCount(QQmlListProperty<PhotoContainer> *list)
 {
     auto photos = static_cast<PhotosList*>(list->data);
@@ -42,4 +51,13 @@ PhotoContainer *MainFormController::photoItem(QQmlListProperty<PhotoContainer> *
 {
     auto photos = static_cast<PhotosList*>(list->data);
     return photos->at(i);
+}
+
+void MainFormController::imagePickerFactory(IImageGalleryProvider *&picker)
+{
+#ifdef __ANDROID__
+    picker = new ImagePickerAndroid(this);
+#elif __WIN32__
+    picker = nullptr;
+#endif
 }

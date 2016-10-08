@@ -2,17 +2,21 @@ import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
+import QtQuick.Dialogs 1.2
 
 import "myScripts/Styles.js" as ScriptStyles
 import "myControls"
 
 import ca.riftekit.Controllers 1.0
+//import ca.riftekit.Behaviours 1.0
 
 Page {
     id: root
     title: global_appTitle
 
 //    property MainFormController formController: global_mainWorker.mainFormController
+
+    property var imagesProvider: global_mainWorker.mainFormController.imagesProvider
 
     header: ToolBar {
 
@@ -161,15 +165,25 @@ Page {
             spacing: 20 * global_scale_factor
             anchors.fill: parent
 
-            ToolButton {
-                id: cameraButton
-                text: "Camera"
+            Item{
                 Layout.fillWidth: true
+                height: cameraButton.implicitHeight
+                ToolButton {
+                    id: cameraButton
+                    text: "Camera"
+                    width: parent.width
+                    onClicked: root.imagesProvider.openCamera()
+                }
             }
-            ToolButton {
-                id: nextButton
-                text: "Next"
+
+            Item{
                 Layout.fillWidth: true
+                height: nextButton.implicitHeight
+                ToolButton {
+                    id: nextButton
+                    text: "Next"
+                    width: parent.width
+                }
             }
         }
     }
