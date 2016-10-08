@@ -101,45 +101,91 @@ Page {
             Layout.fillWidth: true
             currentIndex: -1
 
+            readonly property int containsAmount: 6
+            readonly property int delegateHeight: height / containsAmount
+
             delegate: SwipeDelegate {
                 id: delRoot
                 width: parent.width
+                height: selectedPhotosView.delegateHeight
                 text: modelData.title
-                highlighted: ListView.isCurrentItem
+//                highlighted: ListView.isCurrentItem
 
-                contentItem: RowLayout {
-                    width: delRoot.width - 2 * (ScriptStyles.commonMargins * global_scale_factor)
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    spacing: 20 * global_scale_factor
-                    Item{
-                        Layout.fillWidth: true
-                        height: 70 * global_scale_factor
-                        Image{
-                            id: dImage
-                            fillMode: Image.PreserveAspectFit
-                            source: modelData.imagePath
-                            horizontalAlignment: Image.AlignHCenter
-                            verticalAlignment: Image.AlignVCenter
-                            sourceSize.height: parent.height
-//                            anchors.fill: parent
+                contentItem: Item{
+                    RowLayout {
+                        width: delRoot.width - 2 * (ScriptStyles.commonMargins * global_scale_factor)
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        spacing: 20 * global_scale_factor
+//                        height: 70 * global_scale_factor
+                        height: parent.height
+                        Item{
+                            id: imItem
+                            Layout.fillWidth: true
+                            anchors.bottom: parent.bottom
+                            anchors.top: parent.top
+
+                            Image{
+                                id: dImage
+                                cache: false
+                                fillMode: Image.PreserveAspectFit
+                                source: modelData.imagePath
+                                //                            horizontalAlignment: Image.AlignHCenter
+                                //                            verticalAlignment: Image.AlignVCenter
+                                sourceSize.height: parent.height
+                                //                            anchors.fill: parent
+                                anchors.centerIn: parent
+                                mipmap: true
+                            }
+                        }
+                        Item{
+                            Layout.fillWidth: true
+                            //                        height: parent.height
+
+                            anchors.bottom: parent.bottom
+                            anchors.top: parent.top
+                            LabelPF{
+                                id: imTitle
+                                width: parent.width
+                                maximumLineCount: 1
+                                text: dImage.status === Image.Error ? qsTr("Loading error") : delRoot.text
+                                //                            wrapMode: Label.WrapAnywhere
+                                elide: Label.ElideMiddle
+                                horizontalAlignment: Label.AlignHCenter
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                    }
+                    Behavior on x {
+                        enabled: !delRoot.down
+                        NumberAnimation {
+                            easing.type: Easing.InOutCubic
+                            duration: 400
                         }
                     }
-                    Item{
-                        Layout.fillWidth: true
-                        implicitHeight: parent.height
-                        LabelPF{
-                            id: imTitle
-                            width: parent.width
-                            maximumLineCount: 1
-                            text: dImage.status === Image.Error ? qsTr("Loading error") : delRoot.text
-//                            wrapMode: Label.WrapAnywhere
-                            elide: Label.ElideMiddle
-                            horizontalAlignment: Label.AlignHCenter
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-                    }
-
                 }
+
+                Component {
+                    id: removeComponent
+
+                    Rectangle {
+//                        color: delRoot.swipe.complete && delRoot.pressed ? "#333" : "#444"
+                        color: delRoot.swipe.complete && delRoot.pressed ? ScriptStyles.pressedColor : Material.primary
+                        width: parent.width
+                        height: parent.height
+//                        clip: true
+
+                        LabelPF {
+                            font.pixelSize: delRoot.font.pixelSize
+                            text: qsTr("Remove")
+                            color: Material.background
+                            anchors.centerIn: parent
+                        }
+                    }
+                }
+
+                swipe.behind: removeComponent
+//                swipe.right: removeComponent
 
             }
 
@@ -155,6 +201,8 @@ Page {
 //                    title:  "file:/C:/Users/Antony/Pictures/temporal_flux_wallpaper_version_by_magicnaanavi-d671cua.jpg"
 //                }
 //            }
+
+            ScrollIndicator.vertical: ScrollIndicator { }
         }
 
     }
@@ -178,11 +226,12 @@ Page {
 
             Item{
                 Layout.fillWidth: true
-                height: nextButton.implicitHeight
+                height: galleryButton.implicitHeight
                 ToolButton {
-                    id: nextButton
-                    text: "Next"
+                    id: galleryButton
+                    text: "Gallery"
                     width: parent.width
+                    onClicked: global_mainWorker.mainFormController.morePhotos()
                 }
             }
         }

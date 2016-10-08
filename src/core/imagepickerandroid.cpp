@@ -47,7 +47,8 @@ void ImagePickerAndroid::handleActivityResult(int receiverRequestCode, int resul
     jint RESULT_OK = QAndroidJniObject::getStaticField<jint>("android/app/Activity", "RESULT_OK");
     if(resultCode != RESULT_OK)
     {
-        emit imageSelected("Canceled");
+        emit error("Canceled");
+//        emit imageSelected("Canceled");
         return;
     }
     QString className = NATIVE_CODE_PATH + NATIVE_CODE_CLASSNAME;
@@ -60,18 +61,19 @@ void ImagePickerAndroid::handleActivityResult(int receiverRequestCode, int resul
 
     bool v = res.isValid();
 
-    if(!v){
-        emit imageSelected("Error");
+    if (!v) {
+        emit error("Invalid result");
+//        emit imageSelected("Error");
         return;
     }
     QAndroidJniEnvironment jniEnv;
     int splitArrayLength = jniEnv->GetArrayLength(res.object<jarray>());
 
     QStringList ret;
-    for(int i = 0; i < splitArrayLength; i++){
+    for (int i = 0; i < splitArrayLength; i++) {
         QAndroidJniObject arrayElement = jniEnv->GetObjectArrayElement(res.object<jobjectArray>(), i );
 //        QString retStr = arrayElement.toString();
-        if(arrayElement.isValid())
+        if (arrayElement.isValid())
             ret << arrayElement.toString();
 
     }

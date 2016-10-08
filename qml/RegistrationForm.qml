@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 
+import "myScripts/Styles.js" as ScriptStyles
 import "myControls"
 //import "qrc:/Material"
 import ca.riftekit.Containers 1.0
@@ -329,7 +330,7 @@ Page{
                         text: okButton.text
                         font: okButton.font
                         opacity: enabled ? 1.0 : 0.3
-                        color: okButton.down ? "#0277B8" : Material.primary
+                        color: okButton.down ? ScriptStyles.pressedColor : Material.primary
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideRight

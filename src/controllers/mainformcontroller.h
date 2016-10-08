@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QQmlListProperty>
+#include <QDebug>
 
 #include "models/photocontainer.h"
 #include "behaviours/iimagegalleryprovider.h"
@@ -33,10 +34,15 @@ public:
     QQmlListProperty<PhotoContainer> photos();
     IImageGalleryProvider *imagesProvider() const;
 
+    Q_INVOKABLE void morePhotos();
+
 signals:
     void photosChanged();
 
 public slots:
+
+private slots:
+    void onNewImagesSelected(QStringList imagesList);
 
 private:
     IImageGalleryProvider *m_galleryProvider;

@@ -11,7 +11,7 @@ class IImageGalleryProvider : public QObject
     Q_DISABLE_COPY(IImageGalleryProvider)
 
 public:
-    Q_INVOKABLE virtual void openGallery() = 0;
+    virtual void openGallery() = 0;
     Q_INVOKABLE virtual void openCamera() = 0;
 
 protected:

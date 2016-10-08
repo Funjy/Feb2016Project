@@ -12,5 +12,7 @@ var DefaultStyle = {
 //    headerFont: "myriadSetPro_ultralight",
 //    textInputFont:  myriad_set_pro,
     textInputFont:  roboto_regular,
-    labelFont:      myriad_set_pro
+    labelFont:      myriad_set_pro,
+    pressedColor:   "#0277B8"
+
 }

@@ -21,7 +21,7 @@ public:
     explicit ImagePickerAndroid(QObject *parent = 0);
 
 
-    Q_INVOKABLE virtual void openGallery() override;
+    virtual void openGallery() override;
     Q_INVOKABLE virtual void openCamera() override;
 
 protected:
