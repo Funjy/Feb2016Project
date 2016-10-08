@@ -71,20 +71,18 @@ public class MyJavaClass
 
     	ClipData clipData = imageReturnedIntent.getClipData();
     	if (clipData != null) {
-    		ret = new String[clipData.getItemCount() + 1];
+    		ret = new String[clipData.getItemCount()];
     		for (int i = 0; i < clipData.getItemCount(); i++) {
     			Uri selectedImage = clipData.getItemAt(i).getUri();
     			ret[i] = getStringPathFromImageUri(selectedImage, curActivity);
     		}
-    		ret[clipData.getItemCount()] = "First variant";
         	return ret;
     	}
 
     	Uri intentData = imageReturnedIntent.getData();
     	if (intentData != null) {
-    		ret = new String[2];
+    		ret = new String[1];
     		ret[0] = getStringPathFromImageUri(intentData, curActivity);
-    		ret[1] = "Second variant";
     		return ret;
     	}
     	

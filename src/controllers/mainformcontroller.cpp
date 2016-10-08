@@ -12,7 +12,11 @@ MainFormController::MainFormController(QObject *parent) : QObject(parent)
 
     pc = new PhotoContainer(this);
     pc->setImagePath("file:/C:/Users/Antony/Pictures/temporal_flux_wallpaper_version_by_magicnaanavi-d671cua.jpg");
-    pc->setTitle("file:/C:/Users/Antony/Pictures/temporal_flux_wallpaper_version_by_magicnaanavi-d671cua.jpg");
+//    pc->setTitle("file:/C:/Users/Antony/Pictures/temporal_flux_wallpaper_version_by_magicnaanavi-d671cua.jpg");
+
+    QFileInfo f(pc->imagePath());
+    pc->setTitle(f.baseName());
+
     m_photos << pc;
 
     emit photosChanged();
@@ -60,9 +64,10 @@ void MainFormController::onNewImagesSelected(QStringList imagesList)
 {
     for (auto imPath : imagesList) {
         qDebug() << "imPath: " << imPath;
+        QFileInfo f(imPath);
         auto pc = new PhotoContainer(this);
         pc->setImagePath("file:/" + imPath);
-        pc->setTitle(imPath);
+        pc->setTitle(f.baseName());
         m_photos << pc;
     }
     emit photosChanged();

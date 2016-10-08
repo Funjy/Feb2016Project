@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QQmlListProperty>
 #include <QDebug>
+#include <QFileInfo>
 
 #include "models/photocontainer.h"
 #include "behaviours/iimagegalleryprovider.h"
