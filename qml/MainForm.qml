@@ -112,24 +112,24 @@ Page {
                 onClicked: if (swipe.complete) formController.removePhoto(index)
 //                highlighted: ListView.isCurrentItem
 
-                ListView.onRemove: SequentialAnimation {
-                    PropertyAction {
-                        target: delRoot
-                        property: "ListView.delayRemove"
-                        value: true
-                    }
-                    NumberAnimation {
-                        target: delRoot
-                        property: "height"
-                        to: 0
-                        easing.type: Easing.InOutQuad
-                    }
-                    PropertyAction {
-                        target: delRoot
-                        property: "ListView.delayRemove"
-                        value: false
-                    }
-                }
+//                ListView.onRemove: SequentialAnimation {
+//                    PropertyAction {
+//                        target: delRoot
+//                        property: "ListView.delayRemove"
+//                        value: true
+//                    }
+//                    NumberAnimation {
+//                        target: delRoot
+//                        property: "height"
+//                        to: 0
+//                        easing.type: Easing.InOutQuad
+//                    }
+//                    PropertyAction {
+//                        target: delRoot
+//                        property: "ListView.delayRemove"
+//                        value: false
+//                    }
+//                }
 
                 contentItem: Item{
                     RowLayout {
@@ -154,7 +154,7 @@ Page {
                                 sourceSize.height: parent.height
                                 //                            anchors.fill: parent
                                 anchors.centerIn: parent
-                                mipmap: true
+//                                mipmap: true
                             }
                         }
                         Item{
@@ -165,13 +165,21 @@ Page {
                             anchors.top: parent.top
                             LabelPF{
                                 id: imTitle
-                                width: parent.width
+//                                width: parent.width
+//                                height: parent.height
                                 maximumLineCount: 1
-                                text: dImage.status === Image.Error ? qsTr("Loading error") : delRoot.text
-                                //                            wrapMode: Label.WrapAnywhere
-                                elide: Label.ElideMiddle
+//                                text: dImage.status === Image.Error ? qsTr("Loading error") : delRoot.text
+                                text: modelData.title
+                                wrapMode: Label.WrapAnywhere
+                                elide: Label.ElideLeft
                                 horizontalAlignment: Label.AlignHCenter
-                                anchors.verticalCenter: parent.verticalCenter
+                                verticalAlignment: Label.AlignVCenter
+                                anchors.bottom: parent.bottom
+                                anchors.top: parent.top
+                                anchors.fill: parent
+//                                anchors.right: parent.right
+//                                contentWidth: parent.width
+//                                anchors.verticalCenter: parent.verticalCenter
                             }
                         }
 

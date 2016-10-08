@@ -54,7 +54,7 @@ void ImagePickerAndroid::handleActivityResult(int receiverRequestCode, int resul
     QString className = NATIVE_CODE_PATH + NATIVE_CODE_CLASSNAME;
     QAndroidJniObject res = QAndroidJniObject::callStaticObjectMethod(
                 className.toStdString().c_str(),
-                "handleResult",
+                "handleResult_v2",
                 "(Landroid/content/Intent;Landroid/app/Activity;)[Ljava/lang/String;",
                 data.object<jobject>(),
                 QtAndroid::androidActivity().object<jobject>());
