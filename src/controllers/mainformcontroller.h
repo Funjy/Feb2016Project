@@ -35,6 +35,7 @@ public:
     IImageGalleryProvider *imagesProvider() const;
 
     Q_INVOKABLE void morePhotos();
+    Q_INVOKABLE void removePhoto(int idx);
 
 signals:
     void photosChanged();

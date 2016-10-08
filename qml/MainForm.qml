@@ -14,9 +14,9 @@ Page {
     id: root
     title: global_appTitle
 
-//    property MainFormController formController: global_mainWorker.mainFormController
+    property var formController: global_mainWorker.mainFormController
 
-    property var imagesProvider: global_mainWorker.mainFormController.imagesProvider
+    property var imagesProvider: formController.imagesProvider
 
     header: ToolBar {
 
@@ -109,7 +109,27 @@ Page {
                 width: parent.width
                 height: selectedPhotosView.delegateHeight
                 text: modelData.title
+                onClicked: if (swipe.complete) formController.removePhoto(index)
 //                highlighted: ListView.isCurrentItem
+
+                ListView.onRemove: SequentialAnimation {
+                    PropertyAction {
+                        target: delRoot
+                        property: "ListView.delayRemove"
+                        value: true
+                    }
+                    NumberAnimation {
+                        target: delRoot
+                        property: "height"
+                        to: 0
+                        easing.type: Easing.InOutQuad
+                    }
+                    PropertyAction {
+                        target: delRoot
+                        property: "ListView.delayRemove"
+                        value: false
+                    }
+                }
 
                 contentItem: Item{
                     RowLayout {
@@ -189,7 +209,7 @@ Page {
 
             }
 
-            model: global_mainWorker.mainFormController.photos
+            model: formController.photos
 
 //            model: ListModel{
 //                ListElement{
@@ -231,7 +251,7 @@ Page {
                     id: galleryButton
                     text: "Gallery"
                     width: parent.width
-                    onClicked: global_mainWorker.mainFormController.morePhotos()
+                    onClicked: formController.morePhotos()
                 }
             }
         }

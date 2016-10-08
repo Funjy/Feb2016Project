@@ -48,6 +48,14 @@ void MainFormController::morePhotos()
     m_galleryProvider->openGallery();
 }
 
+void MainFormController::removePhoto(int idx)
+{
+    if (idx >= m_photos.count())
+        return;
+    m_photos.takeAt(idx)->deleteLater();
+    emit photosChanged();
+}
+
 void MainFormController::onNewImagesSelected(QStringList imagesList)
 {
     for (auto imPath : imagesList) {
