@@ -26,15 +26,14 @@ class MainFormController : public QObject
     Q_DISABLE_COPY(MainFormController)
 
     Q_PROPERTY(QQmlListProperty<PhotoFlyModels::PhotoContainer> photos READ photos NOTIFY photosChanged)
-    Q_PROPERTY(IImageGalleryProvider* imagesProvider READ imagesProvider CONSTANT)
 
 public:
     explicit MainFormController(QObject *parent = 0);
     ~MainFormController();
 
     QQmlListProperty<PhotoContainer> photos();
-    IImageGalleryProvider *imagesProvider() const;
 
+    Q_INVOKABLE void openCamera() const;
     Q_INVOKABLE void morePhotos();
     Q_INVOKABLE void removePhoto(int idx);
 

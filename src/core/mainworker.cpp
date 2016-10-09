@@ -2,6 +2,9 @@
 
 MainWorker::MainWorker(QObject *parent) : QObject(parent){
 
+    m_userInfo = new RegistrationFormData(this);
+    updateUserInfo();
+
     m_imPicker = nullptr;
     connect(m_imPicker, &IImageGalleryProvider::imagesSelected, this, &MainWorker::onImagesSelected);
 //    emit setMessage("Ready");
@@ -11,19 +14,6 @@ MainWorker::MainWorker(QObject *parent) : QObject(parent){
 
     m_mainFormController = new MainFormController(this);
 
-}
-
-void MainWorker::selectImageFromGallery()
-{
-    emit setMessage("Open clicked");
-
-    m_imPicker->openGallery();
-
-}
-
-void MainWorker::openCamera()
-{
-//    m_imPicker.openCamera();
 }
 
 void MainWorker::testFunc(RegistrationFormData* data)
@@ -40,6 +30,17 @@ void MainWorker::testFunc(RegistrationFormData* data)
 void MainWorker::Init()
 {
 
+}
+
+bool MainWorker::isRegistered() const
+{
+    return m_userInfo->isValid();
+}
+
+void MainWorker::updateUserInfo()
+{
+    appSettings.readUserInfo(m_userInfo);
+    emit isRegisteredChanged();
 }
 
 void MainWorker::onImagesSelected(QStringList imagePaths)

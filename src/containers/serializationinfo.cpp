@@ -38,17 +38,17 @@ SerializationInfo &SerializationInfo::operator=(const SerializationInfo &other)
     return *this;
 }
 
-void SerializationInfo::addValue(QString name, QVariant value)
+void SerializationInfo::addValue(const QString &name, QVariant value)
 {
     m_data.insert(name, value);
 }
 
-void SerializationInfo::addValue(QString name, const SerializationInfo &value)
+void SerializationInfo::addValue(const QString &name, const SerializationInfo &value)
 {
     m_data.insert(name, value.m_data);
 }
 
-QVariant SerializationInfo::value(QString name)
+QVariant SerializationInfo::value(const QString &name)
 {
     return m_data.contains(name) ? m_data[name] : QVariant();
 }
@@ -56,6 +56,11 @@ QVariant SerializationInfo::value(QString name)
 bool SerializationInfo::equals(const SerializationInfo &other)
 {
     return m_data == other.m_data;
+}
+
+void SerializationInfo::clear()
+{
+    m_data.clear();
 }
 
 QString SerializationInfo::getTypeId() const
@@ -70,7 +75,7 @@ void SerializationInfo::setTypeId(const QString &typeId)
     m_data[TypeIdKey] = typeId;
 }
 
-QList<QString> SerializationInfo::getKeys() const
+QList<QString> SerializationInfo::keys() const
 {
     return m_data.keys();
 }

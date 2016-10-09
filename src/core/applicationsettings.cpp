@@ -8,7 +8,7 @@ void ApplicationSettings::init()
     QQmlEngine::setObjectOwnership(&appSettings, QQmlEngine::CppOwnership);
 
     // Init settings file
-    if(!m_settings){
+    if (!m_settings) {
 //        QString path = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
 //        if(!QDir(path).exists()){
 //            QDir().mkpath(path);
@@ -19,9 +19,9 @@ void ApplicationSettings::init()
     }
     // Registration data
     m_isFirstLaunch = appSettingsCore.value(KeyIsFirstLaunch, true).toBool();
-    setValue(KeyIsFirstLaunch, false);
+//    setValue(KeyIsFirstLaunch, true);
     // note: debug
-    m_isFirstLaunch = true;
+//    m_isFirstLaunch = true;
 
 }
 
@@ -51,10 +51,43 @@ bool ApplicationSettings::isFirstLaunch() const
     return m_isFirstLaunch;
 }
 
-QString ApplicationSettings::keyIsRegistered() const
+void ApplicationSettings::saveUserInfo(const RegistrationFormData &userInfo)
 {
-    return FULL_PARAM_KEY(GroupGeneral, KeyIsRegistered);
+    appSettingsCore.beginGroup(RegistrationFormData::UserInfoGroup);
+    SerializationInfo si;
+    userInfo.getObjectInfo(si);
+    for (auto key : si.keys()) {
+        appSettingsCore.setValue(key, si[key]);
+    }
+    appSettingsCore.endGroup();
 }
+
+void ApplicationSettings::readUserInfo(RegistrationFormData *userInfo)
+{
+    if (!userInfo)
+        return;
+
+    appSettingsCore.beginGroup(RegistrationFormData::UserInfoGroup);
+
+
+    SerializationInfo si;
+    userInfo->getObjectInfo(si);
+//    auto keys = si.keys();
+//    si.clear();
+
+    for (auto key : si.keys()) {
+//        si.addValue(key, appSettingsCore.value(key));
+        si[key] = appSettingsCore.value(key);
+    }
+    userInfo->deserialize(si);
+    appSettingsCore.endGroup();
+
+}
+
+//QString ApplicationSettings::keyIsRegistered() const
+//{
+//    return FULL_PARAM_KEY(GroupGeneral, KeyIsRegistered);
+//}
 
 qreal ApplicationSettings::ratio() const
 {

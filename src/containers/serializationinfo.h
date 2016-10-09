@@ -23,20 +23,28 @@ public:
     explicit SerializationInfo(const SerializationInfo& other);
     SerializationInfo &operator=(const SerializationInfo& other);
 
-    void addValue(QString name, QVariant value);
-    void addValue(QString name, const SerializationInfo& value);
-    QVariant value(QString name);
+    void addValue(const QString &name, QVariant value);
+    void addValue(const QString &name, const SerializationInfo& value);
+    QVariant value(const QString &name);
     bool equals(const SerializationInfo& other);
+    void clear();
 
     QString getTypeId() const;
     void setTypeId(const QString& typeId);
 
-    QList<QString> getKeys() const;
+    QList<QString> keys() const;
 
     void swap(SerializationInfo &_v) throw();
 
     QVariantMap toMap() const;
     QJsonObject toJson() const;
+
+    inline bool contains(const QString &key) const
+    { return m_data.contains(key); }
+    inline QVariant &operator[](const QString &key)
+    { return m_data[key]; }
+    inline const QVariant &operator[](const QString &key) const
+    { return m_data[key]; }
 
 private:
     QVariantMap m_data;

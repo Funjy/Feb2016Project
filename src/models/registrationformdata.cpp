@@ -2,6 +2,8 @@
 
 using namespace PhotoFlyModels;
 
+const QString RegistrationFormData::UserInfoGroup =         "UserInfo";
+
 const QString RegistrationFormData::NameKey =               "UserName";
 const QString RegistrationFormData::SurnameKey =            "Surname";
 const QString RegistrationFormData::EmailKey =              "Email";
@@ -16,17 +18,14 @@ RegistrationFormData::RegistrationFormData(QObject *parent) : QObject(parent)
     m_passwordType = PT_Direct;
 }
 
-RegistrationFormData::RegistrationFormData(const RegistrationFormData &other) : QObject()
-{
-    m_name = other.m_name;
-    m_surname = other.m_surname;
-    m_postalAddress = other.m_postalAddress;
-    m_email = other.m_email;
-    m_password = other.m_password;
-    m_phoneNumber = other.m_phoneNumber;
-}
+//RegistrationFormData::RegistrationFormData(const RegistrationFormData &other) : QObject()
+//{
+//    SerializationInfo si;
+//    other.getObjectInfo(si);
+//    deserialize(si);
+//}
 
-void RegistrationFormData::getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const
+void RegistrationFormData::getObjectInfo(SerializationInfo &info) const
 {
 #if USE_RegistrationFormData_TYPEID == 1
     info.setTypeId(metaObject()->className());
@@ -40,9 +39,26 @@ void RegistrationFormData::getObjectInfo(PhotoFlyContainers::SerializationInfo &
     info.addValue(PhoneNumberKey,   getPhoneNumber());
 }
 
+void RegistrationFormData::deserialize(const SerializationInfo &info)
+{
+#if USE_RegistrationFormData_TYPEID == 1
+    if (info.getTypeId() != metaObject()->className())
+        return;
+#endif
+
+    m_name = info[NameKey].toString();
+    m_surname = info[SurnameKey].toString();
+    m_postalAddress = info[PostalAddressKey].toString();
+    m_email = info[EmailKey].toString();
+    m_password = info[PasswordKey].toString();
+    m_phoneNumber = info[PhoneNumberKey].toString();
+
+}
+
 bool RegistrationFormData::isValid() const
 {
-    return m_isValid;
+    return m_name == m_surname && m_name.isEmpty();
+//    return m_isValid;
 }
 
 QVariant RegistrationFormData::ccnList() const
@@ -129,3 +145,19 @@ void RegistrationFormData::setPhoneNumber(const QString &phoneNumber)
 {
     m_phoneNumber = phoneNumber;
 }
+
+//const QStringList &RegistrationFormData::properties2Serialize()
+//{
+//    static QStringList toRet;
+
+//    if (toRet.isEmpty()) {
+//        toRet << NameKey;
+//        toRet << SurnameKey;
+//        toRet << PostalAddressKey;
+//        toRet << EmailKey;
+//        toRet << PasswordKey;
+//        toRet << PhoneNumberKey;
+//    }
+
+//    return toRet;
+//}

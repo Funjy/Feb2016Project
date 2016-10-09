@@ -42,9 +42,13 @@ QQmlListProperty<PhotoContainer> MainFormController::photos()
                 &MainFormController::photoItem);
 }
 
-IImageGalleryProvider *MainFormController::imagesProvider() const
+void MainFormController::openCamera() const
 {
-    return m_galleryProvider;
+    if (!m_galleryProvider)
+        return;
+
+    m_galleryProvider->openCamera();
+
 }
 
 void MainFormController::morePhotos()

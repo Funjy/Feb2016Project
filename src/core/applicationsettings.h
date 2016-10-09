@@ -10,7 +10,7 @@
 #include <QApplication>
 #include <QScreen>
 
-//#include "models/registrationformdata.h"
+#include "models/registrationformdata.h"
 
 #define appSettings PhotoFlySettings::ApplicationSettings::instance()
 #define appSettingsCore appSettings.settings()
@@ -25,6 +25,7 @@
 #define FULL_PARAM_KEY(g,p) QString(g) + "/" + p
 
 namespace PhotoFlySettings{
+using namespace PhotoFlyModels;
 
 // General group
 static constexpr const char* GroupGeneral =       "general";
@@ -35,7 +36,7 @@ class ApplicationSettings : public QObject
 {
     Q_OBJECT
     Q_DISABLE_COPY(ApplicationSettings)
-    Q_PROPERTY(QString keyIsRegistered READ keyIsRegistered CONSTANT)
+//    Q_PROPERTY(QString keyIsRegistered READ keyIsRegistered CONSTANT)
 
     Q_PROPERTY(qreal ratio READ ratio CONSTANT)
     Q_PROPERTY(qreal fontRatio READ fontRatio CONSTANT)
@@ -55,7 +56,10 @@ public:
     Q_INVOKABLE bool        getBoolValue(const QString& key, bool defaultValue = false);
     Q_INVOKABLE bool        isFirstLaunch() const;
 
-    QString keyIsRegistered() const;
+    void saveUserInfo(const RegistrationFormData &userInfo);
+    void readUserInfo(RegistrationFormData *userInfo);
+
+//    QString keyIsRegistered() const;
     qreal ratio() const;
     qreal fontRatio() const;
 

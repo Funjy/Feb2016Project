@@ -6,12 +6,14 @@
 
 #include "models/registrationformdata.h"
 #include "photo_service/serviceprovider.h"
+#include "core/applicationsettings.h"
 
 #define RegFormReqStatus  PhotoFlyControllers::RegistrationFormController::Status
 
 namespace PhotoFlyControllers{
 using namespace PhotoFlyModels;
 using namespace PhotoFlyService;
+using namespace PhotoFlySettings;
 
 class RegistrationFormController : public QObject
 {

@@ -103,14 +103,16 @@ ApplicationWindow {
     }
 
     function registrationComplete(){
+        global_mainWorker.updateUserInfo()
         stackView.replace(mainFormComponent)
     }
 
     Component.onCompleted: {
         global_scale_factor = ApplicationSettings.ratio
 
-        var key = ApplicationSettings.getSettingsKeyString(ApplicationSettings.SK_IsRegistered)
-        var isRegistered = ApplicationSettings.getBoolValue(key)
+//        var key = ApplicationSettings.getSettingsKeyString(ApplicationSettings.SK_IsRegistered)
+//        var isRegistered = ApplicationSettings.getBoolValue(key)
+        var isRegistered = global_mainWorker.isRegistered
 
         if(!isRegistered)
             stackView.push(regFormComponent)

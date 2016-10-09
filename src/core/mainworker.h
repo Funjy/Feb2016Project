@@ -31,23 +31,23 @@ class MainWorker : public QObject
 
     Q_PROPERTY(MainFormController* mainFormController MEMBER m_mainFormController CONSTANT)
 
+    Q_PROPERTY(bool isRegistered READ isRegistered NOTIFY isRegisteredChanged)
+
 public:
     MainWorker(QObject *parent = 0);
-//    MainWorker(qreal ratio, qreal ratioFont, QObject *parent = 0);
-
-    Q_INVOKABLE void selectImageFromGallery();
-
-    Q_INVOKABLE void openCamera();
 
     Q_INVOKABLE void testFunc(RegistrationFormData* data);
 
     void Init();
 
+    bool isRegistered() const;
+
 signals:
-    void setMessage(QString message);
+    void isRegisteredChanged();
 //    void regFormControllerChanged();
 
 public slots:
+    void updateUserInfo();
 
 private slots:
 //    void onImageSelected(QString imagePath);
@@ -56,6 +56,9 @@ private slots:
 private:
     IImageGalleryProvider   *m_imPicker;
     MainFormController      *m_mainFormController;
+
+    RegistrationFormData    *m_userInfo;
+
 //    RegistrationFormController *m_regFormController;
 //    ImagePickerAndroid m_imPicker;
 

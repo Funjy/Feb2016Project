@@ -16,7 +16,7 @@ Page {
 
     property var formController: global_mainWorker.mainFormController
 
-    property var imagesProvider: formController.imagesProvider
+//    property var imagesProvider: formController.imagesProvider
 
     header: ToolBar {
 
@@ -255,7 +255,7 @@ Page {
                     id: cameraButton
                     text: "Camera"
                     width: parent.width
-                    onClicked: root.imagesProvider.openCamera()
+                    onClicked: formController.openCamera()
                 }
             }
 

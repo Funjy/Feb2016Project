@@ -19,6 +19,7 @@ using namespace PhotoFlyBehaviours;
 class RegistrationFormData : public QObject, ISerializable
 {
     Q_OBJECT
+    Q_DISABLE_COPY(RegistrationFormData)
 
     Q_PROPERTY(bool isValid     READ isValid                NOTIFY isValidChanged)
     Q_PROPERTY(QString name     MEMBER m_name               NOTIFY nameChanged)
@@ -32,6 +33,7 @@ class RegistrationFormData : public QObject, ISerializable
 
 public:
 
+    static const QString UserInfoGroup;
     static const QString NameKey;
     static const QString SurnameKey;
     static const QString EmailKey;
@@ -53,15 +55,16 @@ public:
 //    Q_ENUM(SourceForm)
 
     explicit RegistrationFormData(QObject *parent = 0);
-    RegistrationFormData(const RegistrationFormData &other);
+//    RegistrationFormData(const RegistrationFormData &other);
 
     // ISerializable interface
-    virtual void getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const override;
+    virtual void getObjectInfo(SerializationInfo &info) const override;
+    virtual void deserialize(const SerializationInfo& info) override;
 
     //    void serialize(QVariant &object);
     //    void deserialize(const QVariant &object);
 
-    bool        isValid() const;
+    Q_INVOKABLE bool    isValid() const;
     QVariant    ccnList() const;
 
     QString getName() const;
@@ -87,6 +90,8 @@ public:
 
     QString getPhoneNumber() const;
     void setPhoneNumber(const QString &phoneNumber);
+
+//    static const QStringList &properties2Serialize();
 
 signals:
     void nameChanged();
@@ -117,8 +122,6 @@ private:
 
 }
 
-Q_DECLARE_METATYPE      (PhotoFlyModels::RegistrationFormData)
-Q_DECLARE_OPAQUE_POINTER(PhotoFlyModels::RegistrationFormData)
-//Q_DECLARE_METATYPE      (RegistrationFormData*)
+Q_DECLARE_METATYPE      (PhotoFlyModels::RegistrationFormData*)
 
 #endif // REGISTRATIONFORMDATA_H
