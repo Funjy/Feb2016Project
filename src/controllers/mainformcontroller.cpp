@@ -53,6 +53,8 @@ void MainFormController::openCamera() const
 
 void MainFormController::morePhotos()
 {
+    if (!m_galleryProvider)
+        return;
     m_galleryProvider->openGallery();
 }
 
