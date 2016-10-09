@@ -3,6 +3,14 @@ var default_pix_density = 22
 
 var commonMargins = 8
 
+// Control size
+var toolButtonSize = 40
+var titleFontSize = 20
+var toolBarRowSpacing = 20
+var spacingInRow = 20
+var spacingInColumn = 20
+
+// Font
 var myriad_set_pro = "Myriad Set Pro"
 var roboto_regular = "Roboto Regular"
 

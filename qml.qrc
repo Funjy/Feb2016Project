@@ -30,5 +30,7 @@
         <file>qml/myControls/ButtonPF.qml</file>
         <file>qml/myControls/TextFieldWithLabel.qml</file>
         <file>qml/MainForm.qml</file>
+        <file>qml/MessageOptions.qml</file>
+        <file>qml/MessageOptionsForm.ui.qml</file>
     </qresource>
 </RCC>

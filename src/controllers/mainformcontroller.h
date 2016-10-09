@@ -33,9 +33,13 @@ public:
 
     QQmlListProperty<PhotoContainer> photos();
 
+    // Photo selection
     Q_INVOKABLE void openCamera() const;
     Q_INVOKABLE void morePhotos();
     Q_INVOKABLE void removePhoto(int idx);
+
+    // Message options
+    Q_INVOKABLE void sendRequested(QVariant data2send);
 
 signals:
     void photosChanged();

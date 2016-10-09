@@ -54,7 +54,7 @@ private slots:
     void onImagesSelected(QStringList imagePaths);
 
 private:
-    IImageGalleryProvider   *m_imPicker;
+//    IImageGalleryProvider   *m_imPicker;
     MainFormController      *m_mainFormController;
 
     RegistrationFormData    *m_userInfo;

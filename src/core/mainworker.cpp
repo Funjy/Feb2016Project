@@ -5,8 +5,8 @@ MainWorker::MainWorker(QObject *parent) : QObject(parent){
     m_userInfo = new RegistrationFormData(this);
     updateUserInfo();
 
-    m_imPicker = nullptr;
-    connect(m_imPicker, &IImageGalleryProvider::imagesSelected, this, &MainWorker::onImagesSelected);
+//    m_imPicker = nullptr;
+//    connect(m_imPicker, &IImageGalleryProvider::imagesSelected, this, &MainWorker::onImagesSelected);
 //    emit setMessage("Ready");
 
 //    m_regFormController = new RegistrationFormController(this);

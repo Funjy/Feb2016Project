@@ -66,6 +66,11 @@ void MainFormController::removePhoto(int idx)
     emit photosChanged();
 }
 
+void MainFormController::sendRequested(QVariant data2send)
+{
+
+}
+
 void MainFormController::onNewImagesSelected(QStringList imagesList)
 {
     for (auto imPath : imagesList) {

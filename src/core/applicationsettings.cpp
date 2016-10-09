@@ -56,7 +56,7 @@ void ApplicationSettings::saveUserInfo(const RegistrationFormData &userInfo)
     appSettingsCore.beginGroup(RegistrationFormData::UserInfoGroup);
     SerializationInfo si;
     userInfo.getObjectInfo(si);
-    for (auto key : si.keys()) {
+    for (auto key : si.asMap().keys()) {
         appSettingsCore.setValue(key, si[key]);
     }
     appSettingsCore.endGroup();
@@ -75,7 +75,7 @@ void ApplicationSettings::readUserInfo(RegistrationFormData *userInfo)
 //    auto keys = si.keys();
 //    si.clear();
 
-    for (auto key : si.keys()) {
+    for (auto key : si.asMap().keys()) {
 //        si.addValue(key, appSettingsCore.value(key));
         si[key] = appSettingsCore.value(key);
     }

@@ -4,6 +4,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 
 import "myControls"
+import "myScripts/Styles.js" as ScriptStyles
 //import "qrc:/Material"
 import ca.riftekit.Containers 1.0
 import ca.riftekit.Controllers 1.0
@@ -43,7 +44,7 @@ Page{
         anchors.fill: parent
         anchors.margins: Math.min(parent.width, parent.height) * 0.05
         columns: 1
-        clip: true
+        clip: true        
 
         SwipeView {
             id: swipeView
@@ -76,7 +77,7 @@ Page{
                         anchors.left: parent.left
                         anchors.right: parent.right
                         columns: 1
-                        rowSpacing: 16 * global_scale_factor
+                        rowSpacing: ScriptStyles.spacingInColumn * global_scale_factor
 
                         TextFieldWithLabel{
                             id: loginEmail
@@ -129,9 +130,7 @@ Page{
                         anchors.left: parent.left
                         anchors.right: parent.right
                         columns: 1
-                        rowSpacing: 16 * global_scale_factor
-
-
+                        rowSpacing: ScriptStyles.spacingInColumn * global_scale_factor
 
                         GridLayout{
                             Layout.fillWidth: true

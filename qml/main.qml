@@ -95,16 +95,20 @@ ApplicationWindow {
 //        }
 //    }
 
-    function backClicked(){
+    function backClicked() {
         if(stackView.depth > 1)
             stackView.pop()
         else
             Qt.quit()
     }
 
-    function registrationComplete(){
+    function registrationComplete() {
         global_mainWorker.updateUserInfo()
         stackView.replace(mainFormComponent)
+    }
+
+    function openComponent(openComponent) {
+        stackView.push(openComponent)
     }
 
     Component.onCompleted: {
@@ -137,6 +141,8 @@ ApplicationWindow {
         id: mainFormComponent
         MainForm{}
     }
+
+
 
 //    Component{
 //        id: initComp

@@ -29,8 +29,8 @@ Page {
             ToolButton {
                 id: menuButton
                 contentItem: Item {
-                    height: 40 * global_scale_factor
-                    width: 40 * global_scale_factor
+                    height: ScriptStyles.toolButtonSize * global_scale_factor
+                    width: ScriptStyles.toolButtonSize * global_scale_factor
                     Image {
                         id: menuImage
                         fillMode: Image.PreserveAspectFit
@@ -54,16 +54,30 @@ Page {
             }
 
             Item{
-                width: proceedButton.implicitWidth
+                width: Math.max(proceedButton.implicitWidth, menuButton.width)
                 height: proceedButton.implicitHeight
                 ToolButton {
                     id: proceedButton
+                    opacity: selectedPhotosView.count > 0 ? 1 : 0
+                    visible: opacity > 0
+                    enabled: opacity == 1
                     font.pixelSize: titleLabel.font.pixelSize * 0.8
-                    text: "Proceed"
+                    text: qsTr("Proceed")
                     width: parent.width
+                    Behavior on opacity {NumberAnimation{easing.type: Easing.InOutQuad}}
+                    onClicked: {
+                        openComponent(messageOptionsComponent)
+                    }
                 }
             }
 
+        }
+    }
+
+    Component{
+        id: messageOptionsComponent
+        MessageOptions{
+            controller: formController
         }
     }
 
