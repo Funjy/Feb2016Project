@@ -175,18 +175,13 @@ Page {
 //                                width: parent.width
 //                                height: parent.height
                                 maximumLineCount: 1
-//                                text: dImage.status === Image.Error ? qsTr("Loading error") : delRoot.text
-                                text: modelData.title
+                                text: dImage.status === Image.Error ? qsTr("Loading error") : delRoot.text
+//                                text: modelData.title
                                 wrapMode: Label.WrapAnywhere
 //                                elide: Label.ElideLeft
                                 horizontalAlignment: Label.AlignHCenter
                                 verticalAlignment: Label.AlignVCenter
-//                                anchors.bottom: parent.bottom
-//                                anchors.top: parent.top
                                 anchors.fill: parent
-//                                anchors.right: parent.right
-//                                contentWidth: parent.width
-//                                anchors.verticalCenter: parent.verticalCenter
                             }
                         }
 
