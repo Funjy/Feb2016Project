@@ -49,7 +49,7 @@ ServiceMessageType ServiceMessage::getTypeByString(const QString &value)
 void ServiceMessage::getObjectInfo(PhotoFlyContainers::SerializationInfo &info) const
 {
 //    info.addValue(TypeKey, (int)getType());
-    info.addValue(MessageTypeKey, getTypeString());
+    info.asMap().insert(MessageTypeKey, getTypeString());
 #if USE_ServiceMessage_TYPEID == 1
     info.setTypeId(TypeId);
 #endif

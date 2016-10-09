@@ -23,8 +23,8 @@ void GenericServiceRequest::getObjectInfo(SerializationInfo &info) const
 
     SerializationInfo si;
     m_result->getObjectInfo(si);
-    info.addValue(ResultKey, si);
-    info.addValue(ResultStatusKey, QVariant::fromValue(m_resultStatus));
+    info.insert(ResultKey, si);
+    info.insert(ResultStatusKey, QVariant::fromValue(m_resultStatus));
 
 //    info.setTypeId(metaObject()->className());
 }
@@ -32,7 +32,7 @@ void GenericServiceRequest::getObjectInfo(SerializationInfo &info) const
 void GenericServiceRequest::deserialize(const SerializationInfo &info)
 {
     GenericServiceMessage::deserialize(info);
-    auto map = info.toMap();
+    auto map = info.asMap();
     setResult(map);
     setResultStatus(map[ResultStatusKey].value<ResultStatus>());
 }

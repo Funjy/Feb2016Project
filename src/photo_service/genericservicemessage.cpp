@@ -61,7 +61,7 @@ QVariantMap &GenericServiceMessage::contentData()
 void GenericServiceMessage::getObjectInfo(SerializationInfo &info) const
 {
     ServiceMessage::getObjectInfo(info);
-    info.addValue(ContentKey, m_content);
+    info.insert(ContentKey, m_content);
 #if USE_ServiceMessage_TYPEID == 1
     info.setTypeId(metaObject()->className());
 #endif
@@ -69,7 +69,7 @@ void GenericServiceMessage::getObjectInfo(SerializationInfo &info) const
 
 void GenericServiceMessage::deserialize(const SerializationInfo &info)
 {
-    auto map = info.toMap();
+    auto map = info.asMap();
     setMessageType(map[MessageTypeKey].toString());
     setContent(map[ContentKey].toMap());
 }

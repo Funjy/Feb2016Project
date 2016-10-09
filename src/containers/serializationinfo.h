@@ -23,30 +23,34 @@ public:
     explicit SerializationInfo(const SerializationInfo& other);
     SerializationInfo &operator=(const SerializationInfo& other);
 
-    void addValue(const QString &name, QVariant value);
-    void addValue(const QString &name, const SerializationInfo& value);
-    QVariant value(const QString &name);
+    void insert(const QString &name, const QVariant &value);
+    void insert(const QString &name, const SerializationInfo& value);
+//    QVariant value(const QString &name);
     bool equals(const SerializationInfo& other);
     void clear();
 
     QString getTypeId() const;
     void setTypeId(const QString& typeId);
 
-    QList<QString> keys() const;
+//    QList<QString> keys() const;
 
-    void swap(SerializationInfo &_v) throw();
+    inline QVariantMap &asMap()
+    { return m_data; }
+    inline const QVariantMap &asMap() const
+    { return m_data; }
 
-    QVariantMap toMap() const;
+//    QVariantMap toMap() const;
     QJsonObject toJson() const;
 
-    inline bool contains(const QString &key) const
-    { return m_data.contains(key); }
+//    inline bool contains(const QString &key) const
+//    { return m_data.contains(key); }
     inline QVariant &operator[](const QString &key)
     { return m_data[key]; }
-    inline const QVariant &operator[](const QString &key) const
-    { return m_data[key]; }
+//    inline const QVariant &operator[](const QString &key) const
+//    { return m_data[key]; }
 
 private:
+    void swap(SerializationInfo &_v) throw();
     QVariantMap m_data;
 
 };

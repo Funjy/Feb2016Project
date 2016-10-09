@@ -31,12 +31,12 @@ void RegistrationFormData::getObjectInfo(SerializationInfo &info) const
     info.setTypeId(metaObject()->className());
 #endif
 
-    info.addValue(NameKey,          getName());
-    info.addValue(SurnameKey,       getSurname());
-    info.addValue(PostalAddressKey, getPostalAddress());
-    info.addValue(EmailKey,         getEmail());
-    info.addValue(PasswordKey,      getPassword());
-    info.addValue(PhoneNumberKey,   getPhoneNumber());
+    info.asMap().insert(NameKey,          getName());
+    info.asMap().insert(SurnameKey,       getSurname());
+    info.asMap().insert(PostalAddressKey, getPostalAddress());
+    info.asMap().insert(EmailKey,         getEmail());
+    info.asMap().insert(PasswordKey,      getPassword());
+    info.asMap().insert(PhoneNumberKey,   getPhoneNumber());
 }
 
 void RegistrationFormData::deserialize(const SerializationInfo &info)
@@ -46,18 +46,18 @@ void RegistrationFormData::deserialize(const SerializationInfo &info)
         return;
 #endif
 
-    m_name = info[NameKey].toString();
-    m_surname = info[SurnameKey].toString();
-    m_postalAddress = info[PostalAddressKey].toString();
-    m_email = info[EmailKey].toString();
-    m_password = info[PasswordKey].toString();
-    m_phoneNumber = info[PhoneNumberKey].toString();
+    m_name = info.asMap()[NameKey].toString();
+    m_surname = info.asMap()[SurnameKey].toString();
+    m_postalAddress = info.asMap()[PostalAddressKey].toString();
+    m_email = info.asMap()[EmailKey].toString();
+    m_password = info.asMap()[PasswordKey].toString();
+    m_phoneNumber = info.asMap()[PhoneNumberKey].toString();
 
 }
 
 bool RegistrationFormData::isValid() const
 {
-    return m_name == m_surname && m_name.isEmpty();
+    return !(m_name == m_surname && m_name.isEmpty());
 //    return m_isValid;
 }
 

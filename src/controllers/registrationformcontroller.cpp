@@ -33,7 +33,7 @@ void RegistrationFormController::processRegistration(RegistrationFormData *data)
 {
     SerializationInfo info;
     data->getObjectInfo(info);
-    auto map = info.toMap();
+    auto map = info.asMap();
 
     auto req = new GenericServiceRequest(this);
     req->setMessageType(ServiceMessageType::Req_Register);

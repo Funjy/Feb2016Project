@@ -38,20 +38,20 @@ SerializationInfo &SerializationInfo::operator=(const SerializationInfo &other)
     return *this;
 }
 
-void SerializationInfo::addValue(const QString &name, QVariant value)
+void SerializationInfo::insert(const QString &name, const QVariant &value)
 {
     m_data.insert(name, value);
 }
 
-void SerializationInfo::addValue(const QString &name, const SerializationInfo &value)
+void SerializationInfo::insert(const QString &name, const SerializationInfo &value)
 {
     m_data.insert(name, value.m_data);
 }
 
-QVariant SerializationInfo::value(const QString &name)
-{
-    return m_data.contains(name) ? m_data[name] : QVariant();
-}
+//QVariant SerializationInfo::value(const QString &name)
+//{
+//    return m_data.contains(name) ? m_data[name] : QVariant();
+//}
 
 bool SerializationInfo::equals(const SerializationInfo &other)
 {
@@ -75,20 +75,20 @@ void SerializationInfo::setTypeId(const QString &typeId)
     m_data[TypeIdKey] = typeId;
 }
 
-QList<QString> SerializationInfo::keys() const
-{
-    return m_data.keys();
-}
+//QList<QString> SerializationInfo::keys() const
+//{
+//    return m_data.keys();
+//}
 
 void SerializationInfo::swap(SerializationInfo &_v) throw()
 {
     m_data.swap(_v.m_data);
 }
 
-QVariantMap SerializationInfo::toMap() const
-{
-    return m_data;
-}
+//QVariantMap SerializationInfo::toMap() const
+//{
+//    return m_data;
+//}
 
 QJsonObject SerializationInfo::toJson() const
 {
