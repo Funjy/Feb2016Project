@@ -90,7 +90,7 @@ inline void registerTypes(){
     // Controllers
 //    qmlRegisterUncreatableType<PhotoFlyControllers::RegistrationFormController>
 //            ("ca.riftekit.Controllers", 1, 0, "RegistrationFormController", "Reg controller creation attempt!");
-    qmlRegisterType<PhotoFlyControllers::RegistrationFormController>
+    qmlRegisterType<RegistrationFormController>
             ("ca.riftekit.Controllers", 1, 0, "RegistrationFormController");
 
     qmlRegisterUncreatableType<PhotoFlyControllers::MainFormController>

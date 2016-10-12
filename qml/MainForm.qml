@@ -170,6 +170,7 @@ Page {
                                 cache: false
                                 fillMode: Image.PreserveAspectFit
                                 source: modelData.imagePath
+                                asynchronous: true
                                 //                            horizontalAlignment: Image.AlignHCenter
                                 verticalAlignment: Image.AlignVCenter
                                 sourceSize.height: parent.height

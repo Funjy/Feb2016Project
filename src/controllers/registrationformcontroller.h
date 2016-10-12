@@ -20,7 +20,7 @@ class RegistrationFormController : public QObject
     Q_OBJECT
     Q_DISABLE_COPY(RegistrationFormController)
 
-    Q_PROPERTY(RegFormReqStatus requstStatus READ status WRITE setStatus NOTIFY requstStatusChanged)
+    Q_PROPERTY(Status requstStatus READ status NOTIFY requstStatusChanged)
 
 public:
     explicit RegistrationFormController(QObject *parent = 0);
@@ -36,7 +36,9 @@ public:
     Q_INVOKABLE void processRegistration(RegistrationFormData* data);
 
     RegFormReqStatus status() const;
+//    int status() const;
     void setStatus(const RegFormReqStatus &status);
+    void setStatus(int status);
 
 signals:
     void requstStatusChanged();
@@ -45,11 +47,13 @@ signals:
 public slots:
 
 private:
-    ServiceProvider m_service;
+    ServiceProvider *m_service;
     RegFormReqStatus m_status;
 
     void handleRequest(GenericServiceRequest *request);
-    Q_INVOKABLE void handleResponse(GenericServiceRequest *request);
+    void handleResponse(GenericServiceRequest *request);
+
+    bool handleLoginResponse(GenericServiceRequest *request, QString *errorString);
 
 };
 

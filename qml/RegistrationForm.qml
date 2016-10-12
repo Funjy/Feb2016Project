@@ -64,11 +64,15 @@ Page{
 
 //                    contentHeight: loginFormLayout.implicitHeight
 
-                    function buildData(){
+                    function buildData() {
                         var rData = Qt.createQmlObject("import ca.riftekit.Containers 1.0; RegistrationFormData {}", this)
                         rData.email = loginEmail.text
                         rData.password = loginPassword.text
                         return rData
+
+//                        registrationData.email = loginEmail.text
+//                        registrationData.password = loginPassword.text
+
                     }
 
                     GridLayout{
@@ -214,6 +218,7 @@ Page{
                 onClicked: {
 
                     var rData = swipeView.currentItem.buildData()
+//                    swipeView.currentItem.buildData()
 
                     if(swipeView.currentIndex === loginIndex)
 //                        global_mainWorker.regFormController.processLogin(rData)
@@ -223,12 +228,15 @@ Page{
                         controller.processRegistration(rData)
 
                     rData.destroy()
-
 //                    sucRes.open()
                 }
             }
         }
     }
+
+//    RegistrationFormData{
+//        id: registrationData
+//    }
 
     RegistrationFormController{
         id: controller
@@ -244,6 +252,7 @@ Page{
 
     PopupPF{
         id: waitDialog
+
         closePolicy: Popup.NoAutoClose
         visible: controller.requstStatus === RegistrationFormController.S_InProgress
 

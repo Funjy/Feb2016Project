@@ -49,10 +49,16 @@ public:
     QString getErrorString() const;
     void setErrorString(const QString &errorString);
 
+    inline QMap<QString, QString> &urlParameters()
+    { return m_urlParameters; }
+    inline const QMap<QString, QString> &urlParameters() const
+    { return m_urlParameters; }
+
 private:
     ResultStatus                    m_resultStatus;
     QString                         m_errorString;
     QSharedPointer<ServiceMessage>  m_result;
+    QMap<QString, QString>          m_urlParameters;
 
 };
 

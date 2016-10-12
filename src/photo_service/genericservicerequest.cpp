@@ -9,6 +9,7 @@ const QString GenericServiceRequest::ResultStatusKey =  "ResultStatus";
 GenericServiceRequest::GenericServiceRequest(QObject *parent) : GenericServiceMessage(parent)
 {
     m_resultStatus = ResultStatus::Initialized;
+//    m_result = QSharedPointer<ServiceMessage>(new GenericServiceMessage());
 }
 
 //GenericServiceRequest::GenericServiceRequest(ServiceMessage::Type type, QObject *parent) :
@@ -22,7 +23,8 @@ void GenericServiceRequest::getObjectInfo(SerializationInfo &info) const
     GenericServiceMessage::getObjectInfo(info);
 
     SerializationInfo si;
-    m_result->getObjectInfo(si);
+    if (m_result)
+        m_result->getObjectInfo(si);
     info.insert(ResultKey, si);
     info.insert(ResultStatusKey, QVariant::fromValue(m_resultStatus));
 
@@ -67,7 +69,9 @@ void GenericServiceRequest::setResult(ServiceMessage *result)
 void GenericServiceRequest::setResult(const QVariantMap &result)
 {
     auto message = new GenericServiceMessage();
-    message->deserialize(SerializationInfo(result));
+//    message->deserialize(SerializationInfo(result));
+    message->setContent(result);
+    message->setMessageType(getMessageType());
     setResult(message);
 }
 
@@ -80,4 +84,5 @@ void GenericServiceRequest::setErrorString(const QString &errorString)
 {
     m_errorString = errorString;
 }
+
 

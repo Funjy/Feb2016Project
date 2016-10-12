@@ -4,12 +4,12 @@ using namespace PhotoFlyModels;
 
 const QString RegistrationFormData::UserInfoGroup =         "UserInfo";
 
-const QString RegistrationFormData::NameKey =               "UserName";
+const QString RegistrationFormData::NameKey =               "name";
 const QString RegistrationFormData::SurnameKey =            "Surname";
-const QString RegistrationFormData::EmailKey =              "Email";
-const QString RegistrationFormData::PasswordKey =           "Password";
+const QString RegistrationFormData::EmailKey =              "login";
+const QString RegistrationFormData::PasswordKey =           "password";
 const QString RegistrationFormData::PostalAddressKey =      "PostalAddress";
-const QString RegistrationFormData::PhoneNumberKey =        "PhoneNumber";
+const QString RegistrationFormData::PhoneNumberKey =        "phone";
 const QString RegistrationFormData::CCNListKey =            "CCNList";
 
 RegistrationFormData::RegistrationFormData(QObject *parent) : QObject(parent)

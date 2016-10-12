@@ -17,10 +17,24 @@ void ServiceProvider::connectToHost(const QString &hostName, quint16 port)
 
 void ServiceProvider::makeRequest(GenericServiceRequest *request, int timeout)
 {
-    auto reply = prepareRequest(request);
-    if(!reply) return;
+//    auto reply = prepareRequest(request);
+//    if(!reply) return;
 
-    reply->waitForReadyRead(timeout);
+    QNetworkReply *reply = nullptr;
+
+    QUrl url;
+    QByteArray content;
+    prepareRequest(*request, &url, &content);
+    QNetworkRequest req(url);
+
+    if (content.isEmpty() || content.isNull()) {
+        reply = m_service->get(req);
+    } else {
+        reply = m_service->post(req, content);
+    }
+    QEventLoop loop;
+    loop.connect(reply, SIGNAL(finished()), SLOT(quit()));
+    loop.exec();
 
     handleReply(request, reply);
 
@@ -37,7 +51,7 @@ void ServiceProvider::beginMakeRequest(GenericServiceRequest *request)
 
 QUrl ServiceProvider::getHostUrl()
 {
-    return m_seriveUrl;
+    return m_serviceUrlString;
 }
 
 #define TEST_REQ 1      // 1 - get
@@ -50,16 +64,16 @@ void ServiceProvider::testRequest()
     QElapsedTimer elTim;
     elTim.start();
 
-    m_service->connectToHost("http://91.149.189.150:5000");
+//    m_service->connectToHost("http://91.149.189.150:5000");
 
-    qDebug() << "Connect timeout: " << elTim.elapsed();
+//    qDebug() << "Connect timeout: " << elTim.elapsed();
 
-    elTim.restart();
+//    elTim.restart();
 
     QString resStr;
     bool isValid;
 
-    QNetworkRequest req(QUrl("http://91.149.189.150:5000/photofly/api/v0.1/letters"));
+    QNetworkRequest req(QUrl("http://91.149.189.150:5000/photofly/api/v0.1/users/user"));
 
 
 #if TEST_REQ == 1
@@ -171,7 +185,15 @@ QByteArray ServiceProvider::bytesFromJson(const QJsonDocument &data)
 
 QNetworkReply *ServiceProvider::prepareRequest(GenericServiceRequest *request)
 {
-    QNetworkRequest req(m_seriveUrl);
+//    if (QThread::currentThread() != this->thread()) {
+//        QMetaObject::invokeMethod(this, "prepareRequest",
+//                                  Qt::QueuedConnection,
+//                                  Q_ARG(GenericServiceRequest *, request));
+//    }
+
+//    QNetworkRequest req(m_seriveUrl);
+
+    QString urlString = m_serviceUrlString;
 
     auto content = bytesFromJson( reqToJson(request) );
 
@@ -179,9 +201,12 @@ QNetworkReply *ServiceProvider::prepareRequest(GenericServiceRequest *request)
 
     switch (request->getMessageType()) {
     case ServiceMessageType::Req_Login:
+        urlString += "users/" + request->urlParameters().first();
+        reply = m_service->get(QNetworkRequest(QUrl(urlString.toLatin1())));
+        break;
     case ServiceMessageType::Req_Register:
     case ServiceMessageType::Req_SendPhotos:
-        reply = m_service->post(req, content);
+//        reply = m_service->post(req, content);
         break;
     default:
         break;
@@ -190,12 +215,40 @@ QNetworkReply *ServiceProvider::prepareRequest(GenericServiceRequest *request)
     return reply;
 }
 
+void ServiceProvider::prepareRequest(const GenericServiceRequest &request, QUrl *url, QByteArray *content)
+{
+    QString urlString = m_serviceUrl;
+
+    *url = QUrl();
+    content->clear();
+
+    switch (request.getMessageType()) {
+    case ServiceMessageType::Req_Login:
+        urlString += "users/" + request.urlParameters().first();
+        *url = QUrl(urlString);
+        break;
+    case ServiceMessageType::Req_Register:
+    case ServiceMessageType::Req_SendPhotos:
+//        reply = m_service->post(req, content);
+        break;
+    default:
+        break;
+        qDebug() << "Unknown request type";
+    }
+}
+
 void ServiceProvider::handleReply(GenericServiceRequest *request, QNetworkReply *reply)
 {
 
+    if (!reply) {
+        request->setResultStatus(RequestResultStatus::Fail);
+        request->setErrorString("Reply object wasn't created");
+        return;
+    }
+
     if(reply->error() == QNetworkReply::NoError){
-        request->setResultStatus(RequestResultStatus::Ok);
         auto json = nmReplyToJson(reply);
+        request->setResultStatus(RequestResultStatus::Ok);
         request->setResult(json.toVariant().toMap());
     } else {
         request->setResultStatus(RequestResultStatus::Fail);

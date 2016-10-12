@@ -17,9 +17,9 @@ public:
 //    explicit SerializationInfo(QObject *parent = 0);
 //    explicit SerializationInfo(QVariantMap map, QObject *parent = 0);
     explicit SerializationInfo() {}
-    explicit SerializationInfo(const QVariantMap &map);
+    SerializationInfo(const QVariantMap &map);
 //    explicit SerializationInfo(QVariantMap map, QObject *parent = 0);
-    explicit SerializationInfo(const QJsonObject &json);
+    SerializationInfo(const QJsonObject &json);
     explicit SerializationInfo(const SerializationInfo& other);
     SerializationInfo &operator=(const SerializationInfo& other);
 

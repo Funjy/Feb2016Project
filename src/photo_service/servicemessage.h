@@ -27,6 +27,7 @@ public:
 
     enum MessageType{
         Undefined,
+        Get_generic,
         Req_Login,
         Req_Register,
         Req_SendPhotos

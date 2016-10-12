@@ -22,7 +22,7 @@ MessageOptionsForm {
         controller.sendRequested(prepareData())
     }
 
-    function prepareData(){
+    function prepareData() {
         var data2send = {};
         data2send["fName"] = firstName.text
         data2send["sName"] = secondName.text

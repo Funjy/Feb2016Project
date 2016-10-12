@@ -6,6 +6,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QEventLoop>
+#include <QThread>
 
 #include "behaviours/iserviceprovider.h"
 
@@ -34,7 +35,10 @@ private slots:
     void onReplyFinished();
 
 private:
-    const QUrl       m_seriveUrl = QUrl("http://91.149.189.150:5000");
+//    const QUrl       m_seriveUrl = QUrl("http://91.149.189.150:5000/photofly/api");
+    const QString       m_serviceUrlString =     QString("http://91.149.189.150:5000/photofly/api/");
+    const QString       m_serviceUrlversion =    QString("0.1");
+    const QString       m_serviceUrl =           QString("%1v%2/").arg(m_serviceUrlString).arg(m_serviceUrlversion);
     QNetworkAccessManager   *m_service;
 
     QHash<QNetworkReply*, GenericServiceRequest *>  m_requests;
@@ -45,7 +49,8 @@ private:
     static QJsonDocument jsonFromBytes(const QByteArray &data);
     static QByteArray bytesFromJson(const QJsonDocument &data);
 
-    QNetworkReply *prepareRequest(GenericServiceRequest *request);
+    Q_INVOKABLE QNetworkReply *prepareRequest(GenericServiceRequest *request);
+    Q_INVOKABLE void prepareRequest(const GenericServiceRequest &request, QUrl *url, QByteArray *content);
 
     static void handleReply(GenericServiceRequest *request, QNetworkReply *reply);
 

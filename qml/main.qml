@@ -104,7 +104,9 @@ ApplicationWindow {
 
     function registrationComplete() {
         global_mainWorker.updateUserInfo()
-        stackView.replace(mainFormComponent)
+//        stackView.replace(mainFormComponent)
+        stackView.pop(StackView.Immediate)
+        stackView.push(mainFormComponent)
     }
 
     function openComponent(openComponent) {
