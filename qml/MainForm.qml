@@ -23,7 +23,7 @@ Page {
         Material.primary: "white"
 
         RowLayout {
-            spacing: 20 * global_scale_factor
+            spacing: ScriptStyles.toolBarRowSpacing * global_scale_factor
             anchors.fill: parent
 
             ToolButton {
@@ -41,15 +41,9 @@ Page {
                     }
                 }
                 onClicked: drawer.open()
-            }
+            }            
 
-            Label {
-                id: titleLabel
-                text: root.title
-                font.pixelSize: 20 * global_scale_factor
-                elide: Label.ElideRight
-                horizontalAlignment: Qt.AlignHCenter
-                verticalAlignment: Qt.AlignVCenter
+            Item{
                 Layout.fillWidth: true
             }
 
@@ -71,6 +65,19 @@ Page {
                 }
             }
 
+        }
+
+        LabelPF {
+            id: titleLabel
+            text: root.title
+//            font.pixelSize: ScriptStyles.titleFontSize * global_scale_factor
+            font.pixelSize: parent.height * 0.5
+            elide: Label.ElideRight
+//                horizontalAlignment: Qt.AlignHCenter
+//                verticalAlignment: Qt.AlignVCenter
+//                anchors.verticalCenter: parent.verticalCenter
+//                Layout.fillWidth: true
+            anchors.centerIn: parent
         }
     }
 

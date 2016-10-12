@@ -5,7 +5,7 @@ var commonMargins = 8
 
 // Control size
 var toolButtonSize = 40
-var titleFontSize = 20
+var titleFontSize = 25
 var toolBarRowSpacing = 20
 var spacingInRow = 20
 var spacingInColumn = 20

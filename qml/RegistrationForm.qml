@@ -89,6 +89,8 @@ Page{
 //                            expandWidth: true
                             Layout.fillWidth: true
                             KeyNavigation.tab: loginPassword
+                            onNextClickedItem: loginPassword
+                            enterKeyType: Qt.EnterKeyNext
                         }
 
                         TextFieldWithLabel{
@@ -96,7 +98,8 @@ Page{
                             title: qsTr("Password")
 //                            expandWidth: true
                             Layout.fillWidth: true
-                            KeyNavigation.tab: acceptButton
+                            enterKeyType: Qt.EnterKeyGo
+                            onGoClicked: acceptButton.clicked()
                         }
 
                     }

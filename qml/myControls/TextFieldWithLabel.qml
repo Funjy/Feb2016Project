@@ -15,6 +15,7 @@ FocusScope{
     width: if(!root.Layout.fillWidth) grid.width
 
     signal doneClicked()
+    signal goClicked()
 
     Behavior on y {NumberAnimation{easing.type: Easing.InOutQuad}}
 
@@ -74,6 +75,9 @@ FocusScope{
                 } else if (root.enterKeyType === Qt.EnterKeyDone) {
                     root.focus = false
                     root.doneClicked()
+                } else if (root.enterKeyType === Qt.EnterKeyGo) {
+                    root.focus = false
+                    root.goClicked()
                 }
             }
         }
