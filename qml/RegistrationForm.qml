@@ -66,8 +66,8 @@ Page{
 
                     function buildData() {
                         var rData = Qt.createQmlObject("import ca.riftekit.Containers 1.0; RegistrationFormData {}", this)
-                        rData.email = loginEmail.text
-                        rData.password = loginPassword.text
+                        rData.email = loginEmail.text.trim()
+                        rData.password = loginPassword.text.trim()
                         return rData
 
 //                        registrationData.email = loginEmail.text
@@ -91,11 +91,14 @@ Page{
                             KeyNavigation.tab: loginPassword
                             onNextClickedItem: loginPassword
                             enterKeyType: Qt.EnterKeyNext
+                            onTextChanged: if (!isValid) isValid = ScriptStyles.emailRegExp.test(text)
+                            onEditingFinished: isValid = ScriptStyles.emailRegExp.test(text)
                         }
 
                         TextFieldWithLabel{
                             id: loginPassword
                             title: qsTr("Password")
+                            isPassword: true
 //                            expandWidth: true
                             Layout.fillWidth: true
                             enterKeyType: Qt.EnterKeyGo
@@ -116,9 +119,10 @@ Page{
 
                 function buildData(){
                     var rData = Qt.createQmlObject("import ca.riftekit.Containers 1.0; RegistrationFormData {}", this)
-                    rData.name = registerName.text
-                    rData.email = registerEmail.text
-                    rData.password = registerPassword.text
+                    rData.name = registerName.text.trim()
+                    rData.phoneNumber = registerPhone.text.trim()
+                    rData.email = registerEmail.text.trim()
+                    rData.password = registerPassword.text.trim()
                     return rData
 //                    registrationData.name = registerName.text
 //                    registrationData.email = registerEmail.text
@@ -140,6 +144,7 @@ Page{
                         rowSpacing: ScriptStyles.spacingInColumn * global_scale_factor
 
                         GridLayout{
+
                             Layout.fillWidth: true
                             columns: 2
                             rows: 1
@@ -155,6 +160,7 @@ Page{
 
                             TextFieldWithLabel{
                                 id: registerSurname
+                                visible: false
                                 title: qsTr("Surname")
                                 Layout.fillWidth: true
                                 onNextClickedItem: registerAddress
@@ -164,6 +170,7 @@ Page{
 
                         TextFieldWithLabel{
                             id: registerAddress
+                            visible: false
                             title: qsTr("Postal address")
                             Layout.fillWidth: true
                             onNextClickedItem: registerPhone
@@ -184,14 +191,17 @@ Page{
                             Layout.fillWidth: true
                             onNextClickedItem: registerPassword
                             enterKeyType: Qt.EnterKeyNext
+                            onTextChanged: if (!isValid) isValid = ScriptStyles.emailRegExp.test(text)
+                            onEditingFinished: isValid = ScriptStyles.emailRegExp.test(text)
                         }
 
                         TextFieldWithLabel{
                             id: registerPassword
                             title: qsTr("Password")
+                            isPassword: true
                             Layout.fillWidth: true
-                            enterKeyType: Qt.EnterKeyDone
-                            onDoneClicked: acceptButton.clicked()
+                            enterKeyType: Qt.EnterKeyGo
+                            onGoClicked: acceptButton.clicked()
                         }
 
                         //                    Item{

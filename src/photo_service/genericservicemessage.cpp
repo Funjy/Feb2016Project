@@ -91,7 +91,7 @@ void GenericServiceMessage::setMessageType(const QString &value)
     m_type = getTypeByString(value);
 }
 
-QVariantMap GenericServiceMessage::getContent() const
+const QVariantMap &GenericServiceMessage::getContent() const
 {
     return m_content;
 }

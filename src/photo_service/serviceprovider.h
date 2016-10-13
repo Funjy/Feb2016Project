@@ -39,11 +39,18 @@ private:
     const QString       m_serviceUrlString =     QString("http://91.149.189.150:5000/photofly/api/");
     const QString       m_serviceUrlversion =    QString("0.1");
     const QString       m_serviceUrl =           QString("%1v%2/").arg(m_serviceUrlString).arg(m_serviceUrlversion);
+
+    static const QString       RespKeyStatus;
+    static const QString       RespStatusError;
+    static const QString       RespKeyMessage;
+
+    QString getServiceUrl() const;
+
     QNetworkAccessManager   *m_service;
 
     QHash<QNetworkReply*, GenericServiceRequest *>  m_requests;
 
-    static QJsonDocument reqToJson(GenericServiceRequest *request);
+    static QJsonDocument reqToJson(const GenericServiceRequest &request);
     static QJsonDocument nmReplyToJson(QNetworkReply *reply);
 
     static QJsonDocument jsonFromBytes(const QByteArray &data);

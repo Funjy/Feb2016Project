@@ -27,7 +27,6 @@ public:
 
     enum MessageType{
         Undefined,
-        Get_generic,
         Req_Login,
         Req_Register,
         Req_SendPhotos
@@ -37,6 +36,8 @@ public:
     virtual ~ServiceMessage(){}
 
     virtual MessageType getMessageType() const = 0;
+    virtual const QVariantMap &getContent() const = 0;
+
     QString getTypeString() const;
 
     static QString getTypeString(ServiceMessageType value);

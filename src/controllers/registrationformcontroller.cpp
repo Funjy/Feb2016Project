@@ -36,6 +36,7 @@ void RegistrationFormController::processLogin(RegistrationFormData *data)
 
 void RegistrationFormController::processRegistration(RegistrationFormData *data)
 {
+    data->setEmail(data->getEmail().toLower());
     SerializationInfo info;
     data->getObjectInfo(info);
     auto map = info.asMap();
@@ -74,7 +75,6 @@ void RegistrationFormController::handleRequest(GenericServiceRequest *request)
 
     QtConcurrent::run( [&, request] {
         m_service->makeRequest(request);
-//        QThread::msleep(500);
         handleResponse(request);
     });
 
@@ -89,14 +89,21 @@ void RegistrationFormController::handleResponse(GenericServiceRequest *request)
     auto status = request->getResultStatus();
 
     bool ok = status != RequestResultStatus::Fail;
-    QString errorMessage = request->getErrorString();// tr("No connection");
+    QString errorMessage = request->getErrorString();// Note: Change to user message
 
     if (ok) {
-        if (request->getMessageType() == ServiceMessageType::Req_Login) {
+        switch (request->getMessageType()) {
+        case ServiceMessageType::Req_Login:
             ok = handleLoginResponse(request, &errorMessage);
-        } else {
+            break;
+        case ServiceMessageType::Req_Register:
+//            ok = handleRegistrationResponse(request, &errorMessage);
+            ok = true;
+            break;
+        default:
             ok = false;
             errorMessage = tr("Unknown request type");
+            break;
         }
     }
 
@@ -113,15 +120,13 @@ bool RegistrationFormController::handleLoginResponse(GenericServiceRequest *requ
         *errorString = "inner error: handleLoginResponse";
         return false;
     }
-    SerializationInfo si;
-    request->getObjectInfo(si);
 
-    auto reqCont =  si[GenericServiceRequest::ContentKey].toMap();
-    auto respCont = si[GenericServiceRequest::ResultKey].toMap()[GenericServiceRequest::ContentKey].toMap();
+    const auto& reqCont = request->getContent();
+    const auto& respCont = request->getResult()->getContent();
 
     bool correctUser =
-            respCont[RegistrationFormData::EmailKey].toString() ==
-                reqCont[RegistrationFormData::EmailKey].toString() &&
+            respCont[RegistrationFormData::EmailKey].toString().toLower() ==
+                reqCont[RegistrationFormData::EmailKey].toString().toLower() &&
             respCont[RegistrationFormData::PasswordKey].toString() ==
                 reqCont[RegistrationFormData::PasswordKey].toString();
 
@@ -135,4 +140,19 @@ bool RegistrationFormController::handleLoginResponse(GenericServiceRequest *requ
     *errorString = tr("Wrong user credentials");
     return false;
 
+}
+
+bool RegistrationFormController::handleRegistrationResponse(GenericServiceRequest *request, QString *errorString)
+{
+
+    if (!request) {
+        *errorString = "inner error: handleRegistrationResponse";
+        return false;
+    }
+
+    const auto& respCont = request->getResult()->getContent();
+
+    qDebug() << "resp: " << respCont;
+
+    return false;
 }

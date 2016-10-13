@@ -4,6 +4,10 @@ using namespace PhotoFlyService;
 
 using namespace PhotoFlyContainers;
 
+const QString ServiceProvider::RespKeyStatus = QString("status");
+const QString ServiceProvider::RespStatusError = QString("ERR");
+const QString ServiceProvider::RespKeyMessage = QString("message");
+
 ServiceProvider::ServiceProvider(QObject *parent) : IServiceProvider(parent)
 {
     m_service = new QNetworkAccessManager(this);
@@ -30,6 +34,8 @@ void ServiceProvider::makeRequest(GenericServiceRequest *request, int timeout)
     if (content.isEmpty() || content.isNull()) {
         reply = m_service->get(req);
     } else {
+        qDebug() << "req content: " << reqToJson(*request);
+        req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
         reply = m_service->post(req, content);
     }
     QEventLoop loop;
@@ -148,19 +154,27 @@ void ServiceProvider::onReplyFinished()
     emit requestComplete(request);
 }
 
+QString ServiceProvider::getServiceUrl() const
+{
+    return m_serviceUrl;
+}
+
 //void ServiceProvider::onReplyFinished(QNetworkReply *reply)
 //{
 //    m_requests.take(reply);
 //    reply->deleteLater();
 //}
 
-QJsonDocument ServiceProvider::reqToJson(GenericServiceRequest *request)
+QJsonDocument ServiceProvider::reqToJson(const GenericServiceRequest &request)
 {
-    SerializationInfo info;
-    request->getObjectInfo(info);
+//    SerializationInfo info;
+//    request.getObjectInfo(info);
+//    request.getContent()
+//    QJsonDocument json(info.toJson());
+//    return json;
 
-    QJsonDocument json(info.toJson());
-    return json;
+    return QJsonDocument( QJsonObject::fromVariantMap(request.getContent()) );
+
 }
 
 QJsonDocument ServiceProvider::nmReplyToJson(QNetworkReply *reply)
@@ -195,7 +209,7 @@ QNetworkReply *ServiceProvider::prepareRequest(GenericServiceRequest *request)
 
     QString urlString = m_serviceUrlString;
 
-    auto content = bytesFromJson( reqToJson(request) );
+    auto content = bytesFromJson( reqToJson(*request) );
 
     QNetworkReply *reply = nullptr;
 
@@ -217,7 +231,7 @@ QNetworkReply *ServiceProvider::prepareRequest(GenericServiceRequest *request)
 
 void ServiceProvider::prepareRequest(const GenericServiceRequest &request, QUrl *url, QByteArray *content)
 {
-    QString urlString = m_serviceUrl;
+    QString urlString = getServiceUrl();
 
     *url = QUrl();
     content->clear();
@@ -226,14 +240,19 @@ void ServiceProvider::prepareRequest(const GenericServiceRequest &request, QUrl 
     case ServiceMessageType::Req_Login:
         urlString += "users/" + request.urlParameters().first();
         *url = QUrl(urlString);
+//        *url = QUrl(urlString + "users/" + request.urlParameters().first());
         break;
     case ServiceMessageType::Req_Register:
+        urlString += "users";
+//        *url = QUrl(urlString + "users");
+        *url = QUrl(urlString);
+        *content = bytesFromJson( reqToJson(request) );
+        break;
     case ServiceMessageType::Req_SendPhotos:
 //        reply = m_service->post(req, content);
-        break;
     default:
-        break;
         qDebug() << "Unknown request type";
+        break;
     }
 }
 
@@ -248,9 +267,14 @@ void ServiceProvider::handleReply(GenericServiceRequest *request, QNetworkReply 
 
     if(reply->error() == QNetworkReply::NoError){
         auto json = nmReplyToJson(reply);
-        request->setResultStatus(RequestResultStatus::Ok);
-        request->setResult(json.toVariant().toMap());
-    } else {
+        auto respMap = json.toVariant().toMap();
+        if (respMap[RespKeyStatus].toString() == RespStatusError)
+            request->setResultStatus(RequestResultStatus::Fail);
+        else
+            request->setResultStatus(RequestResultStatus::Ok);
+        request->setErrorString(respMap[RespKeyMessage].toString());
+        request->setResult(respMap);
+    } else {        
         request->setResultStatus(RequestResultStatus::Fail);
         request->setErrorString(reply->errorString());
     }

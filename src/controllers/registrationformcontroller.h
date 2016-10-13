@@ -54,6 +54,7 @@ private:
     void handleResponse(GenericServiceRequest *request);
 
     bool handleLoginResponse(GenericServiceRequest *request, QString *errorString);
+    bool handleRegistrationResponse(GenericServiceRequest *request, QString *errorString);
 
 };
 

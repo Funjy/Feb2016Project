@@ -35,7 +35,10 @@ public:
     void setMessageType(ServiceMessageType value);
     void setMessageType(const QString& value);
 
-    QVariantMap getContent() const;
+    virtual const QVariantMap &getContent() const override;
+    inline QVariantMap &getContent()
+    { return m_content; }
+
     void setContent(const QVariantMap &content);
 
     // ----------- Cope -----------
