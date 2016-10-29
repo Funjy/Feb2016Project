@@ -12,6 +12,8 @@ MessageOptionsForm {
     property var controller
 
     backButton.onClicked: backClicked()
+
+    sendButton.text: qsTr("Proceed")
     sendButton.onClicked: {
         if (!firstName.isValid ||
             !secondName.isValid ||

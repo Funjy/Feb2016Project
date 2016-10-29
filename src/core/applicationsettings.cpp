@@ -69,7 +69,6 @@ void ApplicationSettings::readUserInfo(RegistrationFormData *userInfo)
 
     appSettingsCore.beginGroup(RegistrationFormData::UserInfoGroup);
 
-
     SerializationInfo si;
     userInfo->getObjectInfo(si);
 //    auto keys = si.keys();

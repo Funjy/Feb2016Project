@@ -15,11 +15,16 @@ Page {
     property alias photoSizeBox: photoSizeBox
     wheelEnabled: false
 
-    property alias backButton: backButton
-    property alias sendButton: sendButton
+//    property alias title: toolBar1.title
+    property alias backButton: toolBar1.leftButton
+    property alias sendButton: toolBar1.rightButton
     property alias postalAddress: postalAddress
 
-    header: ToolBar {
+    header: MyToolbar {
+        id: toolBar1
+        title: root.title
+    }
+        /*ToolBar {
         id: toolBar1
         Material.primary: "white"
 
@@ -70,7 +75,7 @@ Page {
             }
         }
 
-    }
+    }*/
 
     ColumnLayout {
         id: grid1

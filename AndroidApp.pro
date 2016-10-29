@@ -38,7 +38,8 @@ HEADERS += \
     src/photo_service/genericservicerequest.h \
     src/photo_service/serviceprovider.h \
     src/controllers/registrationformcontroller.h \
-    src/controllers/mainformcontroller.h
+    src/controllers/mainformcontroller.h \
+    src/core/global_defs.h
 
 SOURCES += \
     src/core/applicationsettings.cpp \

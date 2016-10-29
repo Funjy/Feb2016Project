@@ -17,6 +17,8 @@
 #include "controllers/registrationformcontroller.h"
 #include "controllers/mainformcontroller.h"
 
+#include "core/global_defs.h"
+
 using namespace PhotoFlyBehaviours;
 using namespace PhotoFlyModels;
 using namespace PhotoFlyControllers;

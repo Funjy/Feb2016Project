@@ -32,5 +32,6 @@
         <file>qml/MainForm.qml</file>
         <file>qml/MessageOptions.qml</file>
         <file>qml/MessageOptionsForm.ui.qml</file>
+        <file>qml/myControls/MyToolbar.qml</file>
     </qresource>
 </RCC>

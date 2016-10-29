@@ -4,7 +4,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import QtQuick.Dialogs 1.2
 
-import "myScripts/Styles.js" as ScriptStyles
+import "qrc:/qml/myScripts/Styles.js" as ScriptStyles
 import "myControls"
 
 import ca.riftekit.Controllers 1.0
@@ -18,67 +18,12 @@ Page {
 
 //    property var imagesProvider: formController.imagesProvider
 
-    header: ToolBar {
+    header: MyToolbar{
+        title: root.title
+        leftButton.onClicked: drawer.open()
 
-        Material.primary: "white"
-
-        RowLayout {
-            spacing: ScriptStyles.toolBarRowSpacing * global_scale_factor
-            anchors.fill: parent
-
-            ToolButton {
-                id: menuButton
-                contentItem: Item {
-                    height: ScriptStyles.toolButtonSize * global_scale_factor
-                    width: ScriptStyles.toolButtonSize * global_scale_factor
-                    Image {
-                        id: menuImage
-                        fillMode: Image.PreserveAspectFit
-                        horizontalAlignment: Image.AlignHCenter
-                        verticalAlignment: Image.AlignVCenter
-                        source: "qrc:/images/close-128.png"
-                        anchors.fill: parent
-                    }
-                }
-                onClicked: drawer.open()
-            }            
-
-            Item{
-                Layout.fillWidth: true
-            }
-
-            Item{
-                width: Math.max(proceedButton.implicitWidth, menuButton.width)
-                height: proceedButton.implicitHeight
-                ToolButton {
-                    id: proceedButton
-                    opacity: selectedPhotosView.count > 0 ? 1 : 0
-                    visible: opacity > 0
-                    enabled: opacity == 1
-                    font.pixelSize: titleLabel.font.pixelSize * 0.8
-                    text: qsTr("Proceed")
-                    width: parent.width
-                    Behavior on opacity {NumberAnimation{easing.type: Easing.InOutQuad}}
-                    onClicked: {
-                        openComponent(messageOptionsComponent)
-                    }
-                }
-            }
-
-        }
-
-        LabelPF {
-            id: titleLabel
-            text: root.title
-//            font.pixelSize: ScriptStyles.titleFontSize * global_scale_factor
-            font.pixelSize: parent.height * 0.5
-            elide: Label.ElideRight
-//                horizontalAlignment: Qt.AlignHCenter
-//                verticalAlignment: Qt.AlignVCenter
-//                anchors.verticalCenter: parent.verticalCenter
-//                Layout.fillWidth: true
-            anchors.centerIn: parent
-        }
+        rightButton.text: qsTr("Proceed")
+        rightButton.onClicked: openComponent(messageOptionsComponent)
     }
 
     Component{

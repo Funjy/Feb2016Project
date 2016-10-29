@@ -18,7 +18,7 @@ MainWorker::MainWorker(QObject *parent) : QObject(parent){
 
 void MainWorker::testFunc(RegistrationFormData* data)
 {
-
+    Q_UNUSED(data)
     auto provider = new ServiceProvider(this);
 
     provider->testRequest();
@@ -34,7 +34,11 @@ void MainWorker::Init()
 
 bool MainWorker::isRegistered() const
 {
+#if DUMMY_LOGIN
+    return true;
+#else
     return m_userInfo->isValid();
+#endif
 }
 
 void MainWorker::updateUserInfo()
