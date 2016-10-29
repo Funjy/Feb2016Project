@@ -10,6 +10,7 @@ const QString ServiceProvider::RespKeyMessage = QString("message");
 
 ServiceProvider::ServiceProvider(QObject *parent) : IServiceProvider(parent)
 {
+    m_isBusy = false;
     m_service = new QNetworkAccessManager(this);
 //    connect(m_service, &QNetworkAccessManager::finished, this, &ServiceProvider::onReplyFinished);
 }
@@ -26,18 +27,20 @@ void ServiceProvider::makeRequest(GenericServiceRequest *request, int timeout)
 
     QNetworkReply *reply = nullptr;
 
-    QUrl url;
-    QByteArray content;
-    prepareRequest(*request, &url, &content);
-    QNetworkRequest req(url);
+    reply = initOperation(request, timeout);
 
-    if (content.isEmpty() || content.isNull()) {
-        reply = m_service->get(req);
-    } else {
-        qDebug() << "req content: " << reqToJson(*request);
-        req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-        reply = m_service->post(req, content);
-    }
+//    QUrl url;
+//    QByteArray content;
+//    prepareRequest(*request, &url, &content);
+//    QNetworkRequest req(url);
+
+//    if (content.isEmpty() || content.isNull()) {
+//        reply = m_service->get(req);
+//    } else {
+//        qDebug() << "req content: " << reqToJson(*request);
+//        req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+//        reply = m_service->post(req, content);
+//    }
     QEventLoop loop;
     loop.connect(reply, SIGNAL(finished()), SLOT(quit()));
     loop.exec();
@@ -48,11 +51,12 @@ void ServiceProvider::makeRequest(GenericServiceRequest *request, int timeout)
 
 void ServiceProvider::beginMakeRequest(GenericServiceRequest *request)
 {
-    auto reply = prepareRequest(request);
-    if(!reply) return;
-    connect(reply, &QNetworkReply::finished, this, &ServiceProvider::onReplyFinished);
+//    auto reply = prepareRequest(request);
 
+    auto reply = initOperation(request, 10000);
+    if(!reply) return;
     m_requests.insert(reply, request);
+    connect(reply, &QNetworkReply::finished, this, &ServiceProvider::onReplyFinished);
 }
 
 QUrl ServiceProvider::getHostUrl()
@@ -249,11 +253,34 @@ void ServiceProvider::prepareRequest(const GenericServiceRequest &request, QUrl 
         *content = bytesFromJson( reqToJson(request) );
         break;
     case ServiceMessageType::Req_SendPhotos:
+        urlString += "messages";
+        *url = QUrl(urlString);
+        *content = bytesFromJson( reqToJson(request) );
 //        reply = m_service->post(req, content);
+        break;
     default:
         qDebug() << "Unknown request type";
         break;
     }
+}
+
+QNetworkReply *ServiceProvider::initOperation(GenericServiceRequest *request, int timeout)
+{
+    QNetworkReply *reply = nullptr;
+
+    QUrl url;
+    QByteArray content;
+    prepareRequest(*request, &url, &content);
+    QNetworkRequest req(url);
+
+    if (content.isEmpty() || content.isNull()) {
+        reply = m_service->get(req);
+    } else {
+        qDebug() << "req content: " << reqToJson(*request);
+        req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+        reply = m_service->post(req, content);
+    }
+    return reply;
 }
 
 void ServiceProvider::handleReply(GenericServiceRequest *request, QNetworkReply *reply)

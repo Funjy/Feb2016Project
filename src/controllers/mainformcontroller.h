@@ -8,6 +8,7 @@
 
 #include "models/photocontainer.h"
 #include "behaviours/iimagegalleryprovider.h"
+#include "photo_service/serviceprovider.h"
 #ifdef __ANDROID__
 //#include <QtAndroidExtras>
 #include <QAndroidJniObject>
@@ -48,9 +49,12 @@ public slots:
 
 private slots:
     void onNewImagesSelected(QStringList imagesList);
+    void onRequestComplete(GenericServiceRequest *request);
 
 private:
-    IImageGalleryProvider *m_galleryProvider;
+    IImageGalleryProvider   *m_galleryProvider;
+    IServiceProvider        *m_serviceProvider;
+    QList<GenericServiceRequest*>   m_requestedPhotos;
 
     PhotosList  m_photos;
     static int photosCount(QQmlListProperty<PhotoContainer> *list);

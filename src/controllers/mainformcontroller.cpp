@@ -23,6 +23,7 @@ MainFormController::MainFormController(QObject *parent) : QObject(parent)
 #endif
 
     m_galleryProvider = nullptr;
+    m_serviceProvider = nullptr;
     imagePickerFactory(m_galleryProvider);
 
 }
@@ -68,6 +69,16 @@ void MainFormController::removePhoto(int idx)
 
 void MainFormController::sendRequested(QVariant data2send)
 {
+    if (!m_serviceProvider)
+        m_serviceProvider = new ServiceProvider(this);
+    connect(m_serviceProvider, &IServiceProvider::requestComplete, this, &MainFormController::onRequestComplete);
+
+    auto req = new GenericServiceRequest(this);
+    req->setMessageType(ServiceMessageType::Req_SendPhotos);
+    req->setContent(data2send.toMap());
+    m_serviceProvider->beginMakeRequest(req);
+
+    m_requestedPhotos << req;
 
 }
 
@@ -82,6 +93,11 @@ void MainFormController::onNewImagesSelected(QStringList imagesList)
         m_photos << pc;
     }
     emit photosChanged();
+}
+
+void MainFormController::onRequestComplete(GenericServiceRequest *request)
+{
+    qDebug() << "req res: " << request->getResultStatus() << " | " << request->getErrorString();
 }
 
 int MainFormController::photosCount(QQmlListProperty<PhotoContainer> *list)

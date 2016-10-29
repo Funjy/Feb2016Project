@@ -7,6 +7,7 @@
 #include <QJsonDocument>
 #include <QEventLoop>
 #include <QThread>
+#include <QMutex>
 
 #include "behaviours/iserviceprovider.h"
 
@@ -59,7 +60,13 @@ private:
     Q_INVOKABLE QNetworkReply *prepareRequest(GenericServiceRequest *request);
     Q_INVOKABLE void prepareRequest(const GenericServiceRequest &request, QUrl *url, QByteArray *content);
 
+    QNetworkReply *initOperation(GenericServiceRequest *request, int timeout);
+
     static void handleReply(GenericServiceRequest *request, QNetworkReply *reply);
+
+    QMutex  m_busyLock;
+    bool    m_isBusy;
+
 
 };
 
